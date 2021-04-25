@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Electrolineras</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="homepage">
+  <header>
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="2800">
+          <div class="w-100" style="width: 100px; height: 600px;">
+            <img src="../../assets/img/maps.jpg">
+          </div>
+          <div class="carousel-caption ">
+            <h1>¿Que es Electro?</h1>
+            <p>Una aplicacion que te permite acceder a infromacion de electrolineras facil y rapido</p>
+          </div>
+        </div>
+        <div class="carousel-item " data-bs-interval="2800">
+          <div class="w-100" style="width: 100px; height: 600px; align-content: center;">
+            <img src="../../assets/img/pokemon-GO.jpg" width="1472px">
+          </div>
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Ubicación</h1>
+            <p>Localiza de forma ágil y rápido los puntos de carga.</p>
+          </div>
+        </div>
+          <div class="carousel-item" data-bs-interval="2800">
+            <div class="w-100" style="width: 100px; height: 600px; align-content: center;">
+              <img src="../../assets/img/Rabee9aa882653f908654bc1da30fdb9e.png" class="d-block w-100" alt="...">
+            </div>
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Gestion</h1>
+            <p>Administra la informacion de la App desde este sistema Web.</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2800">
+          <div class="w-100" style="width: 100px; height: 600px; align-content: center;">
+            <img src="../../assets/img/mobile.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Rutas</h1>
+            <p>Establece la ruta mas rapida desde tu ubicacion al punto de carga.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </header>
+  <section>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <img class = "card" src="../../assets/img/puntodecarga.jpg"/>
+            <ion-card-header>
+              <ion-card-title>Puntos de Carga</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Localiza los distintos puntos de carga para vehiculos electricos que se encuentran disponobles en el Disrtito Metropolitano de Quito
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <img class = "card" src="../../assets/img/google-maps_2.jpg"/>
+            <ion-card-header>
+              <ion-card-title>Establecer Rutas</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Selecciona la electrilinera que mas se adapte a tu necesidad y la aplicacion generara la ruta mas adecuada de acuerdo a tu ubicacion para llegar a tu destino.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <img class = "card" src="../../assets/img/5cf726706d14f.jpeg"/>
+            <ion-card-header>
+              <ion-card-title>Electrolineras</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Visualiza informacion sobre las electrolineras que se encuentren disponible en el Distrito Metropolitano de Quito en un solo lugar.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+  </section>
+   
+
+</ion-content>
+
