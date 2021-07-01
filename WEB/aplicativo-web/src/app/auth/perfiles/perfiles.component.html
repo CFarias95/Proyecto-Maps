@@ -1,0 +1,39 @@
+
+  <div style="min-height: 300px;"> 
+    <ng-container *ngIf="!usuario || usuario.length == 0">
+      <p class="centrarmensaje">No existen usuarios a mostrar.</p>
+    </ng-container>
+    <ion-list>
+      <div *ngFor="let user of usuario | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index" style="display: flex;justify-content: center;align-items: center;">
+        <div >
+          <ion-card [ngStyle]="{'background': 'white' }" *ngIf="user.uid != id">
+            <ion-row style="border-bottom: solid 1px;border-color: #2355EF;">
+              <ion-col>
+                <img [src]=user.foto width = "50px">   
+              </ion-col>
+              <ion-col>
+                <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
+                   <!--La fecha de solicud se envió {{alqui.fecha.toMillis() | date:'dd/MM/yyyy'}}-->
+                   {{user.nombres}}
+                </p>
+              </ion-col>
+              <ion-col>
+                <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
+                   {{user.estado}}
+                </p>
+              </ion-col>
+              <ion-col  style="text-align: center;">
+                <ion-button  button (click)="dehabilitar(user.uid)" color="danger" >Desahilitar</ion-button>
+              </ion-col>
+              <ion-col  style="text-align: center;">
+                <ion-button  button (click)="habilitar(user.uid)" color="warning" >Habilitar</ion-button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+        </div>
+        
+      </div>
+      <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;"></pagination-controls>
+  
+    </ion-list>

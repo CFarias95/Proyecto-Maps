@@ -1,0 +1,82 @@
+<form [formGroup]="ionicForm" (ngSubmit)="submitform()" novalidate > 
+  <h1>Crear Notificación</h1>
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Nombre</ion-label>
+    <ion-input formControlName="name" type="text"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+    Nombres requeridos.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
+    Minimo 2 caracteres.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.pattern">
+    Solo se permiten letras.
+  </span>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Titulo</ion-label>
+    <ion-input formControlName="titulo" type="text" ></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titulo.errors?.required">
+    La notificacion requiere un titulo para mostrar.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titulo.errors?.pattern">
+    Solo se permiten letras.
+  </span>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Texto</ion-label>
+    <ion-input formControlName="texto" type="direccion"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.texto.errors?.required">
+    La notificacion requiere un texto para mostrar.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.texto.errors?.minlength">
+    Minimo 2 caracteres.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.texto.errors?.maxlength">
+    Maximo 30 caracteres.
+  </span>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Fecha</ion-label>
+    <ion-input formControlName="fecha" type="date" [min]="mydate"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fecha.errors?.required">
+    Fecha en la que se enviara la notificacion requerida.
+  </span>
+  
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Hora</ion-label>
+    <ion-input formControlName="hora" type="time" ></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.hora.errors?.required">
+    La hora es requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.hora.errors?.pattern">
+    El formato es  invalido.
+  </span>
+
+  <!-- Tipo -->
+<ion-item lines="full" color="dark">
+  <ion-label position="stacked">Categoria</ion-label>
+  <ion-select formControlName="estado" required>
+    <ion-select-option value="Activo">Noticia</ion-select-option>
+    <ion-select-option value="Inactivo">Promocion</ion-select-option>
+  </ion-select>
+</ion-item>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Foto</ion-label>
+    <ion-input formControlName="foto" type="file" accept=".png, .jpg" (change)="enviarimagen($event)" style="color:black"></ion-input>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <ion-button expand="full"  type="submit" color="success">Guardar</ion-button>
+    </ion-col>
+  </ion-row>
+
+</form>

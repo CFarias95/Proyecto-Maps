@@ -52,5 +52,86 @@ img.card{
   background: linear-gradient(to bottom, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+.page-content h1 {
+  margin: 1.0em 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  text-rendering: optimizelegibility;
+  text-align: center;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: lighter;
+}
 
+.light-green {
+  color: #32a592;
+  font-weight: lighter;
+}
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.homemapa {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.homemapa .stats-box {
+  border-radius: 5px;
+}
+#map {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ion-slides {
+  height: 100%;
+}
+
+.swiper-slide {
+  display: block;
+}
+
+.swiper-slide h2 {
+  margin-top: 2.8rem;
+}
+
+.swiper-slide img {
+  max-height: 50%;
+  max-width: 80%;
+  margin: 60px 0 40px;
+  pointer-events: none;
+}
+
+b {
+  font-weight: 500;
+}
+
+p {
+  padding: 0 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ion-color-step-600, #60646b);
+}
+
+p b {
+  color: var(--ion-text-color, #000000);
+}
+
+.apphome{
+  background-color: #03989e;
+}
+
+ion-slides{
+  background-color: #03989e;
+}

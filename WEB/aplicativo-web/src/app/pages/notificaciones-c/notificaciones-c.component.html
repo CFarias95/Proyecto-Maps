@@ -1,0 +1,72 @@
+<form (ngSubmit)="nuevaNotify(MyNotificationForm.value)" [formGroup]="MyNotificationForm" [style]= "oculto">
+  <button class="btn-warning" (click)="atras()">Atras</button>  
+  <h3 class="box-title m-b-20">Generar nueva Notificacion</h3>
+  <div class="form-group ">
+      <div class="col-xs-12">
+          <input class="form-control" type="text" placeholder="Titulo" formControlName="tituloF" required> </div>
+  </div>
+  <div class="form-group">
+      <div class="col-xs-12">
+          <input class="form-control" type="text" placeholder="Texto" formControlName="textoF"> </div>
+  </div>
+  <div class="form-group">
+      <div class="col-xs-12">
+          <input class="form-control" type="date" placeholder="Fecha"  formControlName="fechaF"> </div>
+  </div>
+  <div class="form-group">
+      <div class="col-xs-12">
+          <input class="form-control" type="text" placeholder="Hora"  formControlName="horaF"> </div>
+  </div>
+  <div class="form-group">
+      <div class="col-xs-12">
+        <input formControlName="fotoF" type="file" accept=".png, .jpg" (change)="enviarimagen($event)" style="color:rgb(30, 100, 73)"/>
+  </div>
+  <br>
+  <div class="form-group text-center">
+      <div class="col-xs-12 p-b-20">
+          <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">{{boton}}</button>
+      </div>
+    </div>
+  </div>
+</form>
+ 
+<div  class="container" >
+  <h1>Notificaciones</h1>
+  <ion-list>
+    <div *ngFor="let n of notificaciones | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index" style="justify-content: center;align-items: center;">
+      <div >
+        <ion-card [ngStyle]="{'background': 'white' }">
+          <ion-row style="border-bottom: solid 1px;border-color: #2355EF;">
+            <ion-col size="1">
+              <img src="../../../assets/img/notifi.png" width = "50px">   
+            </ion-col>
+            <ion-col >
+              <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
+                 {{n.name}}
+              </p>
+            </ion-col>
+            <ion-col >
+              <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
+                 {{n.titulo}}
+              </p>
+            </ion-col>
+            <ion-col >
+              <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
+                {{n.fecha}}
+              </p>
+              </ion-col>
+             
+            <ion-col>
+              <button  class="btn btn-block btn-sm btn-info btn-rounded" (click)="edit(n.id)">Editar</button>
+            </ion-col>
+            <ion-col style="text-align: center;">
+              <button  class="btn btn-block btn-sm btn-danger btn-rounded" (click)="eliminarNotify(n.id)">Eliminar</button>
+            </ion-col>                                
+          </ion-row>
+        </ion-card>
+      </div>     
+    </div>
+    <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;"></pagination-controls>
+
+  </ion-list>
+

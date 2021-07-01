@@ -1,0 +1,314 @@
+
+<form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate > 
+  <h3 class="box-title m-b-20">Editar Electrolinera</h3>
+
+  <!-- nombre -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Nombre</ion-label>
+    <ion-input formControlName="name" type="text" [(ngModel)]="electrolinera.name"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+    Nombre requeridos.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
+    Minimo 2 caracteres.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.pattern">
+    Solo se permiten letras.
+  </span>
+
+<!-- direccion -->
+<ion-item lines="full" color="dark">
+  <ion-label position="stacked">Direccion</ion-label>
+  <ion-input formControlName="direcion" type="text" [(ngModel)]="electrolinera.direcion"></ion-input>
+</ion-item>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.direcion.errors?.required">
+  Direccion requerida.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.direcion.errors?.minlength">
+  Minimo 2 caracteres.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.direcion.errors?.maxlength">
+  Solo se permiten letras.
+</span>
+
+<!-- referencia -->
+<ion-item lines="full" color="dark">
+  <ion-label position="stacked">Referencia</ion-label>
+  <ion-input formControlName="referencia" type="text" [(ngModel)]="electrolinera.referencia"></ion-input>
+</ion-item>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.referencia.errors?.required">
+  Referencia requerida.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.referencia.errors?.minlength">
+  Minimo 2 caracteres.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.referencia.errors?.maxlength">
+  Maximo 20 caracteres.
+</span>
+
+
+<ion-row>
+  <ion-col>
+    <!-- tipo conector -->
+    <ion-item lines="full" color="dark">
+      <ion-label position="stacked">Tipo Conector</ion-label>
+      <ion-input formControlName="tipoconec" type="text" [(ngModel)]="electrolinera.tipoconec"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tipoconec.errors?.required">
+      Tipo de conector requerido.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tipoconec.errors?.minlength">
+      Minimo 2 caracteres.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tipoconec.errors?.maxlength">
+      Minimo 20 caracteres.
+    </span>
+  </ion-col>
+  <ion-col>
+    <!-- numero conectores -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Cantidad</ion-label>
+    <ion-input formControlName="cantidadconec" type="text" [(ngModel)]="electrolinera.cantidadconec"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.cantidadconec.errors?.required">
+    Cantidad requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.cantidadconec.errors?.minlength">
+    Minimo 2 caracteres.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.cantidadconec.errors?.maxlength">
+    Minimo 20 caracteres.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.cantidadconec.errors?.pattern">
+    Minimo 20 caracteres.
+  </span>
+  </ion-col>
+
+</ion-row>
+
+
+<!-- forma de pago -->
+<ion-item lines="full" color="dark">
+  <ion-label position="stacked">Froma de Pago</ion-label>
+  <ion-input formControlName="fpago" type="text" [(ngModel)]="electrolinera.fpago"></ion-input>
+</ion-item>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.fpago.errors?.required">
+  Forma de pago requerida.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.fpago.errors?.minlength">
+  Minimo 2 caracteres.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.fpago.errors?.maxlength">
+  Maximo 20 caracteres.
+</span>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.fpago.errors?.pattern">
+  Se permiten solo letras.
+</span>
+
+<ion-row>
+  <ion-col>
+    <!-- longitud -->
+    <ion-item lines="full" color="dark">
+      <ion-label position="stacked">Longitud</ion-label>
+      <ion-input formControlName="longitud" type="text" [(ngModel)]="electrolinera.longitud"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.longitud.errors?.required">
+      Longitud requerida.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.longitud.errors?.minlength">
+      Minimo 2 caracteres.
+    </span>
+  </ion-col>
+  <ion-col>
+    <!-- latitud -->
+    <ion-item lines="full" color="dark">
+      <ion-label position="stacked">Latitud</ion-label>
+      <ion-input formControlName="latitud" type="text" [(ngModel)]="electrolinera.latitud"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.latitud.errors?.required">
+      Latitud requerida.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.latitud.errors?.minlength">
+      Minimo 2 caracteres.
+    </span>
+  </ion-col>
+</ion-row>
+ 
+<ion-col>
+  <ion-label position="stacked">Horario:</ion-label>
+  <!-- lunes -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked" >Lunes</ion-label>
+    <ion-row>
+      <ion-input formControlName="lunes" type="text" placeholder = "HH:MM-HH:MM" [(ngModel)]="electrolinera.lunes"></ion-input>
+    </ion-row>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lunes.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lunes.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lunes.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lunes.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+  
+
+  <!-- martes -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Martes</ion-label>
+    <ion-input formControlName="martes" type="text" placeholder = "HH:MM-HH:MM" [(ngModel)]="electrolinera.martes"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.martes.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.martes.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.martes.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.martes.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+  
+
+  <!-- miercoles -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Miercoles</ion-label>
+    <ion-input formControlName="miercoles" type="text" placeholder="HH:MM-HH:MM" [(ngModel)]="electrolinera.miercoles"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.miercoles.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.miercoles.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.miercoles.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.miercoles.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+  
+
+  <!-- Jueves -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Jueves</ion-label>
+    <ion-input formControlName="jueves" type="text" placeholder="HH:MM-HH:MM" [(ngModel)]="electrolinera.jueves"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.jueves.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.jueves.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.jueves.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.jueves.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+ 
+
+  <!-- viernes -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Viernes</ion-label>
+    <ion-input formControlName="viernes" type="text" placeholder="HH:MM-HH:MM" [(ngModel)]="electrolinera.viernes"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+ 
+
+  <!-- sabado -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Sabado</ion-label>
+    <ion-input formControlName="sabado" type="text"  placeholder="HH:MM-HH:MM" [(ngModel)]="electrolinera.sabado"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+
+  <!-- domingo -->
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Domingo</ion-label>
+    <ion-input formControlName="domingo" type="text" placeholder="HH:MM-HH:MM" [(ngModel)]="electrolinera.domingo"></ion-input>
+  </ion-item>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.required">
+    Hora requerida.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.minlength">
+    Verifica el formato.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.maxlength">
+    Valores sin espacios.
+  </span>
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.pattern">
+    Formato HH:MM-HH:MM.
+  </span>
+
+</ion-col>
+
+
+
+<!-- estado -->
+<ion-item lines="full" color="dark">
+  <ion-label position="stacked">Estado</ion-label>
+  <ion-select formControlName="estado" [(ngModel)]="electrolinera.estado">
+    <ion-select-option value="Activo">Activo</ion-select-option>
+    <ion-select-option value="Inactivo">Inactivo</ion-select-option>
+  </ion-select>
+</ion-item>
+<span class="error ion-padding" *ngIf="isSubmitted && errorControl.estado.errors?.required">
+  Seleciones un estado.
+</span>
+
+<div id="map"></div>
+
+<!-- imagen -->
+<ion-item lines="full" color="dark" id="imagenelectro">
+  <img [src]= "electrolinera.imagen" width="200px">
+</ion-item>
+
+  <!-- boton -->
+  <ion-row>
+    <ion-col>
+      <label style="color:rgb(255, 255, 255)" class="btn btn-info">
+        Cambiar Imagen
+        <input type="file" accept=".png, .jpg" name="fileSubir" (change)="subirImagen($event)" style="display:none;">
+      </label>
+    </ion-col>
+    <ion-col>
+      <ion-button  type="submit" color="success" >Guardar</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click)="cancelar()" color="danger" >Cancelar</ion-button>
+    </ion-col>
+    
+  </ion-row>
+
+</form>
+

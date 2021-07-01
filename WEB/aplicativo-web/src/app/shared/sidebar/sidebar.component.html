@@ -1,0 +1,101 @@
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="user-profile">
+                    <center>
+                        <a class="has-arrow waves-effect waves-dark center" href="#" aria-expanded="false">
+                            <img src="{{imagen}}" alt="user" width="50px"/>
+                        </a>
+                        <a>
+                            <span class="hide-menu">{{nombre}}</span>
+                        </a>
+                    </center>
+                   
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a routerLink="/login">Logout</a></li> 
+                    </ul>
+                </li>
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap"> <h2>Modulos</h2></li>
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="rePerfil(id)">
+                        <i class="mdi mdi-account"></i>
+                        <span class="hide-menu" routerLink="register" routerLink="register">Mi Perfil</span>
+                    </a>
+                </li>
+
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="rePerfiles()" >
+                        <i class="mdi mdi-account-multiple"></i>
+                        <span class="hide-menu" routerLink="register" routerLink="register">Perfiles</span>
+                    </a>
+                </li>
+
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reCrearAdmin()">
+                        <i class="mdi mdi-account-plus"></i>
+                        <span class="hide-menu" routerLink="register" routerLink="register">Crear Admin</span>
+                    </a>
+                </li>
+            
+                <!-- <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reCrearElectrolinera()">
+                        <i class="mdi mdi-gauge"></i>
+                        <span class="hide-menu" routerLink="dashboard" >Vehículos</span></a>
+                </li> -->
+
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reElectrolineras()">
+                        <i class="mdi mdi-car"></i>
+                        <span class="hide-menu" routerLink="list-electrolinera">Electrolineras</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reElectroC()" >
+                        <i class="mdi mdi-file"></i>
+                        <span class="hide-menu">Agregar Electrolinera</span>
+                    </a>              
+                </li>
+
+                <!-- <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reCrearElectrolinera()" >
+                        <i class="mdi mdi-file"></i>
+                        <span class="hide-menu">Mi Electrolinera</span>
+                    </a>              
+                </li> -->
+
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reNotify()">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="hide-menu" routerLink="notify">Notificaciones</span>
+                    </a>
+                </li>
+
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reNotifyC()">
+                        <i class="mdi mdi-pencil-box"></i>
+                        <span class="hide-menu" routerLink="notify">Crear Notificacion</span>
+                    </a>
+                </li>
+
+                <li> 
+                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reQuejas()">
+                        <i class="mdi mdi-comment-alert"></i>
+                        <span class="hide-menu" routerLink="list-electrolinera">Q C S</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

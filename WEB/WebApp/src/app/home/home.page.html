@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="secondary">
+      Iniciar Sesion
       <ion-button>
         <ion-icon slot="icon-only" name="person-circle"></ion-icon>
       </ion-button>
@@ -9,136 +10,143 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" class="homepage">
-  <header>
-    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  
+  <ion-slides>
+
+    <ion-slide>
+      <div class="slide">
+        <img src="../../assets/img/Green and Black Refined Sports Football Event Banner (1).jpg"/>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="2800">
-          <div class="w-100" style="width: 100px; height: 600px;">
-            <img src="../../assets/img/maps.jpg">
-          </div>
-          <div class="carousel-caption ">
-            <h1>¿Que es Electro?</h1>
-            <p>Una aplicacion que te permite acceder a infromacion de electrolineras facil y rapido</p>
-          </div>
-        </div>
-        <div class="carousel-item " data-bs-interval="2800">
-          <div class="w-100" style="width: 100px; height: 600px; align-content: center;">
-            <img src="../../assets/img/pokemon-GO.jpg" width="1472px">
-          </div>
-          <div class="carousel-caption d-none d-md-block">
-            <h1>Ubicación</h1>
-            <p>Localiza de forma ágil y rápido los puntos de carga.</p>
-          </div>
-        </div>
-          <div class="carousel-item" data-bs-interval="2800">
-            <div class="w-100" style="width: 100px; height: 600px; align-content: center;">
-              <img src="../../assets/img/Rabee9aa882653f908654bc1da30fdb9e.png" class="d-block w-100" alt="...">
-            </div>
-          <div class="carousel-caption d-none d-md-block">
-            <h1>Gestion</h1>
-            <p>Administra la informacion de la App desde este sistema Web.</p>
-          </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="2800">
-          <div class="w-100" style="width: 100px; height: 600px; align-content: center;">
-            <img src="../../assets/img/mobile.png" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-caption d-none d-md-block">
-            <h1>Rutas</h1>
-            <p>Establece la ruta mas rapida desde tu ubicacion al punto de carga.</p>
-          </div>
-        </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <img src="../../assets/img/Green and Black Refined Sports Football Event Banner.jpg"/>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./slide-3.png"/>
+    </ion-slide>
+
+  </ion-slides>
+
+ <section class="page-content">
+  <h1>Todo lo que necesitas saber sobre los puntos de recarga</h1>
+ <h2 class="light-green"> <img alt="surtidos puntos" width="42" height="42" src="https://cfassets.electromaps.com/img/surtidor-home.png">
+  <br>Localiza los puntos de carga para vehículos eléctricos de uso público</h2>
+  <section class="homemapa">
+    <img src="../../assets/img/maps.png">
+    <div class="container">
+      <div #map id="map" style="height:100%;width:100%"></div>
+      <div id="map"></div>
+      
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly"
+    async
+    ></script>
     </div>
-  </header>
-  <section>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-card>
-            <img class = "card" src="../../assets/img/puntodecarga.jpg"/>
-            <ion-card-header>
-              <ion-card-title>Puntos de Carga</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Localiza los distintos puntos de carga para vehiculos electricos que se encuentran disponobles en el Disrtito Metropolitano de Quito
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <img class = "card" src="../../assets/img/google-maps_2.jpg"/>
-            <ion-card-header>
-              <ion-card-title>Establecer Rutas</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Selecciona la electrilinera que mas se adapte a tu necesidad y la aplicacion generara la ruta mas adecuada de acuerdo a tu ubicacion para llegar a tu destino.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <img class = "card" src="../../assets/img/5cf726706d14f.jpeg"/>
-            <ion-card-header>
-              <ion-card-title>Electrolineras</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Visualiza informacion sobre las electrolineras que se encuentren disponible en el Distrito Metropolitano de Quito en un solo lugar.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
-  </section>
-   
-<footer>
-  <div class="container footer-middle">
-    <!-- <div class = "row">
-      <div class ="col">
-        <div class="footer-pad">
-          <h4>Realizado por:</h4>
-          <ul class="list-unstyled">
-            <li>Estefania Aguilar</li>
-            <li>Carlos Farias</li>
-          </ul>
-        </div>
-      </div>
-      <div class ="col">
-        <div class="footer-pad">
-          <h4>Contactos:</h4>
-          <ul class="list-unstyled">
-            <li>Estefania Aguilar - 0987456321</li>
-            <li>Carlos Farias - 1478523698</li>
-          </ul>
-        </div>
-      </div>
-      <div class ="col">
-        
-      </div>
-    </div> -->
+  </section> 
+  <div class="container">
+    <h1> Servicios</h1>
     <div class="row">
-      <div class="col-md-12 copy">
-        <p class="text-center">
-          © Copyright 2020 - Todos los derechos reservado. Estefania Aguilar- Carlos Farias
-        </p>
+      <div class="col">
+        <ion-card>
+          <img src="../../assets/img/puntodecarga.jpg" />
+          <ion-card-header>
+            <ion-card-title>Encuentra la mejor opción</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Elige entre los diferentes puntos de carga segun la tu ubicacion actual puedes escoger el punto de carga que mas te conviene.
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="col">
+        <ion-card>
+          <img src="../../assets/img/google-maps_2.jpg" />
+          <ion-card-header>
+            <ion-card-title>Buscar puntos de recarga</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Localiza los puntos de carga mas cercanos a tu posicion sin tener que estar saliendo de la App.
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="col">
+        <ion-card>
+          <img src="../../assets/img/5cf726706d14f.jpeg" />
+          <ion-card-header>
+            <ion-card-title>Datos</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Obtener informacion sobre los puntos de carga en un solo lugar.
+          </ion-card-content>
+        </ion-card>
       </div>
     </div>
-  </div>
-</footer>
+  </div> 
+  <section class="apphome">
+    <div class="row">
+      <h1 style="color: white;">Descarga nuesta app</h1>
+      <div class="col">
+        <img src="../../assets/img/playstore.png">
+      </div>
+      <div class="col">
+        <img src="../../assets/img/Facil de instalar (3).png">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 app-bottons">
+          <center>
+            <a>
+              <img src="https://cfassets.electromaps.com/img/app/android.png"  style="width: 150px;" alt="app android">
+            </a>
+          </center>
+          
+        </div>
+      </div>
+      
+      
+      
+    </div>
+  </section>
+ </section> 
+  
+  <footer>
+    <div class="container footer-middle">
+      <!-- <div class = "row">
+        <div class ="col">
+          <div class="footer-pad">
+            <h4>Realizado por:</h4>
+            <ul class="list-unstyled">
+              <li>Estefania Aguilar</li>
+              <li>Carlos Farias</li>
+            </ul>
+          </div>
+        </div>
+        <div class ="col">
+          <div class="footer-pad">
+            <h4>Contactos:</h4>
+            <ul class="list-unstyled">
+              <li>Estefania Aguilar - 0987456321</li>
+              <li>Carlos Farias - 1478523698</li>
+            </ul>
+          </div>
+        </div>
+        <div class ="col">
+          
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-12 copy">
+          <p class="text-center">
+            © Copyright 2020 - Todos los derechos reservado. Estefania Aguilar- Carlos Farias
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 </ion-content>
 

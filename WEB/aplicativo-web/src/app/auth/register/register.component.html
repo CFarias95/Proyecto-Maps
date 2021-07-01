@@ -1,0 +1,84 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<section id="wrapper">
+    <div class="login">
+        <div class="login-box card">
+            <div class="card-body">
+                 
+                
+
+                <form [formGroup]="myFormUser" (ngSubmit)="registerUser()">
+                    <h3 class="box-title m-b-20">Registrar un nuevo Administrador</h3>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="email" required placeholder="Email" formControlName="emailF">
+                            <div class="alert-danger" *ngIf="emailF.invalid && (emailF.dirty || emailF.touched)">
+                                <div class="div container-error-message" *ngIf="emailF.errors.required">
+                                    Email es requerido
+                                </div>
+                                <div class="div container-error-message" *ngIf="emailF.errors.pattern">
+                                    Email no es correcto
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" required placeholder="Contraseña" formControlName="passwordF">
+                            <div class="alert-danger" *ngIf="passwordF.invalid && (passwordF.dirty || passwordF.touched)">
+                                <div class="div container-error-message" *ngIf="passwordF.errors.required">
+                                    El password es requerido
+                                </div>
+                                <div class="div container-error-message" *ngIf="passwordF.errors?.minlength">
+                                    El password debe tener una longitud de 5 caracteres
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required placeholder="Nombres" formControlName="nombresF">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required placeholder="Apellidos" formControlName="apellidosF">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required placeholder="Telefono" formControlName="telefonoF">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required placeholder="Direccion" formControlName="direccionF">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label position="stacked"><strong>Imagen</strong></label>
+                        <br/>
+                        <input formControlName="foto" type="file" accept=".png, .jpg" (change)="enviarimagen($event)" style="color:black"/>
+                    </div>
+                    <div class="validation-errors">
+                        <p class="form-error"
+                          *ngIf="(formGroup.get('foto').hasError('required') && formGroup.get('foto').touched) || formGroup.get('foto').pristine">
+                          *Requerido
+                        </p>
+                    </div>
+                    <div class="form-group text-center p-b-20">
+                        <div class="col-xs-12">
+                            <button
+                                class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light"
+                                type="submit">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->

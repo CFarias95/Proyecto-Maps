@@ -1,0 +1,7 @@
+{
+  "name": "aplicativo-web",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
