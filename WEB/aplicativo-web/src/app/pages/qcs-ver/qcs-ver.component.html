@@ -1,0 +1,36 @@
+<h1>Queja, Comentario y/o Sugerencia Detallada</h1>
+<form  novalidate > 
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Tipo</ion-label>
+    <ion-label >{{quejas.Tipo}}</ion-label>
+  </ion-item>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Origen</ion-label>
+    <ion-label>{{quejas.Origen}}</ion-label>
+  </ion-item>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Fecha</ion-label>
+    <ion-label >{{quejas.Fecha}}</ion-label>
+  </ion-item>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Estado Actual</ion-label>
+    <ion-label >{{quejas.Estado}}</ion-label>
+  </ion-item>
+
+  <ion-item lines="full" color="dark">
+    <ion-label position="stacked">Contenido</ion-label>
+    <ion-label class="ion-text-wrap">{{quejas.Texto}}</ion-label>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <ion-button  (click)="atras()" color="danger">Lista</ion-button>
+    </ion-col>
+  </ion-row>
+
+</form>
+
+

@@ -6,55 +6,31 @@
      <li><a (click)="GetInactivas()">Inactivas</a></li>
   </ul>
 </div>
-
- <div style="min-height: 300px; background-color: white;">
-  <br>
-    <h1 class="centrarmensaje">Lista de Electrolineras creadas</h1>
-
-    <div class="ml-auto">
-      <div class="form-group">
-          <input id="demo-input-search2" type="text" placeholder="Search" autocomplete="off">
-      </div>
-  </div>
-
+<h1 class="centrarmensaje">Lista de Electrolineras creadas</h1>
+<input type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
+<br>
+<table class="table table-striped" style="display: table;">
+  <thead>
+    <tr>
+      <th scope="col" >#</th>
+      <th scope="col" >Nombre</th>
+      <th scope="col" >Estado</th>
+      <th scope="col" ></th>
+      <th scope="col" >Acciones</th>
+      <th scope="col" ></th>
+    </tr>
+  </thead>
   <ng-container *ngIf="!electrolinera || electrolinera.length == 0">
     <p class="centrarmensaje">No existen Datos a mostrar.</p>
   </ng-container>
-  <ion-list>
-    <div *ngFor="let electro of electrolinera | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index" style="display: flex;justify-content: center;align-items: center;">
-      <div >
-        <ion-card [ngStyle]="{'background': 'white' }">
-          <ion-row style="border-bottom: solid 1px;border-color: #2355EF;">
-            <ion-col>
-              <img src="../../../assets/img/R8447f75e4af9573eb61ef5175cce3821.png" width = "50px">   
-            </ion-col>
-            <ion-col>
-              <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
-                 <!--La fecha de solicud se envió {{alqui.fecha.toMillis() | date:'dd/MM/yyyy'}}-->
-                 {{electro.name}}
-              </p>
-            </ion-col>
-            <ion-col>
-              <p style="font-size: 20px;padding: 0px;margin: 0px;font-weight: bold;">
-                 {{electro.estado}}
-              </p>
-            </ion-col>
-
-            <ion-col>
-              <ion-button  button (click)="reEditElectrolinera(electro.id)" color="success" >Ver</ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button  button (click)="reEditElectrolinera(electro.id)" color="primary" >Editar</ion-button>
-            </ion-col>
-            <ion-col style="text-align: center;">
-              <ion-button  button (click)="eliminarElectrolinera(electro.id)" color="danger">Eliminar</ion-button>
-            </ion-col>
-                     
-          </ion-row>
-
-        </ion-card>
-      </div>
-    </div>
-    <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;"></pagination-controls>
-
-  </ion-list>
+  <tbody *ngFor="let electro of electrolinera | filtere: filterpost | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index">
+    <td  style="text-align: center; padding-top: 1%;"> <img src="../../../assets/img/R8447f75e4af9573eb61ef5175cce3821.png" width = "50px"></td>
+    <td  style="text-align: center; padding-top: 1%;">{{electro.name}}</td>
+    <td  style="text-align: center; padding-top: 1%;">{{electro.estado}}</td>
+    <td  style="text-align: center; "><ion-button  button (click)="reEditElectrolinera(electro.id)" color="success" >Ver</ion-button></td>
+    <td  style="text-align: center; "><ion-button  button (click)="reEditElectrolinera(electro.id)" color="primary" >Editar</ion-button></td>
+    <td  style="text-align: center; "><ion-button  button (click)="eliminarElectrolinera(electro.id)" color="danger">Eliminar</ion-button></td>
+  </tbody>
+  
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

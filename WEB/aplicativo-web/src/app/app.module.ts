@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -20,8 +20,13 @@ import { PerfilComponent } from './auth/perfil/perfil.component';
 import { QcsListComponent } from './pages/qcs-list/qcs-list.component';
 import { QcsListAComponent } from './pages/qcs-list-a/qcs-list-a.component';
 import { QcsListRComponent } from './pages/qcs-list-r/qcs-list-r.component';
+import { QcsVerComponent } from './pages/qcs-ver/qcs-ver.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
+
 import { PerfilesComponent } from './auth/perfiles/perfiles.component';
+import { PerfilesAComponent } from './auth/perfiles-a/perfiles-a.component';
+import { PerfilesIComponent } from './auth/perfiles-i/perfiles-i.component';
+
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { NotificacionesCreateComponent } from './pages/notificaciones-create/notificaciones-create.component';
@@ -40,9 +45,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ElectrolineraCComponent } from './pages/electrolinera-c/electrolinera-c.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
-
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FilterePipe } from './pipes/filtere.pipe';
+import { FilternPipe } from './pipes/filtern.pipe';
+import { FilterqPipe } from './pipes/filterq.pipe';
+
+import { AgmCoreModule } from '@agm/core';
+
 
 
 @NgModule({
@@ -58,6 +69,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListElectrolineraAComponent,
     ListElectrolineraIComponent,
     PerfilComponent,
+    PerfilesAComponent,
+    PerfilesIComponent,
     AdduserComponent,
     NotificacionesCreateComponent,
     ElectrolineraCComponent,
@@ -67,10 +80,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     QcsListComponent,
     QcsListAComponent,
     QcsListRComponent,
+    QcsVerComponent,
     BreadcrumbsComponent,
     SidebarComponent,
     HeaderComponent,
-    PagesComponent
+    PagesComponent,
+    FilterPipe,
+    FilterePipe,
+    FilternPipe,
+    FilterqPipe,
   ],
   entryComponents: [],
   imports: [
@@ -83,8 +101,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDx_q0nhUYOH2dugo66foOjPLUbwRL1U7s', 
+      libraries: ['places']
+    })
   ],
   providers: [AngularFirestore,GoogleMaps,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+  ]
 })
 export class AppModule {}

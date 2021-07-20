@@ -74,10 +74,10 @@ export class AdminService {
             //this.saveUserProfile(user);
           });
         })
-      ).subscribe();
-
-    
+      ).subscribe(); 
   }
+
+  //Cambiar Contraseña
   
 //reset password
   async resetPassword(email: string): Promise<void> {

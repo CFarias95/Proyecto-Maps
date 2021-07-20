@@ -11,6 +11,8 @@ export class QcsListAComponent implements OnInit {
 
   public quejas:any = [];
   estado = "Aprobado";
+  pageActual: number= 1;
+  filterpost='';
 
   constructor(
     private serviceStore: QuejasService,
@@ -58,4 +60,8 @@ export class QcsListAComponent implements OnInit {
     this.router.navigate(['panel/qcsr']);
   }
 
+  ver(documentId){
+    this.router.navigate(['panel/qcsver',documentId]);
+  }
+  
 }

@@ -12,8 +12,11 @@ export class ListElectrolineraIComponent implements OnInit {
 
   public electrolinera:any = [];
   public documentId = null;
-  public estado = "Inactivo"
+  estado = "Inactivo";
+  pageActual: number= 1;
+  filterpost ='';
 
+  
   constructor(
     private serviceStore: FirebasestorageService, 
     private alertCtrl: AlertController,

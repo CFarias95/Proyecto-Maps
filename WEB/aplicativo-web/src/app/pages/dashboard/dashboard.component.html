@@ -40,3 +40,17 @@
 </div> -->
 
 
+
+<input type="text" class="native-input sc-ion-input-ios" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+
+<agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" style="height: 500px;">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event)" style="position: inherit !important;"></agm-marker>
+</agm-map>
+
+<h1>Address: {{address}}</h1>
+<div>Latitude: {{latitude}}</div>
+<div>Longitude: {{longitude}}</div>
+
+
+

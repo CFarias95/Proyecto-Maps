@@ -3,3 +3,8 @@ center .sidebar-nav .user-profile > a img{
     border-radius: 10%;
     margin-right: 5px;
 }
+
+span.hide-menu{
+    vertical-align: middle;
+    font-size: 15px;
+}

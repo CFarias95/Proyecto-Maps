@@ -12,7 +12,9 @@ export class ListElectrolineraAComponent implements OnInit {
 
   public electrolinera:any = [];
   public documentId = null;
-  public estado = "Activo"
+  public estado = "Activo";
+  pageActual: number= 1;
+  filterpost ='';
 
   constructor(
     private serviceStore: FirebasestorageService, 

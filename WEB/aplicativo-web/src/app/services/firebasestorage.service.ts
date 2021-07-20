@@ -13,7 +13,7 @@ export class FirebasestorageService {
   public photoURL = null;
   private electrolineraCollection: AngularFirestoreCollection<Electrolinera>;
   private electrolineraCollection2: AngularFirestoreCollection<Electrolinera>;
-  private Electrolineras: Observable<Electrolinera[]>;
+  private Electrolineras: Observable<any>;
 
   constructor(
 
@@ -100,9 +100,9 @@ export class FirebasestorageService {
             sabado: sabado,
             domingo: domingo,
             formaspago: formaspago,
-            latitud: latitud,
-            longitud: longitud,
-            estado : estado,
+            latitud: 0,
+            longitud: 0,
+            estado : 'Activo',
             imagen: this.photoURL,
           }); 
         });
@@ -164,18 +164,20 @@ export class FirebasestorageService {
   }
 
 
-  public BuscarElectrolinera(termino : string){
-    this.electrolineraCollection2 = this.firestore.collection<Electrolinera>('electrolineras', ref => ref.where('name', '==', termino));
+  public MyElectrolinera(userid : string){
+   
+    this.electrolineraCollection2 = this.firestore.collection<Electrolinera>('electrolineras', ref => ref.where('usuario', '==', userid));
     this.Electrolineras = this.electrolineraCollection2.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
         
-          return {id, ...data};
+          return id;
         });
       })
     );
+
     return this.Electrolineras;
   }
 }

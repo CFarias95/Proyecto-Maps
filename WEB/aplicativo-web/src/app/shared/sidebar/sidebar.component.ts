@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { DatosUsuario } from 'src/app/modelm/user.interface';
 import { AdminService } from '../../services/admin.service';
+import { FirebasestorageService } from 'src/app/services/firebasestorage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,11 +14,16 @@ import { AdminService } from '../../services/admin.service';
 export class SidebarComponent implements OnInit {
 
   usuario:DatosUsuario;
+  uidElectro : string;
   nombre : string;
   imagen: string;
   uid : string;
+  tipo : string;
+  admintipo = "Admin";
+
   constructor(
     private serviceAuth : FirebaseauthService, 
+    private serviceElectro : FirebasestorageService, 
     private router: Router, 
     private Servicio: AdminService) { }
 
@@ -25,15 +31,30 @@ export class SidebarComponent implements OnInit {
     
     this.serviceAuth.getCurrentUser().then(r=>{
       this.uid = r.uid;
-      console.log(this.uid);
+      //console.log(this.uid);
       this.Servicio.getAdministrador(this.uid).subscribe(administrador => {
         this.usuario = administrador;
         this.imagen = administrador.foto;
         this.nombre = administrador.nombres;
-        console.log(this.usuario);
+        this.tipo = administrador.tipo;
+        console.log(this.tipo);
+        if(this.tipo != 'Admin'){
+          this.serviceElectro.MyElectrolinera(this.uid).subscribe(electro =>{
+            //console.log(electro);
+            this.uidElectro = electro[0];
+            console.log(this.uidElectro)
+          })
+          
+        }
+      
       });
     });
 
+  }
+ 
+  
+  reEditElectrolinera(){
+    this.router.navigate(['panel/editelectrolinera',this.uidElectro]);
   }
 
   reCrearElectrolinera(){
@@ -70,6 +91,11 @@ export class SidebarComponent implements OnInit {
 
   reElectroC(){
     this.router.navigate(['panel/electro1']);
+  }
+
+  salir(){
+
+    this.router.navigate(['login']);
   }
 
 }

@@ -1,20 +1,43 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+input{
+    border: currentColor;
+    border-bottom: #a9a9a9;
+    border-bottom-style: solid;
+    width: 100%;
+}
+thead, td{
+    padding: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+th{
+    font-weight: bold; 
+    text-align: center;
+    font-size: 20px;
+}
+
 .list-md{
     background-color: white;
 }
-.container{
-    background-color: white;
-    width:100%;
-}
+
 .paneltab{
     background-color: white;
 }
+
 #pestanas {
     float:left;
     width:100%;
     line-height:normal;
     font-size: 16px;
     font-weight: bold;
-    background-color: cadetblue;
+    border-bottom: inset;
 }
 
 #pestanas ul {
@@ -37,22 +60,23 @@
 #pestanas a {
     padding:3px 10px 3px 10px;
     display:block;
-    background-color: rgb(78, 75, 75);
+    background-color: #00ACC1;
     color: #fff;
     text-decoration: none;
 }
 #pestanas a:hover{
     padding:3px 10px 3px 10px;
     display:block;
-    background-color: rgb(175, 80, 80);
+    background-color: #B2EBF2;
     color: #fff;
     text-decoration: none;
 }
 #pestanas .activa a{
-    background-color :brown;
+    background-color :#00838F;
     width: 200px;
 }
 
 #pestanas .activa{
-    background-color: crimson;
+    background-color: #00838F;
 }
+

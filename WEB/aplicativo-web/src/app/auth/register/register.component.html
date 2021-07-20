@@ -6,8 +6,6 @@
         <div class="login-box card">
             <div class="card-body">
                  
-                
-
                 <form [formGroup]="myFormUser" (ngSubmit)="registerUser()">
                     <h3 class="box-title m-b-20">Registrar un nuevo Administrador</h3>
                     <div class="form-group">
@@ -63,7 +61,7 @@
                     </div>
                     <div class="validation-errors">
                         <p class="form-error"
-                          *ngIf="(formGroup.get('foto').hasError('required') && formGroup.get('foto').touched) || formGroup.get('foto').pristine">
+                          *ngIf="(myFormUser.get('foto').hasError('required') && myFormUser.get('foto').touched) || myFormUser.get('foto').pristine">
                           *Requerido
                         </p>
                     </div>

@@ -46,15 +46,15 @@ export class ElectrolineraCComponent implements OnInit {
       let {email,pass,phone,direcion,name} = this.ionicForm.value;
       //console.log(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF);
 
-      const user = await this.serviceAuth.register(email,pass,'','','',phone,this.image);
+      const user = await this.serviceAuth.register(email,pass,'','','',phone,'Electro',this.image);
       if (user) {
         console.log(user.uid);
-        this.serviceStore.CrearElectrolinera(name,direcion,'','','','','','','','','','','','','','',user.uid,this.image).then(() => {
+        const electro = this.serviceStore.CrearElectrolinera(name,direcion,'','','','','','','','','','','','','','',user.uid,this.image).then(() => {
           this.mensaje="Se registro la Electrolinera en el sistema";
           this.presentAlertConfirm(this.mensaje);
         });
+
         const isVerified = this.serviceAuth.isEmailVerified(user);
-        this.redirectUser(isVerified);
       }else{
         if(this.serviceAuth.errores=="The email address is already in use by another account."){
           //console.log(this.authSvc.errores);}

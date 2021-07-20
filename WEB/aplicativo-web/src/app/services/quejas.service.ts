@@ -50,12 +50,8 @@ export class QuejasService {
   }
 
   //recuperar una queja especifica
-  getNotifyId(documentId: string){
-    return this.db.collection('quejas').doc(documentId).snapshotChanges();
+  getQCSId(documentId: string){
+    return this.quejasCollection.doc(documentId).valueChanges();
   }
 
-  //eliminar Notify
-  removeNotify(id: string){
-    return this.quejasCollection.doc(id).delete();
-  }
 }

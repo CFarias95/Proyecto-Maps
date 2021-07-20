@@ -8,6 +8,7 @@ import { FileI } from '../modelm/file.interface';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
+import { TooltipComponent } from '@angular/material/tooltip';
 
 
 @Injectable({
@@ -73,7 +74,7 @@ export class FirebaseauthService {
   }
 
   //metodo para registrar un usuario//
-  async register(email: string, password: string, nombres: string, apellidos: string, direccion : string ,telefono: string, image?: FileI) 
+  async register(email: string, password: string, nombres: string, apellidos: string, direccion : string ,telefono: string,tipo:string, image?: FileI) 
   {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(email,password);
@@ -96,6 +97,7 @@ export class FirebaseauthService {
              apellidos : apellidos,
              direccion: direccion,
              telefono : telefono,
+             tipo: tipo,
              estado : "Activo",
              foto : this.photoURL,  
            })
@@ -128,6 +130,11 @@ export class FirebaseauthService {
   //obtener el usuario actual//
   getCurrentUser() {
     return this.afAuth.authState.pipe(first()).toPromise();
+      
+  }
+
+  async cambiarContraseña(password :string){
+    await (await this.afAuth.currentUser).updatePassword(password);
   }
 
   //validar correo
@@ -145,4 +152,11 @@ export class FirebaseauthService {
     
   }
 
+  updateElectroUsuario(electro:string, id: string){
+  
+    return this.usuariosCollection.doc(id).update({
+      electrolinera: electro
+    });
+    
+  }
 }

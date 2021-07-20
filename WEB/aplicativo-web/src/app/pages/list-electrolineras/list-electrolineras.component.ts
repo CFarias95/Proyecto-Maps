@@ -6,8 +6,8 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import {  MatTableDataSource} from '@angular/material/table';
-// import { MatSort} from '@angular/material/sort';
-// import { MatPaginator } from '@angular/material/paginator';
+import { MatSort} from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 import {Electrolinera} from '../../modelm/electrolinera';
 
@@ -28,6 +28,8 @@ export class ListElectrolinerasComponent implements OnInit {
   boton:string="Agregar";
   public visible = true;
   public mostrar = false;
+  pageActual: number= 1;
+  filterpost = '';
   
   
   constructor(

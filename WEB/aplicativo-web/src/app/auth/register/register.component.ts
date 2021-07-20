@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
       let {emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF} = this.myFormUser.value;
       //console.log(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF);
 
-      const user = await this.serviceAuth.register(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF,this.image);
+      const user = await this.serviceAuth.register(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF,'Admin',this.image);
 
       if (user) {
         const isVerified = this.serviceAuth.isEmailVerified(user);

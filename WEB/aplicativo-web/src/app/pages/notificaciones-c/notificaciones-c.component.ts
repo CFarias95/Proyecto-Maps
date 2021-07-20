@@ -20,6 +20,8 @@ export class NotificacionesCComponent implements OnInit {
   public recurso:string;
   oculto:string= "display:none";
   oculto2:string= "";
+  pageActual: number= 1;
+  filterpost ='';
  
   
   constructor(private serviceStore: NotificacionesService, private router: Router, ) { }

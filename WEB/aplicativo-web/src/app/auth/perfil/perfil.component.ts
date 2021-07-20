@@ -13,6 +13,7 @@ import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
 export class PerfilComponent implements OnInit {
 
   ionicForm: FormGroup;
+  ionicForm2: FormGroup;
   isSubmitted = false;
   usuario:DatosUsuario;
   mensaje:string;
@@ -42,6 +43,10 @@ export class PerfilComponent implements OnInit {
       mobile: ['',Validators.compose([Validators.required, Validators.pattern('^[0-9]+$'),Validators.maxLength(10), Validators.minLength(9)])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
     })
+    this.ionicForm2 = this.formBuilder.group({
+      pss:['',Validators.compose([Validators.minLength(5),Validators.required])],
+      pss2:['',Validators.compose([Validators.minLength(5),Validators.required])],
+    })
   }
 
   submitForm() {
@@ -68,10 +73,8 @@ export class PerfilComponent implements OnInit {
        onlyself: true
     })
   }
-
 //metodo para cambiar la contraseña
   async cambiarcontra(){
-
     this.Servicio.resetPassword(this.usuario.correo).then(() => {
       this.mensaje="Se envió un correo para cambiar la contraseña. ";
       this.mensajeerror(this.mensaje);
@@ -97,6 +100,29 @@ export class PerfilComponent implements OnInit {
   //recuperar los controles validadores
   get errorControl() {
     return this.ionicForm.controls;
+  }
+
+  get errorControl2() {
+    return this.ionicForm2.controls;
+  }
+  
+  CambiarContra(){
+
+    this.isSubmitted = true;
+    const valor  = this.ionicForm2.value;
+    console.log(valor.pss);
+    if(valor.pss == valor.pss2){
+      this.serviceAuth.cambiarContraseña(valor.pss).then(()=>{
+        this.mensaje="Se cambio de contraseña";
+        this.mensajeerror(this.mensaje);
+  
+      });
+    }else{
+      this.mensaje="La contraseña no coincide";
+      this.mensajeerror(this.mensaje);
+    }
+   
+
   }
 
 

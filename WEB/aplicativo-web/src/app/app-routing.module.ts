@@ -7,6 +7,8 @@ import { ListElectrolinerasComponent } from './pages/list-electrolineras/list-el
 import { LoginComponent } from './auth/login/login.component';
 import { PerfilComponent } from './auth/perfil/perfil.component';
 import { PerfilesComponent } from './auth/perfiles/perfiles.component';
+import { PerfilesAComponent } from './auth/perfiles-a/perfiles-a.component';
+import { PerfilesIComponent } from './auth/perfiles-i/perfiles-i.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AdduserComponent } from './auth/adduser/adduser.component';
 import { NotificacionesCComponent } from './pages/notificaciones-c/notificaciones-c.component';
@@ -18,6 +20,7 @@ import { ListElectrolineraIComponent } from './pages/list-electrolinera-i/list-e
 import { QcsListComponent } from './pages/qcs-list/qcs-list.component';
 import { QcsListAComponent } from './pages/qcs-list-a/qcs-list-a.component';
 import { QcsListRComponent } from './pages/qcs-list-r/qcs-list-r.component';
+import { QcsVerComponent } from './pages/qcs-ver/qcs-ver.component';
 import { ElectrolineraCComponent } from './pages/electrolinera-c/electrolinera-c.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 import { PagesComponent } from './pages/pages.component';
@@ -42,15 +45,19 @@ const routes: Routes = [
       { path: 'qcs', component: QcsListComponent },
       { path: 'qcsa', component: QcsListAComponent },
       { path: 'qcsr', component: QcsListRComponent },
+      { path: 'qcsver/:id', component: QcsVerComponent },
       { path: 'perfil', component: PerfilComponent },
       { path: 'perfiles', component: PerfilesComponent },
+      { path: 'perfilesa', component: PerfilesAComponent },
+      { path: 'perfilesi', component: PerfilesIComponent },
       { path: 'editelectrolinera/:id', component: EditElectrolineraComponent },
       { path: 'notifyc', component: NotificacionesCreateComponent },
       { path: 'notifye/:id', component: NotificacionesEditComponent },
       { path: 'electroa', component: ListElectrolineraAComponent },
       { path: 'electroi', component: ListElectrolineraIComponent },
       { path: 'electro1', component: ElectrolineraCComponent },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      
+      { path: '', redirectTo: 'perfil', pathMatch: 'full' },
     ],
   },
     {

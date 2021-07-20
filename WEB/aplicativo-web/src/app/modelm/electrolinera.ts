@@ -14,8 +14,8 @@ export interface Electrolinera {
     sabado: string;
     domingo: string;
     formaspago: string;
-    latitud: string;
-    longitud: string;
+    latitud: number;
+    longitud: number;
     estado : string;
     imagen: string;
 }

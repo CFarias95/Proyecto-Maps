@@ -7,39 +7,33 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="user-profile">
-                    <center>
-                        <a class="has-arrow waves-effect waves-dark center" href="#" aria-expanded="false">
-                            <img src="{{imagen}}" alt="user" width="50px"/>
-                        </a>
-                        <a>
-                            <span class="hide-menu">{{nombre}}</span>
-                        </a>
-                    </center>
-                   
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a routerLink="/login">Logout</a></li> 
-                    </ul>
+                    
+                    <ion-chip class="ion-margin-start">
+                        <ion-avatar>
+                        <img src="{{imagen}}">
+                        </ion-avatar>
+                        <ion-label>{{nombre}}</ion-label>
+                    </ion-chip>
+
                 </li>
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap"> <h2>Modulos</h2></li>
+
                 <li> 
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="rePerfil(id)">
-                        <i class="mdi mdi-account"></i>
-                        <span class="hide-menu" routerLink="register" routerLink="register">Mi Perfil</span>
+                    <a  style="text-decoration: none;" class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="rePerfil()">
+                        <span class="hide-menu" routerLink="register" routerLink="register"><ion-icon name="person"></ion-icon> Mi Perfil</span>
                     </a>
                 </li>
 
-                <li> 
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="rePerfiles()" >
-                        <i class="mdi mdi-account-multiple"></i>
-                        <span class="hide-menu" routerLink="register" routerLink="register">Perfiles</span>
+                <li *ngIf="tipo == admintipo"> 
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="rePerfiles()" >
+                        <span class="hide-menu" routerLink="register" routerLink="register"><ion-icon name="people"></ion-icon> Perfiles</span>
                     </a>
                 </li>
 
-                <li> 
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reCrearAdmin()">
-                        <i class="mdi mdi-account-plus"></i>
-                        <span class="hide-menu" routerLink="register" routerLink="register">Crear Admin</span>
+                <li *ngIf="tipo == admintipo"> 
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reCrearAdmin()">
+                        <span class="hide-menu" routerLink="register" routerLink="register"> <ion-icon name="person-add"></ion-icon> Crear Admin</span>
                     </a>
                 </li>
             
@@ -49,45 +43,45 @@
                         <span class="hide-menu" routerLink="dashboard" >Vehículos</span></a>
                 </li> -->
 
-                <li> 
-                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reElectrolineras()">
-                        <i class="mdi mdi-car"></i>
-                        <span class="hide-menu" routerLink="list-electrolinera">Electrolineras</span>
+                <li *ngIf="tipo == admintipo" > 
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reElectrolineras()">
+                        <span class="hide-menu" routerLink="list-electrolinera"><ion-icon name="leaf"></ion-icon> Electrolineras</span>
                     </a>
                 </li>
 
-                <li>
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reElectroC()" >
-                        <i class="mdi mdi-file"></i>
-                        <span class="hide-menu">Agregar Electrolinera</span>
+                <li *ngIf="tipo == admintipo">
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reElectroC()" >
+                        <span class="hide-menu"><ion-icon name="locate"></ion-icon> Agregar Electrolinera</span>
                     </a>              
                 </li>
 
-                <!-- <li>
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reCrearElectrolinera()" >
-                        <i class="mdi mdi-file"></i>
-                        <span class="hide-menu">Mi Electrolinera</span>
+                <li *ngIf="tipo != admintipo">
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark" aria-expanded="false" (click)="reEditElectrolinera()" >
+                        <span class="hide-menu"><ion-icon name="leaf"></ion-icon> Mi Electrolinera</span>
                     </a>              
-                </li> -->
+                </li>
 
                 <li> 
-                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reNotify()">
-                        <i class="mdi mdi-bell"></i>
-                        <span class="hide-menu" routerLink="notify">Notificaciones</span>
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reNotify()">
+                        <span class="hide-menu" routerLink="notify"><ion-icon name="notifications"></ion-icon> Notificaciones</span>
                     </a>
                 </li>
 
                 <li> 
-                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reNotifyC()">
-                        <i class="mdi mdi-pencil-box"></i>
-                        <span class="hide-menu" routerLink="notify">Crear Notificacion</span>
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reNotifyC()">
+                        <span class="hide-menu" routerLink="notify"><ion-icon name="add-circle"></ion-icon> Crear Notificacion</span>
                     </a>
                 </li>
 
                 <li> 
-                    <a class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reQuejas()">
-                        <i class="mdi mdi-comment-alert"></i>
-                        <span class="hide-menu" routerLink="list-electrolinera">Q C S</span>
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="reQuejas()">
+                        <span class="hide-menu" routerLink="list-electrolinera"><ion-icon name="clipboard"></ion-icon> Q C S</span>
+                    </a>
+                </li>
+
+                <li> 
+                    <a style="text-decoration: none;" class="has-arrow waves-effect waves-dark"  aria-expanded="false" (click)="salir()">
+                        <span class="hide-menu" routerLink="list-electrolinera"><ion-icon name="log-out"></ion-icon> Salir</span>
                     </a>
                 </li>
             </ul>
@@ -96,6 +90,7 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
+
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->

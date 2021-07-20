@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DatosUsuario } from 'src/app/modelm/user.interface';
 import { AdminService } from 'src/app/services/admin.service';
@@ -9,25 +10,29 @@ import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
   templateUrl: './perfiles.component.html',
   styleUrls: ['./perfiles.component.scss'],
 })
-export class PerfilesComponent implements OnInit {
 
+export class PerfilesComponent implements OnInit {
 
   usuario:any;
   mensaje:string;
   id: string;
   pageActual: number= 1;
+  filterpost = '';
+  activo = "Activo";
+  nombre = "";
 
   constructor(
     private Servicio: AdminService, 
     private alertCtrl: AlertController,
-    private serviceAuth : FirebaseauthService
+    private serviceAuth : FirebaseauthService,
+    private router: Router,
     ) { 
       this.serviceAuth.getCurrentUser().then(r=>{
         this.id = r.uid;
         if (this.id){
           this.cargarUsuario();
         } 
-      });   
+      }); 
     }
 
   ngOnInit() {}
@@ -36,7 +41,8 @@ export class PerfilesComponent implements OnInit {
   async cargarUsuario(){
     this.Servicio.getAdministradores().subscribe(administrador => {
       this.usuario = administrador;
-      console.log(this.usuario);
+      // console.log("DATOS A MOSTRAR: "+this.dataSource);
+      // console.log(this.usuario);
     });
   }
 
@@ -55,6 +61,7 @@ export class PerfilesComponent implements OnInit {
 
     });
   }
+
   
   async mensajeerror(mensajetxt: string) {
     const alert = await this.alertCtrl.create({
@@ -72,5 +79,13 @@ export class PerfilesComponent implements OnInit {
     });
     await alert.present();
   }
+
+  GetActivos(){
+    this.router.navigate(['panel/perfilesa']);
+  }
+  GetInactivas(){
+    this.router.navigate(['panel/perfilesi']);
+  }
+
 
 }

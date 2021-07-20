@@ -9,8 +9,9 @@ import { QuejasService } from 'src/app/services/quejas.service';
 })
 export class QcsListComponent implements OnInit {
 
-  
+  pageActual: number= 1;
   public quejas:any = [];
+  filterpost ='';
 
   constructor(
     private serviceStore: QuejasService,
@@ -56,4 +57,9 @@ export class QcsListComponent implements OnInit {
   GetRechazadas(){
     this.router.navigate(['panel/qcsr']);
   }
+
+  ver(documentId){
+    this.router.navigate(['panel/qcsver',documentId]);
+  }
+  
 }

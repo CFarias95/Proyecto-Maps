@@ -1,3 +1,4 @@
+<h1>Editar Notificacion</h1>
 <form [formGroup]="ionicForm" (ngSubmit)="submitform()" novalidate > 
   <ion-item lines="full" color="dark">
     <ion-label position="stacked">Nombre</ion-label>
@@ -40,7 +41,7 @@
 
   <ion-item lines="full" color="dark">
     <ion-label position="stacked">Fecha</ion-label>
-    <ion-input formControlName="fecha" type="date" [min]="mydate" [(ngModel)]="notifificaciones.fecha"></ion-input>
+    <ion-input formControlName="fecha" type="date"  [(ngModel)]="notifificaciones.fecha"></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fecha.errors?.required">
     Fecha en la que se enviara la notificacion requerida.

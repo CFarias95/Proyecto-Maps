@@ -1,0 +1,31 @@
+<div id="pestanas">
+  <ul>
+     <li ><a (click)="GetTodos()">Creados</a></li>
+     <li class="activa"><a >Activos</a></li>
+     <li><a (click)="GetInactivas()">Inactivos</a></li>
+  </ul>
+</div>
+
+<h1>Usuarios Activos</h1>
+
+<input type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
+<br>
+<table class="table table-striped" style="display: table;">
+  <thead>
+    <tr>
+      <th scope="col" >Nombres</th>
+      <th scope="col" >Estado</th>
+      <th scope="col" >Accion</th>
+    </tr>
+  </thead>
+  <ng-container *ngIf="!usuario || usuario.length == 0">
+    <p class="centrarmensaje">No existen usuarios a mostrar.</p>
+  </ng-container>
+  <tbody *ngFor="let user of usuario | filter: filterpost | paginate: { itemsPerPage: 10, currentPage: pageActual };let indice=index">
+    <td *ngIf="user.uid != id && user.nombres != nombre && user.estado == activo" style="text-align: center;">{{user.nombres}}</td>
+    <td *ngIf="user.uid != id && user.nombres == nombre && user.estado == activo" style="text-align: center; background-color: palegoldenrod;">No Definido</td>
+    <td *ngIf="user.uid != id && user.estado == activo" style="text-align: center;">{{user.estado}}</td>
+    <td *ngIf="user.uid != id && user.estado == activo"style="text-align: center;"><ion-button  button (click)="dehabilitar(user.uid)" color="success" >Desahilitar</ion-button></td>
+  </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

@@ -11,7 +11,8 @@ export class QcsListRComponent implements OnInit {
 
   public quejas:any = [];
   estado = "Rechazado";
-
+  pageActual: number= 1;
+  filterpost = '';
   constructor(
     private serviceStore: QuejasService,
     private router: Router,
@@ -57,5 +58,10 @@ export class QcsListRComponent implements OnInit {
   GetAprobadas(){
     this.router.navigate(['panel/qcsa']);
   }
+
+  ver(documentId){
+    this.router.navigate(['panel/qcsver',documentId]);
+  }
+  
 
 }

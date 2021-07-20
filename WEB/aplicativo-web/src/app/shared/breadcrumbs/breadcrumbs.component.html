@@ -1,18 +1,27 @@
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center">
+<!-- <div class="row page-titles">
+    <div class="col-md-6 align-self-center">
         <h3 class="text-themecolor">Panel</h3>
     </div>
-    <div class="col-md-7 align-self-center">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active"><a routerLink="/login">Salir</a></li>
-        </ol>
+    <div class="col-md-6 align-self-center">    
+        <li class="btn btn-success"><a routerLink="/login">Cerra Sesion</a></li>   
     </div>
-    <div>
-    </div>
-</div>
+</div> -->
+<ion-row>
+    <ion-col>
+        <div class="col-md-6 align-self-center"><h1 class="text-themecolor">Panel</h1></div>
+    </ion-col>
+    <ion-col>
+        <div class="col-md-6 salir" style="padding-left: 60%;">
+            <ion-button fill="outline"  (click)="salir()" >
+                Cerrar Sesion
+                <ion-icon name="log-out"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-col>
+</ion-row>
 <!-- ============================================================== -->
 <!-- End Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
