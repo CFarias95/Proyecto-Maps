@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { QuejasService } from 'src/app/services/quejas.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class QcsListComponent implements OnInit {
 
   constructor(
     private serviceStore: QuejasService,
-    private router: Router, ) { }
+    private router: Router,
+    public atrCtrl: AlertController ) { }
 
   ngOnInit() {
     this.obtenerQuejas();
@@ -42,12 +44,46 @@ export class QcsListComponent implements OnInit {
     });
   }
 
-  rechazar(documentId){
-    this.serviceStore.RechazarQCS(documentId).then(() => {
-      console.log('Queja Rechazada!');
-    }, (error) => {
-      console.error(error);
+  async rechazar(documentId){
+
+    let alert = this.atrCtrl.create({
+      header: 'Rechazar',
+      inputs: [
+        {
+          name: 'razon',
+          placeholder: 'Razon del rechazo'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('You Clicked on Cancel');
+          }
+        },
+        {
+          text: 'Rechazar',
+          handler: data => {
+            if (data.razon != '') {
+              console.log(data.razon);
+              this.serviceStore.RechazarQCS(documentId,data.razon ).then(() => {
+                console.log('Queja Rechazada!');
+              }, (error) => {
+                console.error(error);
+              });
+
+            } else {
+              // invalid login
+              return false;
+            }
+          }
+        }
+      ]
     });
+    
+    (await alert).present();
+
   }
 
   GetAprobadas(){

@@ -43,9 +43,10 @@ export class QuejasService {
     });
   }
 
-  RechazarQCS(documentId: string){
+  RechazarQCS(documentId: string, razon : string){
     return this.quejasCollection.doc(documentId).update({
-      Estado: "Rechazado"
+      Estado: "Rechazado",
+      Razon: razon,
     });
   }
 

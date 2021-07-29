@@ -1,18 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="secondary">
+    <ion-buttons slot="secondary" (click)="reElectroC()">
       Iniciar Sesion
-      <ion-button>
+      <ion-button (click)="reElectroC()">
         <ion-icon slot="icon-only" name="person-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Electrolineras</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content [fullscreen]="true" class="homepage">
   
   <ion-slides>
-
     <ion-slide>
       <div class="slide">
         <img src="../../assets/img/Green and Black Refined Sports Football Event Banner (1).jpg"/>
@@ -27,7 +27,7 @@
     </ion-slide>
 
     <ion-slide>
-      <img src="./slide-3.png"/>
+      <img src="./slide-3.png" />
     </ion-slide>
 
   </ion-slides>
@@ -37,18 +37,7 @@
  <h2 class="light-green"> <img alt="surtidos puntos" width="42" height="42" src="https://cfassets.electromaps.com/img/surtidor-home.png">
   <br>Localiza los puntos de carga para vehículos eléctricos de uso público</h2>
   <section class="homemapa">
-    <img src="../../assets/img/maps.png">
-    <div class="container">
-      <div #map id="map" style="height:100%;width:100%"></div>
-      <div id="map"></div>
-      
-
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly"
-    async
-    ></script>
-    </div>
+    <img src="../../assets/img/maps.png" width="80%">
   </section> 
   <div class="container">
     <h1> Servicios</h1>
@@ -60,7 +49,7 @@
             <ion-card-title>Encuentra la mejor opción</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            Elige entre los diferentes puntos de carga segun la tu ubicacion actual puedes escoger el punto de carga que mas te conviene.
+            Elige entre los diferentes puntos de carga, segun tu ubicacion actual puedes escoger el punto de carga que mas te conviene.
           </ion-card-content>
         </ion-card>
       </div>

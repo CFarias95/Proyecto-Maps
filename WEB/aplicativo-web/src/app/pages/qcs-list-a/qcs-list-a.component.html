@@ -30,11 +30,11 @@
     <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;"><img src="../../../assets/img/queja.png" width = "50px"> </td>
     <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;">{{q.Tipo}}</td>
     <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;"> {{q.Fecha}}</td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;">{{q.Estado}}</td>
+    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px; background-color: rgb(12, 184, 12);">{{q.Estado}}</td>
     <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;">{{q.Origen}}</td>
     <td  *ngIf="q.Estado == estado" style="text-align: center;"><ion-button  button (click)="ver(q.id)" color="primary">Ver</ion-button></td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center;"><ion-button  button (click)="aprobar(q.id)" color="success">Aprobar</ion-button></td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center;"><ion-button  button (click)="rechazar(q.id)" color="danger">Rechazar</ion-button></td>
+    <td  *ngIf="q.Estado == estado" style="text-align: center;"><ion-button  button  color="success">Aprobada</ion-button></td>
+  
   </tbody>
   </table>
   <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;"  previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

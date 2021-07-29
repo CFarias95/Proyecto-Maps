@@ -34,21 +34,6 @@ export class QcsListRComponent implements OnInit {
     })  
   }
 
-  aprobar(documentId){
-    this.serviceStore.aprobarQCS(documentId).then(() => {
-      console.log('Queja Aprobada!');
-    }, (error) => {
-      console.error(error);
-    });
-  }
-
-  rechazar(documentId){
-    this.serviceStore.RechazarQCS(documentId).then(() => {
-      console.log('Queja Rechazada!');
-    }, (error) => {
-      console.error(error);
-    });
-  }
 
   GetTodas(){
     this.router.navigate(['panel/qcs']);

@@ -6,6 +6,7 @@ import { FirebasestorageService } from 'src/app/services/firebasestorage.service
 import { Electrolinera } from '../../modelm/electrolinera';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 
+
 @Component({
   selector: 'app-edit-electrolinera',
   templateUrl: './edit-electrolinera.component.html',
@@ -26,6 +27,8 @@ export class EditElectrolineraComponent implements OnInit {
   zoom: number;
   address: string;
   private geoCoder;
+
+  chesk = '00:00-00:00';
 
   @ViewChild('search',{static:false})
   public searchElementRef: ElementRef;
@@ -156,11 +159,28 @@ export class EditElectrolineraComponent implements OnInit {
 
   //Cargar Electrolinera
   async cargarElectrolinera(){
+
     this.serviceStore.getElectrolineraId(this.id).subscribe(administrador => {
       this.electrolinera = administrador;
       console.log(this.electrolinera);
       this.setCurrentLocation();
     });
+
+    if(this.electrolinera.lunes == ''){
+      this.electrolinera.lunes='00:00-00:00';
+    }else if(this.electrolinera.martes == ''){
+      this.electrolinera.martes='00:00-00:00';
+    }else if(this.electrolinera.miercoles == ''){
+      this.electrolinera.miercoles='00:00-00:00';
+    }else if(this.electrolinera.jueves == ''){
+      this.electrolinera.jueves='00:00-00:00';
+    }else if(this.electrolinera.viernes == ''){
+      this.electrolinera.viernes='00:00-00:00';
+    }else if(this.electrolinera.sabado == ''){
+      this.electrolinera.sabado='00:00-00:00';
+    }else if(this.electrolinera.domingo == ''){
+      this.electrolinera.domingo='00:00-00:00';
+    }
   }
 
   async subirImagen(event: any): Promise<void> {

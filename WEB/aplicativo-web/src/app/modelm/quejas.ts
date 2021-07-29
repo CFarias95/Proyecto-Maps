@@ -8,4 +8,5 @@ export interface Quejas {
     Texto: string;
     User: string;
     Origen: string;
+    Razon: string;
 }

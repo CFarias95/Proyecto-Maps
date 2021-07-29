@@ -14,6 +14,7 @@ export class QcsVerComponent implements OnInit {
   ionicForm: FormGroup;
   quejas:Quejas;
   id: string;
+  estado='Rechazado';
 
   
   constructor(
