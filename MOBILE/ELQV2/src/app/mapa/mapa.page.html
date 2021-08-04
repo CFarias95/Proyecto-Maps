@@ -1,17 +1,8 @@
 
-<ion-header [translucent]="true">
-  <ion-toolbar color="danger">
-    <ion-title>
-      Ionic Google Maps
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
 
-<ion-content [fullscreen]="true" class="ion-padding">
 
-    <input type="text" class="native-input sc-ion-input-ios" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
-
-  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" style="height: 300px;">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom"  mapId = '1cc4b8b373bd6a9f' style="height: 100%; padding: 0;">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
       (dragEnd)="markerDragEnd($event)" style="position: inherit !important;"></agm-marker>
   </agm-map>
@@ -19,6 +10,24 @@
   <h5>Address: {{address}}</h5>
   <div>Latitude: {{latitude}}</div>
   <div>Longitude: {{longitude}}</div>
+
+
+  <ion-fab horizontal="start" vertical="top" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title> Electrolinera: Madison, WI</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+      </ion-card-content>
+    </ion-card>
+  </ion-fab>
 
 </ion-content>
 

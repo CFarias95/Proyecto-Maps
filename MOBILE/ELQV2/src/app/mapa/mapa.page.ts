@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, NgModule } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
-import { AgmCoreModule } from '@agm/core';
+
 
 @Component({
   selector: 'app-mapa',
@@ -8,15 +8,7 @@ import { AgmCoreModule } from '@agm/core';
   styleUrls: ['./mapa.page.scss'],
   
 })
-@NgModule({
-  imports :[
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDx_q0nhUYOH2dugo66foOjPLUbwRL1U7s',
-      libraries: ['places']
 
-    }),
-  ]
-})
 
 
 export class MapaPage implements OnInit {
