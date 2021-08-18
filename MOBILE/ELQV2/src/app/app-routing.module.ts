@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'miperfil',
     loadChildren: () => import('./miperfil/miperfil.module').then( m => m.MiperfilPageModule)
   },
+  {
+    path: 'electrolineras',
+    loadChildren: () => import('./electrolineras/electrolineras.module').then( m => m.ElectrolinerasPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,74 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>miperfil</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding" >
+  <form class="form" [formGroup]="validations_form" style="max-height: 100vmax;" (ngSubmit)="tryRegister(validations_form.value)">
+    <h1>Registrarse</h1>
 
-<ion-content>
+    <ion-item>
+      <ion-label position="floating" color="primary">Nombres</ion-label>
+      <ion-input type="text" formControlName="nombre" [(ngModel)]="usuario.nombre"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.nombre">
+        <div class="error-message"
+          *ngIf="validations_form.get('nombre').hasError(validation.type) && (validations_form.get('nombre').dirty || validations_form.get('nombre').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Apellidos</ion-label>
+      <ion-input type="text" formControlName="apellido" [(ngModel)]="usuario.apellido"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.apellido">
+        <div class="error-message"
+          *ngIf="validations_form.get('apellido').hasError(validation.type) && (validations_form.get('apellido').dirty || validations_form.get('apellido').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Correo</ion-label>
+      <ion-input type="text" formControlName="email" [(ngModel)]="usuario.correo"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message"
+          *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Contraseña</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message"
+          *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    
+
+    <ion-item *ngIf="image2">
+      <img [src]= "usuario.foto" width="250px">
+    </ion-item>
+
+    <ion-item>
+      <label position="floating" style="color:rgb(255, 255, 255)" class="btn btn-info" >IMAGEN
+        <input type="file" accept=".png, .jpg" (change)="enviarimagen($event)" style="color:black;display:none;"/>
+      </label>
+    </ion-item>
+   
+    <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Actualizar</ion-button>
+    <label class="error-message">{{errorMessage}}</label>
+    <label class="success-message">{{successMessage}}</label>
+  </form>
 
 </ion-content>

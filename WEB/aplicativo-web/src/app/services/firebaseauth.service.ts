@@ -141,6 +141,7 @@ export class FirebaseauthService {
   isEmailVerified(user: User): boolean {
     return user.emailVerified === true ? true : false;
   }
+  
  //recuperamos los datos del usuario
   getUsuario(id: string){
     return this.usuariosCollection.doc<DatosUsuario>(id).valueChanges();
