@@ -30,6 +30,37 @@ export class MapaPage implements OnInit {
   private geoCoder;
   private marker;
   lugares:any;
+  visible = false;
+  titulo:string;
+  textos: string;
+
+  mapOptions = {
+    styles: [
+      {
+        url: "./assets/images/cluster.png",
+        width: 70,
+        height: 50,
+        textColor: "rED",
+        fontWeight: "bold",
+        textSize: "14px",
+        fontFamily: "nunito",
+        lineHeight: "12px",
+        paddingTop: "8px",
+        backgroundSize: "cover"
+      }
+    ],
+    calculator: markers => {
+      for (let i = 0; i < markers.length; i++) {
+        // you have access all the markers from each cluster
+      }
+      return {
+        text: markers.length + " MARKERS",
+        index: 1
+      };
+      // index: 1 -> for green icon
+      // index: 2 -> for red icon
+    }
+  };
 
   @ViewChild('search',{static:false})
   public searchElementRef: ElementRef;
@@ -88,8 +119,15 @@ export class MapaPage implements OnInit {
     }    
   }
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  clickedMarker(m: any) {
+    this.visible= true;
+    this.titulo = m.name;
+    this.textos= m.direcion;
+    
+  }
+
+  mapClicked($event: MouseEvent) {
+    this.visible=false;
   }
 
   renderMarker(){
