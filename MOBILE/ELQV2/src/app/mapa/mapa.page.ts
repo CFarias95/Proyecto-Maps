@@ -1,5 +1,16 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, NgModule } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
+import { ElectrolineraUbicacion } from '../modelm/electrolinera';
+import {   GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  GoogleMapOptions,
+  CameraPosition,
+  MarkerOptions,
+  Marker,
+  Environment
+} from '@ionic-native/google-maps';
+import { ElectrolinerasService } from '../services/electrolineras.service';
 
 
 @Component({
@@ -9,8 +20,6 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
   
 })
 
-
-
 export class MapaPage implements OnInit {
 
   title: string = 'AGM project';
@@ -19,13 +28,16 @@ export class MapaPage implements OnInit {
   zoom: number;
   address: string;
   private geoCoder;
+  private marker;
+  lugares:any;
 
   @ViewChild('search',{static:false})
   public searchElementRef: ElementRef;
   
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private servicio: ElectrolinerasService
   ) {
     
   }
@@ -35,11 +47,14 @@ export class MapaPage implements OnInit {
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
+      this.renderMarker();
       this.geoCoder = new google.maps.Geocoder;
 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
+
+
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
@@ -54,6 +69,7 @@ export class MapaPage implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+
         });
       });
     });
@@ -69,15 +85,27 @@ export class MapaPage implements OnInit {
         this.zoom = 8;
         this.getAddress(this.latitude, this.longitude);
       });
-    }
+    }    
   }
 
-  markerDragEnd($event: any) {
-    console.log($event);
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    this.getAddress(this.latitude, this.longitude);
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
   }
+
+  renderMarker(){
+    this.servicio.getElectrolinerasUbicaciones().subscribe((ubicaciones) =>{
+      this.lugares = ubicaciones;
+      console.log(this.lugares);
+    })
+  }
+
+  // markerDragEnd($event: any) {
+  //   console.log($event);
+  //   this.latitude = $event.coords.lat;
+  //   this.longitude = $event.coords.lng;
+  //   this.getAddress(this.latitude, this.longitude);
+  // }
+
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {

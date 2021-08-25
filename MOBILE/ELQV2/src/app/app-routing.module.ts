@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'electrolineras',
     loadChildren: () => import('./electrolineras/electrolineras.module').then( m => m.ElectrolinerasPageModule)
   },
+  {
+    path: 'crearqcs',
+    loadChildren: () => import('./crearqcs/crearqcs.module').then( m => m.CrearqcsPageModule)
+  },
 ];
 
 @NgModule({
