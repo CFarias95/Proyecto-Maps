@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'crearqcs',
     loadChildren: () => import('./crearqcs/crearqcs.module').then( m => m.CrearqcsPageModule)
   },
+  {
+    path: 'ruta/:id',
+    loadChildren: () => import('./ruta/ruta.module').then( m => m.RutaPageModule)
+  },
 ];
 
 @NgModule({

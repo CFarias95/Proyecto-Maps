@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, NgModule } from '@angular/core';
-import { MapsAPILoader, AgmMap } from '@agm/core';
+
 import { ElectrolineraUbicacion } from '../modelm/electrolinera';
 import {   GoogleMaps,
   GoogleMap,
@@ -11,6 +11,8 @@ import {   GoogleMaps,
   Environment
 } from '@ionic-native/google-maps';
 import { ElectrolinerasService } from '../services/electrolineras.service';
+import { MapsAPILoader } from '@agm/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -68,8 +70,8 @@ export class MapaPage implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private servicio: ElectrolinerasService
-  ) {
+    private servicio: ElectrolinerasService,
+    private router: Router  ) {
     
   }
 
@@ -80,6 +82,7 @@ export class MapaPage implements OnInit {
       this.setCurrentLocation();
       this.renderMarker();
       this.geoCoder = new google.maps.Geocoder;
+      
 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
@@ -90,12 +93,10 @@ export class MapaPage implements OnInit {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -161,6 +162,10 @@ export class MapaPage implements OnInit {
       }
 
     });
+  }
+
+  reElectrolineras(){
+    this.router.navigate(['electrolineras']);
   }
 
 }

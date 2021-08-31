@@ -1,9 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>electrolineras</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-card (click)="expandItem(item)" *ngFor="let item of items">
+    <ion-card-header>
+      <ion-card-title>{{item.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <app-expandable expandHeight="500px" [expanded]="item.expanded">
 
+        <img [src]="item.image" alt="ion" *ngIf="item.image">
+
+        <ion-list>
+         
+            <ion-item>
+              <ion-label>{{item.direcion}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{item.referencia}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{item.formaspago}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{item.tipoconector}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{item.numeroconectores}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <td style="text-align: center;"><ion-button  button (click)="reRuta(item.id)" color="success" >Ir</ion-button></td>
+            </ion-item>
+          
+        </ion-list>
+
+      </app-expandable>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -15,6 +15,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
