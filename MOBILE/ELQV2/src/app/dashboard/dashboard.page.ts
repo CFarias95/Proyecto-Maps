@@ -10,6 +10,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class DashboardPage implements OnInit {
 
   userEmail: string;
+  userName: String;
 
   constructor(
     private navCtrl: NavController,
@@ -21,6 +22,7 @@ export class DashboardPage implements OnInit {
       console.log('res', res);
       if (res !== null) {
         this.userEmail = res.email;
+        this.userName = res.displayName;
       } else {
         this.navCtrl.navigateBack('');
       }

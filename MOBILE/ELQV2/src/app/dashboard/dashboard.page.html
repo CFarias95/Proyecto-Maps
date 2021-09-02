@@ -1,28 +1,55 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>MENU</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content class="ion-padding">
-
-  <ion-grid>
+<ion-content>
+  <ion-grid fixed>
     <ion-row>
       <ion-col text-center>
-        Welcome to Dashboard!
+        Bienvenido : {{userEmail}}
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col text-center>
-        Your Registered EmailID : {{userEmail}}
+      <ion-col size="12"></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+        
+          <ion-row>
+            <ion-col size="6">
+              <img src="../../assets/mapa.png" alt="mapa" routerLink="/mapa">
+            </ion-col>
+            <ion-col size="6">
+              <img src="../../assets/electrolineras.png" alt="electrolineras"routerLink="/electrolineras">
+            </ion-col>
+          </ion-row>
+        
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      
+        <ion-col >
+        
+          <ion-row>
+            <ion-col size="6">
+              <img src="../../assets/quejas.png" alt="quejas"  routerLink="/crearqcs"  >
+            </ion-col>
+            <ion-col size="6">
+              <img src="../../assets/usuario.png" alt="usuario" routerLink="/miperfil">
+            </ion-col>
+          </ion-row>
+        
+      
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="logout()" expand="block" shape="round">
+          Cerrar Sesión
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
 </ion-content>
-<ion-footer (click)="logout()">
-  <ion-toolbar color="secondary">
-    <ion-title>Log out</ion-title>
-  </ion-toolbar>
-</ion-footer>
+

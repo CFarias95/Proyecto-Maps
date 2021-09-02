@@ -90,5 +90,6 @@ export class RutaPage implements OnInit {
       //console.log("Destino: "+this.latitudeD +", "+ this.longitudeD);  
     })
   }
+  
 
 }
