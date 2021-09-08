@@ -13,7 +13,6 @@ import {   GoogleMaps,
 import { ElectrolinerasService } from '../services/electrolineras.service';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -72,8 +71,8 @@ export class MapaPage implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private servicio: ElectrolinerasService,
-    private router: Router ,public navCtrl: NavController ) {
-      
+    private router: Router  ) {
+    
   }
 
   ngOnInit() {
@@ -168,9 +167,5 @@ export class MapaPage implements OnInit {
   reElectrolineras(){
     this.router.navigate(['electrolineras']);
   }
-
-  menu(){
-    this.navCtrl.navigateForward('/dashboard');
-   }
 
 }
