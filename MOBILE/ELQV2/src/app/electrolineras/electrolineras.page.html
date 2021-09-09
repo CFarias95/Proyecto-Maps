@@ -1,40 +1,61 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title>Electrolineras Registradas</ion-title>
+      <ion-title style="background-color: rgba(47, 98, 100, 0.486); text-align: left; height: 60px;">Electrolineras Registradas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light">
+        <ion-icon routerLink="/mapa" name="map"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon routerLink="/dashboard" name="grid"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-card (click)="expandItem(item)" *ngFor="let item of items">
     <ion-card-header>
       <ion-card-title>{{item.name}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <app-expandable expandHeight="500px" [expanded]="item.expanded">
+      <app-expandable expandHeight="800px" [expanded]="item.expanded">
 
-        <img [src]="item.image" alt="ion" *ngIf="item.image">
+        <img [src]="item.imagen" alt="imagen" *ngIf="item.imagen" width="250px">
 
-        <ion-list>
-         
+        <ion-list>         
             <ion-item>
-              <ion-label>{{item.direcion}}</ion-label>
+              <h3>{{item.direcion}}</h3>
             </ion-item>
             <ion-item>
-              <ion-label>{{item.referencia}}</ion-label>
+              <h3>Referencia: {{item.referencia}}</h3>
             </ion-item>
             <ion-item>
-              <ion-label>{{item.formaspago}}</ion-label>
+              <h3>Forma de pago: {{item.formaspago}}</h3>
             </ion-item>
             <ion-item>
-              <ion-label>{{item.tipoconector}}</ion-label>
+              <h3>Tipo de conector: {{item.tipoconector}} ({{item.numeroconectores}})</h3>
             </ion-item>
             <ion-item>
-              <ion-label>{{item.numeroconectores}}</ion-label>
+              <h3>Abierto de Lunes a Viernes de {{item.lunes}}</h3>
             </ion-item>
             <ion-item>
-              <td style="text-align: center;"><ion-button  button (click)="reRuta(item.id)" color="success" >Ir</ion-button></td>
+              <h3>Sabados de {{item.martes}}</h3>
             </ion-item>
-          
+            <ion-item>
+              <h3>Domingos de {{item.miercoles}}</h3>
+            </ion-item>
+            <ion-item>
+              <h3>Feriados de {{item.jueves}}</h3>
+            </ion-item>
+            <ion-item>
+              <td style="text-align: center;"><ion-button  button (click)="reRuta(item.id)" color="success" >Ruta</ion-button></td>
+            </ion-item>
         </ion-list>
 
       </app-expandable>
