@@ -68,6 +68,7 @@ export class NotificacionesService {
             fecha : data.fecha,
             hora: data.hora,
             name: data.name,
+            tipo: data.tipo,
             estado : "Activo",
             imagen : this.photoURL
           });

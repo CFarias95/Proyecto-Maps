@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Notificaciones } from '../modelm/notificaciones';
 import { AuthenticationService } from '../services/authentication.service';
+import { NotificacionesService } from '../services/notificaciones.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,13 +13,15 @@ export class DashboardPage implements OnInit {
 
   userEmail: string;
   userName: String;
-
+  noticias: Notificaciones;
   constructor(
     private navCtrl: NavController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private notificaciones : NotificacionesService
   ) { }
 
   ngOnInit() {
+    this.getNoticias();
     this.authService.userDetails().subscribe(res => {
       console.log('res', res);
       if (res !== null) {
@@ -40,6 +44,14 @@ export class DashboardPage implements OnInit {
       .catch(error => {
         console.log(error);
       })
+  }
+
+  getNoticias(){
+    this.notificaciones.getNoticias().subscribe((notificaciones) =>{
+      this.noticias = notificaciones;
+      console.log(this.noticias);
+    })
+
   }
   
 

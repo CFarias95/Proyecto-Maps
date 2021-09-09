@@ -6,9 +6,17 @@
 <ion-content>
   <ion-grid fixed>
     <ion-row>
-      <ion-col text-center>
-        Bienvenido : {{userEmail}}
-      </ion-col>
+      <ion-slides style="background-color: rgb(56, 110, 103);">
+
+        <ion-slide *ngFor="let item of noticias">
+          <div class="slide">
+            <img [src]="item.imagen" *ngIf="item.imagen">
+            <h2>{{item.titulo}}</h2>
+            <p>{{item.texto}}</p>
+          </div>
+        </ion-slide>
+
+      </ion-slides>
     </ion-row>
     <ion-row>
       <ion-col size="12"></ion-col>

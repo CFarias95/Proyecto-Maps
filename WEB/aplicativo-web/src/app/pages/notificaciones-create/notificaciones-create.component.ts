@@ -40,6 +40,7 @@ export class NotificacionesCreateComponent implements OnInit {
       titulo: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zA-Z ]*')])],
       texto: ['',Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(50)])],
       fecha: ['',Validators.compose([Validators.required])],
+      tipo: ['', Validators.compose([Validators.required])],
       hora: ['', Validators.compose([Validators.required])],
     })
   }

@@ -46,7 +46,11 @@ const routes: Routes = [
   {
     path: 'ruta/:id',
     loadChildren: () => import('./ruta/ruta.module').then( m => m.RutaPageModule)
+  },  {
+    path: 'listarqcs',
+    loadChildren: () => import('./listarqcs/listarqcs.module').then( m => m.ListarqcsPageModule)
   },
+
 ];
 
 @NgModule({

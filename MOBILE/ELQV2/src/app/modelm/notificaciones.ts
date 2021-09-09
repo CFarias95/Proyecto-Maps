@@ -1,5 +1,4 @@
 export interface Notificaciones {
-    
     id?: string;
     titulo: string;
     texto: string;
@@ -8,5 +7,4 @@ export interface Notificaciones {
     imagen:string;
     tipo: string;
     name:string;
-
 }
