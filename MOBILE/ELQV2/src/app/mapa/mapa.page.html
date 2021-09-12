@@ -9,7 +9,8 @@
         [longitude]="m.longitud"
         [label]="m.name"
         [markerDraggable]="false"
-        (markerClick)="clickedMarker(m)">
+        (markerClick)="clickedMarker(m)"
+        [iconUrl]="icon" >
       
     </agm-marker>
   </agm-map>

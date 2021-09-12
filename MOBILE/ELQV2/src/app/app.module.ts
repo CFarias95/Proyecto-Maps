@@ -13,9 +13,6 @@ import { environment } from '../environments/environment';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
-
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

@@ -1,9 +1,54 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>listarqcs</ion-title>
+    <ion-title style="background-color: rgba(47, 98, 100, 0.486); text-align: left; height: 60px;">Tus quejas, comentarios y/o sugerencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light">
+        <ion-icon routerLink="/dashboard" name="grid"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon routerLink="/crearqcs" name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-card (click)="expandItem(item)" *ngFor="let item of items">
+    
+    <ion-card-header  color="danger" *ngIf="item.Estado == rechazado">
+      <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-header  color="success" *ngIf="item.Estado == aprobado">
+      <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-header  color="medium" *ngIf="item.Estado == creado">
+      <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
+    </ion-card-header>
 
+    <ion-card-content>
+      <app-expandable expandHeight="800px" [expanded]="item.expanded">
+        <ion-list>         
+            <ion-item>
+              <h3>Fecha: {{item.Fecha}}</h3>
+            </ion-item>
+            <ion-item>
+              <h3>Estado: {{item.Estado}}</h3>
+            </ion-item>
+            <ion-item>
+              <h3>{{item.Texto}}</h3>
+            </ion-item>
+            <ion-item *ngIf="item.Razon">
+              <h3>Motivo rechazo: {{item.Razon}}</h3>
+            </ion-item>
+        </ion-list>
+      </app-expandable>
+    </ion-card-content>
+  </ion-card>
+ 
 </ion-content>

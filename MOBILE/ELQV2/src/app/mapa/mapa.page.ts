@@ -36,7 +36,11 @@ export class MapaPage implements OnInit {
   visible = false;
   titulo:string;
   textos: string;
-
+  icon = {
+    url: 'https://firebasestorage.googleapis.com/v0/b/integracion-maps-304321.appspot.com/o/image%20(2).png?alt=media&token=054b2fda-4c08-4885-aa45-ed72e9924eab',
+    scaledSize: {
+      height: 60, width: 60
+  }};
   mapOptions = {
     styles: [
       {

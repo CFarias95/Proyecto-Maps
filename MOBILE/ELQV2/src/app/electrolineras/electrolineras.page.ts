@@ -30,6 +30,7 @@ export class ElectrolinerasPage implements OnInit {
     this.getElectrolineras();
   }
 
+  
   expandItem(item): void {
     if (item.expanded) {
       item.expanded = false;

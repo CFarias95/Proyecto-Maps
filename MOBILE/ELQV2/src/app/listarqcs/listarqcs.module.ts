@@ -8,6 +8,8 @@ import { ListarqcsPageRoutingModule } from './listarqcs-routing.module';
 
 import { ListarqcsPage } from './listarqcs.page';
 
+import { ExpandableComponent } from '../components/expandable/expandable.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { ListarqcsPage } from './listarqcs.page';
     IonicModule,
     ListarqcsPageRoutingModule
   ],
-  declarations: [ListarqcsPage]
+  declarations: [ListarqcsPage,ExpandableComponent]
 })
 export class ListarqcsPageModule {}
