@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
-    path: 'miperfil',
-    loadChildren: () => import('./miperfil/miperfil.module').then( m => m.MiperfilPageModule)
-  },
-  {
     path: 'electrolineras',
     loadChildren: () => import('./electrolineras/electrolineras.module').then( m => m.ElectrolinerasPageModule)
   },
@@ -46,10 +42,15 @@ const routes: Routes = [
   {
     path: 'ruta/:id',
     loadChildren: () => import('./ruta/ruta.module').then( m => m.RutaPageModule)
-  },  {
+  },
+  {
     path: 'listarqcs',
     loadChildren: () => import('./listarqcs/listarqcs.module').then( m => m.ListarqcsPageModule)
+  },  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+
 
 ];
 

@@ -7,11 +7,11 @@ export interface User {
   }
   
   export interface DatosUsuario {
+
     uid: string;
     correo: string;
     nombres: string;
     apellidos: string;
     direccion:string;
-    telefono: string;
     foto:string;
   }

@@ -87,12 +87,10 @@ export class MapaPage implements OnInit {
       this.setCurrentLocation();
       this.renderMarker();
       this.geoCoder = new google.maps.Geocoder;
-      
 
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
-
 
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -105,7 +103,7 @@ export class MapaPage implements OnInit {
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+          this.zoom = 20;
 
         });
       });
@@ -113,13 +111,14 @@ export class MapaPage implements OnInit {
 
   }
 
+
    // Get Current Location Coordinates
    private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 8;
+        this.zoom = 20;
         this.getAddress(this.latitude, this.longitude);
       });
     }    
@@ -159,6 +158,7 @@ export class MapaPage implements OnInit {
         if (results[0]) {
           this.zoom = 12;
           this.address = results[0].formatted_address;
+          console.log(results[0]);
         } else {
           window.alert('No results found');
         }

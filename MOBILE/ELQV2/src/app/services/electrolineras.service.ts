@@ -20,6 +20,7 @@ export class ElectrolinerasService {
     private firestore: AngularFirestore,  
     private storage: AngularFireStorage
   ) { 
+    
     this.electrolineraCollection=this.firestore.collection<Electrolinera>('electrolineras');
     this.Electrolineras=this.electrolineraCollection.snapshotChanges().pipe(
       map(actions => {
@@ -37,6 +38,7 @@ export class ElectrolinerasService {
   public getElectrolineraId(documentId: string) {
     return this.electrolineraCollection.doc<Electrolinera>(documentId).valueChanges();
   }
+
 
   // Metodo para obtener todaslas electrolineras
   public ObtenerElectrolineras() {

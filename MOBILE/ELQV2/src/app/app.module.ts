@@ -23,7 +23,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDx_q0nhUYOH2dugo66foOjPLUbwRL1U7s',
-      libraries: ['places']
+      libraries: ['places'],
+      
 
     }),
     AngularFireModule.initializeApp (environment.firebaseConfig)],

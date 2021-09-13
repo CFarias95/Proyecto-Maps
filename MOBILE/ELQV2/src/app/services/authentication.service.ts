@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
-import { finalize, first, switchMap } from 'rxjs/operators';
+import { finalize, first, map, switchMap } from 'rxjs/operators';
 import { DatosUsuario, User } from '../modelm/user';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FileI } from '../modelm/file.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,26 @@ export class AuthenticationService {
   public photoURL = null;
   user$: Observable<User>;
   private usuariosCollection: AngularFirestoreCollection<DatosUsuario>;
-
-  constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage,private afs: AngularFirestore) { 
+  private Usuario: Observable<any>;
+  constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage,private afs: AngularFirestore,) { 
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
           return this.afs.doc<User>(`usersmobile/${user.uid}`).valueChanges();
         }
         return of(null);
+      })
+    );
+
+    this.usuariosCollection=this.afs.collection<DatosUsuario>('usersmobile');
+    this.Usuario=this.usuariosCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+        
+          return {id, ...data};
+        });
       })
     );
 
@@ -95,7 +108,35 @@ export class AuthenticationService {
 
   //Get user Data
   getUserData(id: string){
+    //return  this.afs.collection('usersmobile').doc(id).valueChanges();
     return this.usuariosCollection.doc<DatosUsuario>(id).valueChanges();
+  }
+
+  //Update user Data
+  updateUser(id: string, value){
+    return this.usuariosCollection.doc<DatosUsuario>(id).update({
+      nombres: value.nombre,
+      apellidos: value.apellido
+    })
+  }
+
+  //Update imagen
+  updateImagen(usuario:DatosUsuario, id: string,image?: FileI){
+    
+    //this.afDB.database.ref('users/'+id).set(usuario);
+    this.filePath = `usermobile/${id}`;
+    const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath, image);
+    task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(urlImage => {
+            usuario.foto=urlImage;
+            this.usuariosCollection.doc(id).update(usuario);
+            //this.saveUserProfile(user);
+          });
+        })
+      ).subscribe(); 
   }
 
   //detalles de usuario

@@ -2,16 +2,15 @@
 <ion-content [fullscreen]="true">
 
 
-  <agm-map mapId = "4f3ccef30880a1f" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" style="height: 100%; padding: 0;" (mapClick)="mapClicked($event)">
+  <agm-map disableDefaultUI="false" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" style="height: 100%; padding: 0;" (mapClick)="mapClicked($event)">
     <agm-marker 
         *ngFor="let m of lugares; let i = index"
         [latitude]="m.latitud"
         [longitude]="m.longitud"
-        [label]="m.name"
         [markerDraggable]="false"
         (markerClick)="clickedMarker(m)"
-        [iconUrl]="icon" >
-      
+        [iconUrl]="icon"
+        class="map-outer" >
     </agm-marker>
   </agm-map>
 
