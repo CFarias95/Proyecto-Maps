@@ -53,13 +53,11 @@ export class ElectrolinerasComponent implements OnInit {
         martes:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
         miercoles:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
         jueves:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-        viernes:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-        sabado:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-        domingo:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
         fpago:['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(20),Validators.pattern('[a-zA-Z ]*')])],
         latitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
         longitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
         estado:['',Validators.compose([Validators.required])],
+        horariotexto:['',Validators.compose([])],
         
      });
    }
@@ -131,8 +129,8 @@ export class ElectrolinerasComponent implements OnInit {
 
     }else{
 
-      let {name,direcion,referencia,tipoconec,cantidadconec,lunes,martes,miercoles,jueves,viernes,sabado,domingo,fpago,latitud,longitud,estado} = this.ionicForm.value;
-      this.serviceStore.CrearElectrolinera(name,direcion,referencia,tipoconec,cantidadconec,lunes,martes,miercoles,jueves,viernes,sabado,domingo,fpago,latitud,longitud,estado,this.image).then(() => {
+      let {name,direcion,referencia,tipoconec,cantidadconec,lunes,martes,miercoles,jueves,fpago,latitud,longitud,estado,horariotexto} = this.ionicForm.value;
+      this.serviceStore.CrearElectrolinera(name,direcion,referencia,tipoconec,cantidadconec,lunes,martes,miercoles,jueves,fpago,latitud,longitud,estado,horariotexto,this.image).then(() => {
         this.mensaje="Se registro la Electrolinera en el sistema";
         this.mensajeerror(this.mensaje);
       });

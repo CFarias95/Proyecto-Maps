@@ -102,10 +102,6 @@
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.estado.errors?.required">
         Seleciones un estado.
       </span>
-      <ion-item>
-        <ion-checkbox color="secondary" slot="start"></ion-checkbox>
-        <ion-label>Disponible en Feriados</ion-label>
-      </ion-item>
       
     </ion-col>
 
@@ -115,14 +111,13 @@
       <!-- lunes -->
       <ion-item lines="full" color="dark">
         <ion-row>
-          <ion-col size="4">
-            <ion-label position="stacked">Lunes:</ion-label>
+          <ion-col size="6">
+            <ion-label position="stacked">Lunes a Viernes:</ion-label>
           </ion-col>
-          <ion-col size="8">
+          <ion-col size="6">
             <ion-input formControlName="lunes" type="text" placeholder = "hh:mm-hh:mm" [(ngModel)]="electrolinera.lunes"></ion-input> 
           </ion-col>   
         </ion-row>
-        <ion-checkbox color="success" slot="end"></ion-checkbox>
       </ion-item>
       
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lunes.errors?.required">
@@ -142,10 +137,10 @@
       <!-- martes -->
       <ion-item lines="full" color="dark">
         <ion-row>
-          <ion-col size="4">
-            <ion-label position="stacked">Martes</ion-label>
+          <ion-col size="6">
+            <ion-label position="stacked">Sabado: </ion-label>
           </ion-col>
-          <ion-col size="8">
+          <ion-col size="6">
             <ion-input formControlName="martes" type="text" placeholder = "hh:mm-hh:mm" [(ngModel)]="electrolinera.martes"></ion-input>
           </ion-col>
         </ion-row>
@@ -167,10 +162,10 @@
       <!-- miercoles -->
       <ion-item lines="full" color="dark">
         <ion-row>
-          <ion-col size="4">
-            <ion-label position="stacked">Miercoles</ion-label>
+          <ion-col size="6">
+            <ion-label position="stacked">Domingo: </ion-label>
           </ion-col>
-          <ion-col size="8">
+          <ion-col size="6">
             <ion-input formControlName="miercoles" type="text" placeholder="hh:mm-hh:mm" [(ngModel)]="electrolinera.miercoles"></ion-input>
           </ion-col>
         </ion-row>
@@ -192,10 +187,10 @@
       <!-- Jueves -->
       <ion-item lines="full" color="dark">
         <ion-row>
-          <ion-col size="4">
-            <ion-label position="stacked">Jueves</ion-label>
+          <ion-col size="6">
+            <ion-label position="stacked">Feriados: </ion-label>
           </ion-col>
-          <ion-col size="8">
+          <ion-col size="6">
             <ion-input formControlName="jueves" type="text" placeholder="hh:mm-hh:mm" [(ngModel)]="electrolinera.jueves"></ion-input>
           </ion-col>
         </ion-row>
@@ -213,80 +208,17 @@
         Formato HH:MM-HH:MM.
       </span>
  
-
-      <!-- viernes -->
-      <ion-item lines="full" color="dark">
-        <ion-row>
-          <ion-col size="4">
-            <ion-label position="stacked">Viernes</ion-label>
-          </ion-col>
-          <ion-col size="8">
-            <ion-input formControlName="viernes" type="text" placeholder="hh:mm-hh:mm" [(ngModel)]="electrolinera.viernes"></ion-input>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.required">
-        Hora requerida.
-      </span>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.minlength">
-        Verifica el formato.
-      </span>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.maxlength">
-        Valores sin espacios.
-      </span>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.viernes.errors?.pattern">
-        Formato HH:MM-HH:MM.
-      </span>
- 
-
-        <!-- sabado -->
-        <ion-item lines="full" color="dark">
-          <ion-row>
-            <ion-col size="4">
-              <ion-label position="stacked">Sabado</ion-label>
-            </ion-col>
-            <ion-col size="8">
-              <ion-input formControlName="sabado" type="text"  placeholder="hh:mm-hh:mm" [(ngModel)]="electrolinera.sabado"></ion-input>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.required">
-          Hora requerida.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.minlength">
-          Verifica el formato.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.maxlength">
-          Valores sin espacios.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sabado.errors?.pattern">
-          Formato HH:MM-HH:MM.
-        </span>
-
         <!-- domingo -->
         <ion-item lines="full" color="dark">
           <ion-row>
             <ion-col size="4">
-              <ion-label position="stacked">Domingo</ion-label>
+              <ion-label position="stacked">Nota: </ion-label>
             </ion-col>
             <ion-col size ="8">
-              <ion-input formControlName="domingo" type="text" placeholder="hh:mm-hh:hh" [(ngModel)]="electrolinera.domingo"></ion-input>
+              <ion-input formControlName="horariotexto" type="text" placeholder="Nota sobre el horario?" [(ngModel)]="electrolinera.horariotexto"></ion-input>
             </ion-col>
-          </ion-row>
-          
+          </ion-row>    
         </ion-item>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.required">
-          Hora requerida.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.minlength">
-          Verifica el formato.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.maxlength">
-          Valores sin espacios.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.domingo.errors?.pattern">
-          Formato HH:MM-HH:MM.
-        </span>
       </ion-col>
     <ion-col style ="text-align: center;">  
       <!-- imagen -->

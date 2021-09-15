@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { LocalNotifications } from "@ionic-native/local-notifications";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,12 +25,11 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDx_q0nhUYOH2dugo66foOjPLUbwRL1U7s',
       libraries: ['places'],
-      
 
     }),
     AngularFireModule.initializeApp (environment.firebaseConfig)],
 
-  providers: [GoogleMaps,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [LocalNotifications,GoogleMaps,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

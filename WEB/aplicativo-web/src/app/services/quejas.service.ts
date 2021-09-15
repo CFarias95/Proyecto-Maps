@@ -32,6 +32,24 @@ export class QuejasService {
     return this.db.collection('quejas').snapshotChanges();
   }
 
+  getQCSAprobadas(){
+    return this.db.collection('quejas',ref => ref.where('Estado','==','Aprobado')).snapshotChanges();
+  }
+
+  getQCSRechazadas(){
+    return this.db.collection('quejas',ref => ref.where('Estado','==','Rechazado')).snapshotChanges();
+  }
+
+  getQCSMias(nombre: string){
+    return this.db.collection('quejas',ref => ref.where('Origen', '==', nombre)).snapshotChanges();
+  }
+  getQCSMiasAprobadas(nombre: string){
+    return this.db.collection('quejas',ref => ref.where('Origen', '==', nombre).where('Estado','==','Aprobado')).snapshotChanges();
+  }
+  getQCSMiasRechazadas(nombre: string){
+    return this.db.collection('quejas',ref => ref.where('Origen', '==', nombre).where('Estado','==','Rechazado')).snapshotChanges();
+  }
+
   //actualizar queja
   updateQCS(documentId: string, data: any){
     return this.quejasCollection.doc(documentId).update(data);

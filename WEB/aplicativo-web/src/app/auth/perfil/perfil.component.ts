@@ -27,6 +27,7 @@ export class PerfilComponent implements OnInit {
     private Servicio: AdminService, 
     private alertCtrl: AlertController,
     private serviceAuth : FirebaseauthService,) {
+      
     this.serviceAuth.getCurrentUser().then(r=>{
       this.id = r.uid;
       if (this.id){

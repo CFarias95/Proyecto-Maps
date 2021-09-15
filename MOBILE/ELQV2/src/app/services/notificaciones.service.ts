@@ -33,4 +33,38 @@ export class NotificacionesService {
     return this.Notify;
   }
 
+  public getPromociones(){
+   
+    this.notifyCollection = this.firestore.collection<Notificaciones>('notificaciones', ref => ref.where('tipo', '==', 'Promocion'));
+    this.Notify = this.notifyCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+        
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Notify;
+  }
+
+  public getTodo(){
+   
+    this.notifyCollection = this.firestore.collection<Notificaciones>('notificaciones');
+    this.Notify = this.notifyCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+        
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Notify;
+  }
+
 }

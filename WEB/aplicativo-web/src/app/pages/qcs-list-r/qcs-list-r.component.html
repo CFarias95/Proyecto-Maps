@@ -27,13 +27,13 @@
     <p class="centrarmensaje">No existen Datos a mostrar.</p>
   </ng-container>
   <tbody *ngFor="let q of quejas | filterq: filterpost | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index">
-    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;"><img src="../../../assets/img/queja.png" width = "50px"> </td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;">{{q.Tipo}}</td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;"> {{q.Fecha}}</td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px; background-color: brown;">{{q.Estado}}</td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center; padding-top: 10px;">{{q.Origen}}</td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center;"><ion-button  button (click)="ver(q.id)" color="primary">Ver</ion-button></td>
-    <td  *ngIf="q.Estado == estado" style="text-align: center;"><ion-button  button  color="danger">Rechazado</ion-button></td>
+    <td   style="text-align: center; padding-top: 10px;"><img src="../../../assets/img/queja.png" width = "50px"> </td>
+    <td   style="text-align: center; padding-top: 10px;">{{q.Tipo}}</td>
+    <td   style="text-align: center; padding-top: 10px;"> {{q.Fecha}}</td>
+    <td   style="text-align: center; padding-top: 10px; background-color: brown;">{{q.Estado}}</td>
+    <td   style="text-align: center; padding-top: 10px;">{{q.Origen}}</td>
+    <td   style="text-align: center;"><ion-button  button (click)="ver(q.id)" color="primary">Ver</ion-button></td>
+    <td   style="text-align: center;"><ion-button  button  color="danger">Rechazado</ion-button></td>
   </tbody>
   </table>
   <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;"  previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

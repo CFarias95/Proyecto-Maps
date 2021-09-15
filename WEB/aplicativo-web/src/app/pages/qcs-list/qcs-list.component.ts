@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Electrolinera } from 'src/app/modelm/electrolinera';
+import { AdminService } from 'src/app/services/admin.service';
+import { ElectrolineraService } from 'src/app/services/electolinera.service';
+import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
+import { FirebasestorageService } from 'src/app/services/firebasestorage.service';
 import { QuejasService } from 'src/app/services/quejas.service';
 
 @Component({
@@ -13,29 +18,61 @@ export class QcsListComponent implements OnInit {
   pageActual: number= 1;
   public quejas:any = [];
   filterpost ='';
+  id: string;
+  tipo: string;
+  nombre; string;
+  electro : Electrolinera;
 
   constructor(
     private serviceStore: QuejasService,
     private router: Router,
-    public atrCtrl: AlertController ) { }
+    public atrCtrl: AlertController,
+    private route: ActivatedRoute,
+    private Servicio: AdminService,  
+    private lectroservicio: FirebasestorageService,
+    private serviceAuth : FirebaseauthService ) {
+      this.serviceAuth.getCurrentUser().then(r=>{
+        this.id = r.uid;
+        console.log("ID: "+this.id);
+        if (this.id){
+          this.Servicio.getAdministrador(this.id).subscribe(administrador => {
+            this.tipo = administrador.tipo;
+            console.log("Tipo: "+this.tipo);
+            if(this.tipo.startsWith("Admin")){
+              this.serviceStore.getQCS().subscribe((r)=>{
+                this.quejas= r.map(i =>
+                 {
+                 this.quejas = i.payload.doc.data() as {}; 
+                 const id = i.payload.doc.id; 
+                 return {id, ...this.quejas} 
+                 }      
+                )
+              });  
+            }else{
+              this.lectroservicio.obtenerElectrolineraIdUser(this.id).subscribe(electrolinera => {
+                console.log(electrolinera);
+          
+                this.serviceStore.getQCSMias(electrolinera[0].name).subscribe(misquejas=>{
+                  console.log(misquejas);
+                  this.quejas = misquejas;
+                });
+      
+              });
+              
+            }
+          });
+        } 
+      });
+    }
+
 
   ngOnInit() {
-    this.obtenerQuejas();
+    
   }
-
+  //cargar datos de usuario
+  //Cargar usuario
+ 
    // CREAR UN METODO PARA OBTENER TODAS LAS quejas
-   public obtenerQuejas() {
-    this.serviceStore.getQCS().subscribe((r)=>{
-      this.quejas= r.map(i =>
-       {
-       this.quejas = i.payload.doc.data() as {}; 
-       const id = i.payload.doc.id; 
-       return {id, ...this.quejas} 
-       }      
-      )
-    })  
-  }
-
   aprobar(documentId){
     this.serviceStore.aprobarQCS(documentId).then(() => {
       console.log('Queja Aprobada!');

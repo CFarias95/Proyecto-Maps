@@ -42,6 +42,7 @@ export class EditElectrolineraComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
   ) { 
+    
     this.id = this.route.snapshot.params['id'];
     if (this.id){
       console.log(this.id);
@@ -62,13 +63,11 @@ export class EditElectrolineraComponent implements OnInit {
       martes:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
       miercoles:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
       jueves:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      viernes:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      sabado:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      domingo:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
       formaspago:['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(20),Validators.pattern('[a-zA-Z ]*')])],
       latitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
       longitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
       estado:['',Validators.compose([Validators.required])],
+      horariotexto:['',Validators.compose([])],
       
     });
 
@@ -174,12 +173,6 @@ export class EditElectrolineraComponent implements OnInit {
       this.electrolinera.miercoles='00:00-00:00';
     }else if(this.electrolinera.jueves == ''){
       this.electrolinera.jueves='00:00-00:00';
-    }else if(this.electrolinera.viernes == ''){
-      this.electrolinera.viernes='00:00-00:00';
-    }else if(this.electrolinera.sabado == ''){
-      this.electrolinera.sabado='00:00-00:00';
-    }else if(this.electrolinera.domingo == ''){
-      this.electrolinera.domingo='00:00-00:00';
     }
   }
 

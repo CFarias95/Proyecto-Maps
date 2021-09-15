@@ -12,21 +12,7 @@ export class ElectrolineraService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  // Create
-  createBooking(apt: Electrolinera){
-    return this.bookingListRef.push({
-      name: apt.name,
-      direccion : apt.direccion,
-      imagen: apt.imagen,
-      tipoconector: apt.tipoconector,
-      numeroconectores: apt.numeroconectores,
-      referencia: apt.referencia,
-      latitud: apt.latitud,
-      longitud: apt.longitud,
-      horario:apt.horario,
-      formaspago: apt.formaspago
-    })
-  }
+
 
   //Get Single
   getBooking(id: string){
@@ -40,21 +26,6 @@ export class ElectrolineraService {
     return this.bookingListRef;
   }
 
-  //Update
-  updateBooking(id, apt: Electrolinera){
-    return this.bookingRef.update({
-      name: apt.name,
-      direccion : apt.direccion,
-      imagen: apt.imagen,
-      tipoconector: apt.tipoconector,
-      numeroconectores: apt.numeroconectores,
-      referencia: apt.referencia,
-      latitud: apt.latitud,
-      longitud: apt.longitud,
-      horario:apt.horario,
-      formaspago: apt.formaspago
-    })
-  }
 
   //Delete
   deleteBooking(id: string){

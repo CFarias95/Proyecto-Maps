@@ -30,7 +30,7 @@ export class ElectrolineraCComponent implements OnInit {
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       name: ['',Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5)])],
-      direcion: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(20)])],
+      direcion: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(50)])],
       phone: ['',Validators.compose([Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(9), , Validators.maxLength(10)])],
       pass: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(50)])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
@@ -49,7 +49,7 @@ export class ElectrolineraCComponent implements OnInit {
       const user = await this.serviceAuth.register(email,pass,'','','',phone,'Electro',this.image);
       if (user) {
         console.log(user.uid);
-        const electro = this.serviceStore.CrearElectrolinera(name,direcion,'','','','','','','','','','','','','','',user.uid,this.image).then(() => {
+        const electro = this.serviceStore.CrearElectrolinera(name,direcion,'','','','','','','','','','','','',user.uid,this.image).then(() => {
           this.mensaje="Se registro la Electrolinera en el sistema";
           this.presentAlertConfirm(this.mensaje);
         });

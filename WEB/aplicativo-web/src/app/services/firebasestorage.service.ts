@@ -33,27 +33,6 @@ export class FirebasestorageService {
     );
    }
 
-  // Meotodo para crear un nuevo vehiculo
-  public crearAuto(data: {marca: string, modelo:string, anio:number, url: string}) {
-    return this.firestore.collection('autos').add(data);
-  }
-  // Metodo para obtener un auto por ID
-  public obtenerAutoId(documentId: string) {
-    return this.firestore.collection('autos').doc(documentId).snapshotChanges();
-  }
-  // Metodo para obtener todos los autos
-  public ObtenerAutos() {
-    return this.firestore.collection('autos').snapshotChanges();
-  }
-  // Metodo para actualizar un auto
-  public actualizarAuto(documentId: string, data: any) {
-    return this.firestore.collection('autos').doc(documentId).set(data);
-  }
-  // Metodo para eliminar un auto
-  public eliminarAuto(documentId: string) {
-    return this.firestore.collection('autos').doc(documentId).delete();
-  }
-
   // Meotodo para crear una nueva Electrolinera
   async CrearElectrolinera(
     name: string,
@@ -65,13 +44,11 @@ export class FirebasestorageService {
     martes: string,
     miercoles: string,
     jueves: string,
-    viernes: string,
-    sabado: string,
-    domingo: string,
     formaspago: string,
     latitud: string,
     longitud: string,
     estado :string,
+    horariotexto: string,
     usuario :string,
     image?: FileI,
   ) {
@@ -96,13 +73,11 @@ export class FirebasestorageService {
             martes: martes,
             miercoles: miercoles,
             jueves: jueves,
-            viernes: viernes,
-            sabado: sabado,
-            domingo: domingo,
             formaspago: formaspago,
             latitud: 0,
             longitud: 0,
-            estado : 'Activo',
+            estado : 'Inactivo',
+            horariotexto: horariotexto,
             imagen: this.photoURL,
           }); 
         });
@@ -121,7 +96,14 @@ export class FirebasestorageService {
     return this.firestore.collection('electrolineras').doc(documentId).snapshotChanges();
   }
 
-  // Metodo para obtener un auto por ID
+   // Metodo para electrolinera por id de usuario
+   public obtenerElectrolineraIdUser(documentId: string) {
+    return this.firestore.collection<Electrolinera>('electrolineras',ref => ref.where('usuario', '==', documentId)).valueChanges();
+    
+  }
+
+
+  // Metodo para una electrolinera por ID
   public getElectrolineraId(documentId: string) {
     return this.electrolineraCollection.doc<Electrolinera>(documentId).valueChanges();
   }
@@ -134,7 +116,7 @@ export class FirebasestorageService {
 
   // Metodo para actualizar un auto
   public actualizarElectrolinera(data: any, documentId: string) {
-    return this.firestore.collection('electrolineras').doc(documentId).set(data);
+    return this.firestore.collection('electrolineras').doc(documentId).update(data);
   }
   
   // Metodo para eliminar un auto

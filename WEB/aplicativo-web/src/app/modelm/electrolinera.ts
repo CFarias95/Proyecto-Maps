@@ -10,12 +10,11 @@ export interface Electrolinera {
     martes: string;
     miercoles: string;
     jueves: string;
-    viernes: string;
-    sabado: string;
     domingo: string;
     formaspago: string;
     latitud: number;
     longitud: number;
     estado : string;
     imagen: string;
+    horariotexto: string;
 }
