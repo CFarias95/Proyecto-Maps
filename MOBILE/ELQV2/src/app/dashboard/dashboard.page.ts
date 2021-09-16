@@ -13,13 +13,15 @@ export class DashboardPage implements OnInit {
 
   userEmail: string;
   userName: String;
-  noticias: Notificaciones;
+  public items: any = [];
+  filterpost = new Date().toISOString();
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticationService,
     private notificaciones : NotificacionesService
   ) { }
 
+  
   ngOnInit() {
     this.getNoticias();
     this.authService.userDetails().subscribe(res => {
@@ -48,8 +50,8 @@ export class DashboardPage implements OnInit {
 
   getNoticias(){
     this.notificaciones.getNoticias().subscribe((notificaciones) =>{
-      this.noticias = notificaciones;
-      console.log(this.noticias);
+      this.items = notificaciones;
+      console.log(this.items);
     })
 
   }

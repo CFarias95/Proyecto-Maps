@@ -50,6 +50,14 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'noticias',
+    loadChildren: () => import('./noticias/noticias.module').then( m => m.NoticiasPageModule)
+  },
+  {
+    path: 'promos',
+    loadChildren: () => import('./promos/promos.module').then( m => m.PromosPageModule)
+  },
 
 
 ];

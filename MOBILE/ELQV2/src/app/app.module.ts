@@ -13,9 +13,12 @@ import { environment } from '../environments/environment';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { FilterpPipe } from './pipes/filterp.pipe';
+import { FilternPipe } from './pipes/filtern.pipe';
+import { FilterdPipe } from './pipes/filterd.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FilternPipe, FilterdPipe],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { LocalNotifications } from "@ionic-native/local-notifications";
     }),
     AngularFireModule.initializeApp (environment.firebaseConfig)],
 
-  providers: [LocalNotifications,GoogleMaps,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  providers: [GoogleMaps,{ provide: [ LocalNotifications, RouteReuseStrategy], useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

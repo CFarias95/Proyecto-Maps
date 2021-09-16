@@ -45,6 +45,7 @@
       <ion-item lines="full" color="dark">
         <ion-label position="stacked">Fecha</ion-label>
         <ion-input formControlName="fecha" type="date" [min]="mydate"></ion-input>
+        <!-- <ion-datetime formControlName="fecha" displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09"></ion-datetime> -->
       </ion-item>
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fecha.errors?.required">
         Fecha en la que se enviara la notificacion requerida.

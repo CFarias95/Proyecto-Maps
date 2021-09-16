@@ -17,7 +17,7 @@ export class NotificacionesCreateComponent implements OnInit {
   notify:Notificaciones;
   mensaje:string;
   id: string;
-  public image: any;
+  image: any;
   mydate: any = new Date().toISOString();
   day: any = new Date().getUTCDay();
   mes: any = new Date().getUTCMonth();

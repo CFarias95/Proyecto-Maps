@@ -1,0 +1,35 @@
+ion-content{
+    --background: #67B26F;  /* fallback for old browsers */
+    --background: -webkit-linear-gradient(to top, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
+    --background: linear-gradient(to top, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    text-align: center;
+}
+ion-item{
+    --background: #8fc7ccc4;  /* fallback for old browsers */
+    border-radius: 10px;
+    
+}
+ion-label{
+    --color: whitesmoke;
+}
+ion-label:focus{
+    --color: azure;
+}
+ion-label::content{
+    --color: azure;
+}
+ion-fab-button{
+    --background: #08A8B5;
+}
+ion-card {
+    --background: #14323581;
+}
+ion-card .list-md{
+    --background: #08a7b567;
+}
+ion-footer{
+    --background: #44a73079;
+}
+.list-md{
+    background: none;
+}

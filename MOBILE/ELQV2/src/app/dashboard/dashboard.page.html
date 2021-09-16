@@ -9,7 +9,7 @@
     <ion-row>
       <ion-slides style="background-color: rgba(56, 110, 103, 0.507);">
 
-        <ion-slide *ngFor="let item of noticias">
+        <ion-slide *ngFor="let item of items | filterd: filterpost">
           <div class="slide">
             <img [src]="item.imagen" *ngIf="item.imagen">
             <h2>{{item.titulo}}</h2>
@@ -52,6 +52,22 @@
       
       </ion-col>
     </ion-row>
+    <ion-row>
+      
+      <ion-col >
+      
+        <ion-row>
+          <ion-col size="6">
+            <img src="../../assets/noticias.png" alt="quejas"  routerLink="/noticias"  >
+          </ion-col>
+          <ion-col size="6">
+            
+          </ion-col>
+        </ion-row>
+      
+    
+    </ion-col>
+  </ion-row>
     <ion-row>
       <ion-col size="12">
         <ion-button (click)="logout()" expand="block">

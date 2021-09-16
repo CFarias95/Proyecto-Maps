@@ -51,30 +51,45 @@ export class NotificacionesService {
     return this.notificacionesCollection.doc(documentId).update(data);
   }
 
+
 //agregar una notificacion
   addNotify(data, image?: FileI){
     this.filePath = `notificaciones/${data.titulo}`;
     const fileRef = this.storage.ref(this.filePath);
-    const task = this.storage.upload(this.filePath, image);
-    task.snapshotChanges()
-    .pipe(
-       finalize(() => {
-        fileRef.getDownloadURL().subscribe(urlImage => {
-          this.photoURL=urlImage;
-          //console.log(this.photoURL);
-          this.ret =this.db.collection('notificaciones').add({
-            titulo: data.titulo,
-            texto : data.texto,
-            fecha : data.fecha,
-            hora: data.hora,
-            name: data.name,
-            tipo: data.tipo,
-            estado : "Activo",
-            imagen : this.photoURL
+    if(image){
+      const task = this.storage.upload(this.filePath, image);
+      task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(urlImage => {
+            this.photoURL=urlImage;
+            //console.log(this.photoURL);
+            this.ret =this.db.collection('notificaciones').add({
+              titulo: data.titulo,
+              texto : data.texto,
+              fecha : data.fecha,
+              hora: data.hora,
+              name: data.name,
+              tipo: data.tipo,
+              estado : "Activo",
+              imagen : this.photoURL
+            });
           });
-        });
-      })
-    ).subscribe();
+        })
+      ).subscribe();
+    }else{
+      this.ret =this.db.collection('notificaciones').add({
+        titulo: data.titulo,
+        texto : data.texto,
+        fecha : data.fecha,
+        hora: data.hora,
+        name: data.name,
+        tipo: data.tipo,
+        estado : "Activo",
+        imagen : ""
+      });
+    }
+    
     
     return  
 

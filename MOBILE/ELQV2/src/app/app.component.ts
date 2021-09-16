@@ -10,9 +10,7 @@ import { NotificacionesService } from './services/notificaciones.service';
 })
 export class AppComponent {
 
-  notify: Notificaciones;
   
   constructor( ) {}
-
 
 }
