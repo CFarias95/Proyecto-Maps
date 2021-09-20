@@ -31,13 +31,14 @@
   <ion-fab horizontal="start" vertical="bottom" slot="fixed" *ngIf="visible">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{titulo}}</ion-card-title>
+        <ion-card-title>{{titulo}} &nbsp; &nbsp; <ion-icon style="background-color: aliceblue; color: black;" name="locate" (click)="reRuta(id)" ></ion-icon></ion-card-title>
       </ion-card-header>
       <ion-card-content>
         {{textos}}
       </ion-card-content>
     </ion-card>
   </ion-fab>
+
 
 </ion-content>
 

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { finalize, first, map, switchMap } from 'rxjs/operators';
 import { DatosUsuario, User } from '../modelm/user';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FileI } from '../modelm/file.interface';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import  firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,11 @@ export class AuthenticationService {
   user$: Observable<User>;
   private usuariosCollection: AngularFirestoreCollection<DatosUsuario>;
   private Usuario: Observable<any>;
-  constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage,private afs: AngularFirestore,) { 
+  constructor(
+    private afAuth: AngularFireAuth, 
+    private storage: AngularFireStorage,
+    private afs: AngularFirestore, 
+    private google : GooglePlus) { 
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -144,4 +150,30 @@ export class AuthenticationService {
     return this.afAuth.user
   }
 
+  googleLogin(){
+
+    return this.google.login({}).then(res => {
+      const userdataGoogle = res;
+      //alert ( "Resultado del login: "+JSON.stringify(res));
+      //console.log("USERDATA: "+ userdataGoogle);
+      return this.afAuth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null,userdataGoogle.accessToken ));
+
+    })
+  }
+
+  async loginGoogle(): Promise<User> {
+    try {
+      const { user } = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      //this.updateUserData(user);
+      return user;
+    } catch (error) {
+      alert('Error->'+ JSON.stringify(error))
+      console.log('Error->', JSON.stringify(error));
+    }
+  }
+
+
+
 }
+
+

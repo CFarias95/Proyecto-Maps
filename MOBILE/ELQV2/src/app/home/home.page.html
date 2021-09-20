@@ -1,8 +1,8 @@
 
 <ion-content fullscreen class="ion-padding" scroll-y="false" class="page-content">
-  <ion-slides pager = "true">
-    <ion-slide>
-        <img src="../../assets/3-removebg-preview.png">
+  <ion-slides pager = "true" [options]="slideOpts" style="background-color: rgba(0, 0, 0, 0.192);">
+    <ion-slide  >
+        <img src="../../assets/3-removebg-preview.png" >
         <h2>ELQ</h2>
         <p style="color: snow;" >ELQ app es una aplicacion que te permitira encontrar un punto de carga para tu vehiculo de manera mas rapida y segura.</p>     
     </ion-slide>
@@ -24,18 +24,16 @@
       
     </ion-slide>
   </ion-slides>
+
   <ion-grid class="full-width">
     <ion-row >
       <ion-col>
-        <ion-button (click)="login()" expand="full" >Iniciar Sesión</ion-button>
+        <ion-button (click)="login()" expand="full" style="--background: rgba(0, 139, 139, 0.445);" >Iniciar Sesión</ion-button>
       </ion-col>
       <ion-col >
-        <ion-button (click)="register()" expand="full" >Registrarse</ion-button>
+        <ion-button (click)="register()" expand="full" style="--background: rgba(0, 139, 30, 0.445);" >Registrarse</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
   
-    
-
-
 </ion-content>

@@ -2,8 +2,8 @@
 <ion-content class="ion-padding">
   <form class="form" [formGroup]="validations_form" (ngSubmit)="loginUser(validations_form.value)">
 
-    <ion-card style="max-height: 100vmax; background: whitesmoke;">
-      <img src="../../assets/1-removebg-preview.png" height="300px"/>
+    <ion-card style="min-height: 70vmax; background: whitesmoke;">
+      <img src="../../assets/1-removebg-preview.png" height="200px"/>
       <ion-card-header>
         <label class="error-message" style="color: brown;">{{errorMessage}}</label>
       </ion-card-header>
@@ -41,6 +41,15 @@
         </p>
       </ion-card-content>
     </ion-card>
-   
   </form>
+  <h1 style="margin-block: 0px; padding-top: 0px; padding-bottom: 0px;"> o </h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col size = "6">
+        <ion-button (click)="googleL()">
+          <ion-icon size="big" name = "logo-google"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -14,6 +14,8 @@ import { ElectrolinerasService } from '../services/electrolineras.service';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 @Component({
@@ -36,6 +38,7 @@ export class MapaPage implements OnInit {
   visible = false;
   titulo:string;
   textos: string;
+  id:string;
   icon = {
     url: 'https://firebasestorage.googleapis.com/v0/b/integracion-maps-304321.appspot.com/o/image%20(2).png?alt=media&token=054b2fda-4c08-4885-aa45-ed72e9924eab',
     scaledSize: {
@@ -76,7 +79,30 @@ export class MapaPage implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private servicio: ElectrolinerasService,
-    private router: Router ,public navCtrl: NavController ) {
+    private router: Router ,public navCtrl: NavController,
+    private androidPermissions: AndroidPermissions,
+    private geolocation: Geolocation) {
+
+      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(res=>{
+        //alert("Solicitado result : "+ JSON.stringify(res))
+      });
+      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
+        result => {
+          //console.log('Tiene permisos para encontrar location ?',result.hasPermission)
+          if(result.hasPermission == false){
+            
+          }
+        }
+      );
+
+      this.geolocation.getCurrentPosition().then((resp) => {
+        console.log("Coordenates: "+resp.coords.latitude +" - "+ resp.coords.longitude );
+        // resp.coords.latitude
+        // resp.coords.longitude
+       }).catch((error) => {
+         console.log('Error getting location', error);
+       });
+      
       
   }
 
@@ -128,6 +154,7 @@ export class MapaPage implements OnInit {
     this.visible= true;
     this.titulo = m.name;
     this.textos= m.direcion;
+    this.id = m.id;
     
   }
 
@@ -142,12 +169,9 @@ export class MapaPage implements OnInit {
     })
   }
 
-  // markerDragEnd($event: any) {
-  //   console.log($event);
-  //   this.latitude = $event.coords.lat;
-  //   this.longitude = $event.coords.lng;
-  //   this.getAddress(this.latitude, this.longitude);
-  // }
+  reRuta(documentId){
+    this.router.navigate(['ruta',documentId]);
+  }
 
 
   getAddress(latitude, longitude) {

@@ -17,8 +17,14 @@ import { FilterpPipe } from './pipes/filterp.pipe';
 import { FilternPipe } from './pipes/filtern.pipe';
 import { FilterdPipe } from './pipes/filterd.pipe';
 
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 @NgModule({
-  declarations: [AppComponent, FilternPipe, FilterdPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -32,7 +38,7 @@ import { FilterdPipe } from './pipes/filterd.pipe';
     }),
     AngularFireModule.initializeApp (environment.firebaseConfig)],
 
-  providers: [GoogleMaps,{ provide: [ LocalNotifications, RouteReuseStrategy], useClass: IonicRouteStrategy}],
+  providers: [ GoogleMaps, GooglePlus,AndroidPermissions, Geolocation,{ provide: [LocalNotifications, RouteReuseStrategy], useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -8,7 +8,7 @@ const routes: Routes = [
   }, */
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -46,7 +46,8 @@ const routes: Routes = [
   {
     path: 'listarqcs',
     loadChildren: () => import('./listarqcs/listarqcs.module').then( m => m.ListarqcsPageModule)
-  },  {
+  },
+  {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },

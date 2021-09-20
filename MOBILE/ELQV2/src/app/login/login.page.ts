@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { LoadingController, NavController, Platform } from '@ionic/angular';
+//import * as firebase from 'firebase';
 import { AuthenticationService } from '../services/authentication.service';
+import  firebase  from 'firebase/app';
 
 
 @Component({
@@ -14,9 +19,18 @@ export class LoginPage implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
 
+  public loading: any;
+  public isGoogleLogin = false;
+  public user = null;
+
   constructor(  private navCtrl: NavController,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private google: GooglePlus,
+    public loadingController: LoadingController,
+    private fireAuth: AngularFireAuth,
+    private platform: Platform,
+    private router: Router
 ) { }
 
   ngOnInit() {
@@ -61,7 +75,20 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward('/register');
   }
 
+  googleL(){
 
+    const user = this.authService.googleLogin().then(res=>{
+      //alert (JSON.stringify(res));
+      this.router.navigate(['dashboard']);
+    },err=>{
+      console.log(JSON.stringify(err))
+    });
+    //alert (JSON.stringify(user));
+  }
 
+  onLoginError(err) {
+    console.log(err);
+  }
 
 }
+

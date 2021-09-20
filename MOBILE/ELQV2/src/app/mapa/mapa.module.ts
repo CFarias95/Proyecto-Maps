@@ -10,13 +10,15 @@ import { MapaPage } from './mapa.page';
 
 import { AgmCoreModule } from '@agm/core';
 
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MapaPageRoutingModule,
-    AgmCoreModule
+    AgmCoreModule,
   ],
   declarations: [MapaPage]
 })

@@ -7,8 +7,7 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-slides style="background-color: rgba(56, 110, 103, 0.507);">
-
+      <ion-slides style="background-color: rgba(56, 110, 103, 0.507);" [options]="slideOpts" >
         <ion-slide *ngFor="let item of items | filterd: filterpost">
           <div class="slide">
             <img [src]="item.imagen" *ngIf="item.imagen">
@@ -26,11 +25,14 @@
       <ion-col >
         
           <ion-row>
-            <ion-col size="6">
-              <img src="../../assets/mapa.png" alt="mapa" routerLink="/mapa">
+            <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 5%; width: 90%; height: 170px;">
+              <img src="../../assets/mapa.png" width="90px"alt="mapa" routerLink="/mapa">
+              <h2>Mapa</h2>
             </ion-col>
-            <ion-col size="6">
-              <img src="../../assets/electrolineras.png" alt="electrolineras"routerLink="/electrolineras">
+        
+            <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 5%; width: 90%; height: 170px;">
+              <img src="../../assets/electrolineras.png" width="90px" alt="electrolineras"routerLink="/electrolineras">
+              <h2>Electrolineras</h2>
             </ion-col>
           </ion-row>
         
@@ -41,11 +43,14 @@
         <ion-col >
         
           <ion-row>
-            <ion-col size="6">
-              <img src="../../assets/quejas.png" alt="quejas"  routerLink="/listarqcs"  >
+            <ion-col size="6" style="background-color: rgba(240, 248, 255, 0.301); border-radius: 5%; width: 90%; height: 170px;" >
+              <img src="../../assets/quejas.png" alt="quejas"  width="90px" routerLink="/listarqcs"  >
+              <h2>Opinones</h2>
             </ion-col>
-            <ion-col size="6">
-              <img src="../../assets/usuario.png" alt="usuario" routerLink="/perfil">
+          
+            <ion-col size="6" style="background-color: rgba(240, 248, 255, 0.301); border-radius: 5%; width: 90%; height: 170px;">
+              <img src="../../assets/usuario.png" width="90px" alt="usuario" routerLink="/perfil">
+              <h2>Perfil</h2>
             </ion-col>
           </ion-row>
         
@@ -57,10 +62,11 @@
       <ion-col >
       
         <ion-row>
-          <ion-col size="6">
-            <img src="../../assets/noticias.png" alt="quejas"  routerLink="/noticias"  >
+          <ion-col size="6" style="background-color: rgba(245, 240, 255, 0.301); border-radius: 5%; width: 90%; height: 170px;">
+            <img src="../../assets/noticias.png" width="100px" alt="quejas"  routerLink="/noticias"  >
+            <h2>Noticias</h2>
           </ion-col>
-          <ion-col size="6">
+          <ion-col size="5">
             
           </ion-col>
         </ion-row>
@@ -70,7 +76,7 @@
   </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-button (click)="logout()" expand="block">
+        <ion-button (click)="logout()" expand="block" style="--background: rgba(0, 139, 63, 0.562);">
           Cerrar Sesión
         </ion-button>
       </ion-col>
