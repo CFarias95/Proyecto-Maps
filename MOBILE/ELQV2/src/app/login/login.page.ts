@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
 
     const user = this.authService.googleLogin().then(res=>{
       //alert (JSON.stringify(res));
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['perfil']);
     },err=>{
       console.log(JSON.stringify(err))
     });
