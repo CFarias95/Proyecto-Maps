@@ -59,6 +59,11 @@ const routes: Routes = [
     path: 'promos',
     loadChildren: () => import('./promos/promos.module').then( m => m.PromosPageModule)
   },
+  {
+    path: 'electolinera/:id',
+    loadChildren: () => import('./electolinera/electolinera.module').then( m => m.ElectolineraPageModule)
+  },
+
 
 
 ];

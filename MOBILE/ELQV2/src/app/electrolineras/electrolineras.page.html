@@ -20,45 +20,12 @@
   </ion-fab>
 
   <ion-card (click)="expandItem(item)" *ngFor="let item of items">
-    <ion-card-header>
-      <ion-card-title>{{item.name}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <app-expandable expandHeight="800px" [expanded]="item.expanded">
-
-        <img [src]="item.imagen" alt="imagen" *ngIf="item.imagen" width="250px">
-
-        <ion-list>         
-            <ion-item>
-              <h3>{{item.direcion}}</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Referencia: {{item.referencia}}</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Forma de pago: {{item.formaspago}}</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Tipo de conector: {{item.tipoconector}} ({{item.numeroconectores}})</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Abierto de Lunes a Viernes de {{item.lunes}}</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Sabados de {{item.martes}}</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Domingos de {{item.miercoles}}</h3>
-            </ion-item>
-            <ion-item>
-              <h3>Feriados de {{item.jueves}}</h3>
-            </ion-item>
-            <ion-item>
-              <td style="text-align: center;"><ion-button  button (click)="reRuta(item.id)" color="success" >Ruta</ion-button></td>
-            </ion-item>
-        </ion-list>
-
-      </app-expandable>
-    </ion-card-content>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="item.imagen" alt="imagen" *ngIf="item.imagen">
+      </ion-avatar>
+      <ion-label button (click)="reRuta(item.id)" >{{item.name}} <ion-icon name="arrow-forward"></ion-icon></ion-label>
+    </ion-item>
   </ion-card>
+  
 </ion-content>

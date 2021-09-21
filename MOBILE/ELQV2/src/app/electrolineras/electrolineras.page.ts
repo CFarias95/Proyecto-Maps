@@ -11,23 +11,15 @@ import { ElectrolinerasService } from '../services/electrolineras.service';
 export class ElectrolinerasPage implements OnInit {
 
   public items: any = [];
+
   lugares:any;
   constructor(private servicio: ElectrolinerasService,private router: Router) {
-    this.items = [
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false },
-      { expanded: false }
-    ];
+
   }
 
   ngOnInit() {
     this.getElectrolineras();
+
   }
 
   
@@ -55,6 +47,10 @@ export class ElectrolinerasPage implements OnInit {
 
   reRuta(documentId){
     this.router.navigate(['ruta',documentId]);
+  }
+
+  reVer(documentId){
+    this.router.navigate(['electolinera',documentId]);
   }
 
 }

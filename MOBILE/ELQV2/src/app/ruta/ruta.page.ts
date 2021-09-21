@@ -1,6 +1,6 @@
 import { MapsAPILoader } from '@agm/core';
 import { Component, NgZone, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ElectrolinerasService } from '../services/electrolineras.service';
 
 @Component({
@@ -26,7 +26,11 @@ export class RutaPage implements OnInit {
 
   id: string;
 
-  constructor(private route: ActivatedRoute,private servicio: ElectrolinerasService,private ngZone: NgZone,private mapsAPILoader: MapsAPILoader) { }
+  constructor(private route: ActivatedRoute,
+    private servicio: ElectrolinerasService,
+    private ngZone: NgZone,
+    private mapsAPILoader: MapsAPILoader,
+    private router: Router,) { }
 
   ngOnInit() {
     
@@ -79,6 +83,9 @@ export class RutaPage implements OnInit {
       });
     //}
      
+  }
+  reRuta(){
+    this.router.navigate(['electolinera',this.id]);
   }
 
   getElectrolinera(){
