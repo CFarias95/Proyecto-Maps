@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -17,7 +18,14 @@ export class HomePage {
     effect: 'coverflow',
   };
   
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,private nativeStorage: NativeStorage) {
+    this.nativeStorage.getItem('Estado').then(res=>{
+      this.navCtrl.navigateForward('/dashboard');
+    }, err => {
+      console.log("Error: "+ err);
+    });
+      
+  }
 
   login(){
     this.navCtrl.navigateForward('/login');

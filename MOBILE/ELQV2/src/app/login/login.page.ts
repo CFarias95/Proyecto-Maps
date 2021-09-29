@@ -8,7 +8,6 @@ import { LoadingController, NavController, Platform } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import  firebase  from 'firebase/app';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,7 +18,6 @@ export class LoginPage implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
 
-  public loading: any;
   public isGoogleLogin = false;
   public user = null;
 
@@ -27,13 +25,14 @@ export class LoginPage implements OnInit {
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private google: GooglePlus,
-    public loadingController: LoadingController,
     private fireAuth: AngularFireAuth,
     private platform: Platform,
-    private router: Router
+    private router: Router,
+   
 ) { }
 
-  ngOnInit() {
+async ngOnInit() {
+
 
     this.validations_form = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
@@ -65,10 +64,12 @@ export class LoginPage implements OnInit {
       .then(res => {
         console.log(res);
         this.errorMessage = "";
-        this.navCtrl.navigateForward('/dashboard');
+        this.navCtrl.navigateForward('dashboard');
+        
       }, err => {
         this.errorMessage = "Valida el Correo y la contraseña ingresada";
-      })
+      });
+
   }
 
   goToRegisterPage() {
@@ -79,7 +80,7 @@ export class LoginPage implements OnInit {
 
     const user = this.authService.googleLogin().then(res=>{
       //alert (JSON.stringify(res));
-      this.router.navigate(['perfil']);
+      this.router.navigate(['dashboard']);
     },err=>{
       console.log(JSON.stringify(err))
     });

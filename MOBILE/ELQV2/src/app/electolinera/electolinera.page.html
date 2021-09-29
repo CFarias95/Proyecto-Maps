@@ -1,6 +1,6 @@
 <ion-content>
   <ion-card  style = "text-align: center;">
-    <img [src]="items.imagen" width="300px" style="padding-top: 5%;"/>
+    <img [src]="items.imagen" width="200px" style="padding-top: 5%;"/>
     <ion-card-header>
       <h1 style="color: aliceblue;" >{{items.name}}</h1>
     </ion-card-header>
@@ -11,7 +11,7 @@
       <ion-card-title style="align-content:flex-end;">Datos: <ion-icon name="arrow"></ion-icon></ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <app-expandable expandHeight="800px" [expanded]="list1.expanded">                
+      <app-expandable expandHeight="800px" [expanded]="true">                
         <h3 style="color: aliceblue;"> Ubicada en {{items.direcion}}</h3>
         <h3 style="color: aliceblue;" > Como referencia {{items.referencia}}</h3>  
       </app-expandable>
@@ -67,7 +67,7 @@
 
 <ion-fab horizontal="end" vertical="bottom" slot="fixed">
   <ion-fab-button>
-    <ion-icon name="arrow-back"></ion-icon>
+    <ion-icon name="apps"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="top">
     <ion-fab-button color="light">

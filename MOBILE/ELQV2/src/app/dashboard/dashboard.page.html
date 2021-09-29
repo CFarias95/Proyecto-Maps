@@ -7,7 +7,7 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-slides style="background-color: rgba(56, 110, 103, 0.507);" [options]="slideOpts" >
+      <ion-slides style="background-color: rgba(56, 110, 103, 0.507);" >
         <ion-slide *ngFor="let item of items | filterd: filterpost">
           <div class="slide">
             <img [src]="item.imagen" *ngIf="item.imagen">
@@ -41,7 +41,6 @@
     <ion-row>
       
         <ion-col >
-        
           <ion-row>
             <ion-col size="6" style="background-color: rgba(240, 248, 255, 0.301); border-radius: 5%; width: 90%; height: 170px;" >
               <img src="../../assets/quejas.png" alt="quejas"  width="90px" routerLink="/listarqcs"  >
@@ -66,8 +65,9 @@
             <img src="../../assets/noticias.png" width="100px" alt="quejas"  routerLink="/noticias"  >
             <h2>Noticias</h2>
           </ion-col>
-          <ion-col size="5">
-            
+          <ion-col size="6" style="background-color: rgba(245, 240, 255, 0.301); border-radius: 5%; width: 90%; height: 170px;">
+            <img src="../../assets/gift.png" width="100px" alt="quejas"  routerLink="/promos"  >
+            <h2>Promos</h2>
           </ion-col>
         </ion-row>
       

@@ -7,7 +7,7 @@
 <ion-content>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button>
-      <ion-icon name="arrow-back"></ion-icon>
+      <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
       <ion-fab-button color="light">
@@ -19,7 +19,13 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-card (click)="expandItem(item)" *ngFor="let item of items">
+  <input type="text" id="buscar" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
+
+  <ion-item *ngIf="!items || items.length == 0">
+    <p>No existe registros.</p>
+  </ion-item>
+
+  <ion-card (click)="expandItem(item)" *ngFor="let item of items | filterep: filterpost">
     <ion-item>
       <ion-avatar slot="start">
         <img [src]="item.imagen" alt="imagen" *ngIf="item.imagen">

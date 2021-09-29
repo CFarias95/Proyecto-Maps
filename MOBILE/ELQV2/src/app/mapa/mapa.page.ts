@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 
 @Component({
@@ -39,6 +40,8 @@ export class MapaPage implements OnInit {
   titulo:string;
   textos: string;
   id:string;
+  km: string;
+  DistanceService : any;
   icon = {
     url: 'https://firebasestorage.googleapis.com/v0/b/integracion-maps-304321.appspot.com/o/image%20(2).png?alt=media&token=054b2fda-4c08-4885-aa45-ed72e9924eab',
     scaledSize: {
@@ -81,7 +84,8 @@ export class MapaPage implements OnInit {
     private servicio: ElectrolinerasService,
     private router: Router ,public navCtrl: NavController,
     private androidPermissions: AndroidPermissions,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    private locationAccuracy: LocationAccuracy) {
 
       this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(res=>{
         //alert("Solicitado result : "+ JSON.stringify(res))
@@ -94,7 +98,9 @@ export class MapaPage implements OnInit {
           }
         }
       );
-
+      
+    
+      
       this.geolocation.getCurrentPosition().then((resp) => {
         console.log("Coordenates: "+resp.coords.latitude +" - "+ resp.coords.longitude );
         // resp.coords.latitude
@@ -135,8 +141,34 @@ export class MapaPage implements OnInit {
       });
     });
 
+    this.checkPermission();
+
   }
 
+  
+  enableGPS() {
+    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+      () => {
+        //this.currentLocPosition();
+      },
+      error => alert(JSON.stringify(error))
+    );
+  }
+
+  checkPermission() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+      result => {
+        if (result.hasPermission) {
+          this.enableGPS();
+        } else {
+          //this.locationAccPermission();
+        }
+      },
+      error => {
+        alert(error);
+      }
+    );
+  }
 
    // Get Current Location Coordinates
    private setCurrentLocation() {
@@ -155,12 +187,30 @@ export class MapaPage implements OnInit {
     this.titulo = m.name;
     this.textos= m.direcion;
     this.id = m.id;
+    this.DistanceService = new google.maps.DistanceMatrixService();
+    this.DistanceService.getDistanceMatrix(
+      {
+        origins: [{lat: this.latitude, lng: this.longitude}],
+        destinations: [{lat:m.latitud, lng:m.longitud}],
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false,
+      }, (response, status) => {
+        console.log(JSON.stringify(response.rows[0].elements[0]), status);
+        const distance = response.rows[0].elements[0].distance.text;
+        const tiempo = response.rows[0].elements[0].duration.text;
+        console.log(distance);
+        this.km = distance + "-"+tiempo;
+      })
+    
     
   }
 
   mapClicked($event: MouseEvent) {
     this.visible=false;
   }
+
 
   renderMarker(){
     this.servicio.getElectrolinerasUbicaciones().subscribe((ubicaciones) =>{

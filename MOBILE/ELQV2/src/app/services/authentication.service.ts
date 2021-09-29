@@ -7,7 +7,10 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FileI } from '../modelm/file.interface';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import  firebase from 'firebase';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +22,13 @@ export class AuthenticationService {
   user$: Observable<User>;
   private usuariosCollection: AngularFirestoreCollection<DatosUsuario>;
   private Usuario: Observable<any>;
+  public loading: any;
   constructor(
     private afAuth: AngularFireAuth, 
     private storage: AngularFireStorage,
     private afs: AngularFirestore, 
-    private google : GooglePlus) { 
+    private google : GooglePlus,
+    private nativeStorage: NativeStorage) { 
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -46,6 +51,8 @@ export class AuthenticationService {
     );
 
   }
+
+
 
   //registrar usuario
   async registerUser(value, image: string) {
@@ -79,7 +86,10 @@ export class AuthenticationService {
         photoURL: this.photoURL
       });
       
+      user.sendEmailVerification();
+
       return user;
+
     }catch(error){
       console.log(error);
     }
@@ -90,8 +100,9 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(value.email, value.password)
         .then(
-          res => resolve(res),
-          err => reject(err))
+          res => {resolve(res); this.nativeStorage.setItem('Estado','Logeado');},
+          err => {reject(err),this.nativeStorage.setItem('Estado','NO');})
+        
           
     })
     
@@ -103,7 +114,8 @@ export class AuthenticationService {
       if (this.afAuth.currentUser) {
         this.afAuth.signOut()
           .then(() => {
-            console.log("LOG Out");
+            console.log("Log OUT");
+            this.nativeStorage.setItem('Estado','NO');
             resolve();
           }).catch((error) => {
             reject();
@@ -155,10 +167,29 @@ export class AuthenticationService {
     return this.google.login({}).then(res => {
       const userdataGoogle = res;
       //alert ( "Resultado del login: "+JSON.stringify(res));
-      //console.log("USERDATA: "+ userdataGoogle);
-      return this.afAuth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null,userdataGoogle.accessToken ));
+      console.log("USERDATA: "+ JSON.stringify(userdataGoogle));
+
+      return new Promise<any>((resolve, reject) => {
+        this.afAuth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null,userdataGoogle.accessToken ))
+          .then(
+            res => {
+              this.nativeStorage.setItem('Estado','Logeado');
+              resolve(res);
+              console.log("USER UID: "+res.user.uid);
+              this.afs.collection('usersmobile').doc(res.user.uid).set({
+                uid : res.user.uid,
+                correo : userdataGoogle.email,
+                nombres : userdataGoogle.givenName,
+                apellidos : userdataGoogle.familyName,
+                foto : userdataGoogle.imageUrl,  
+              });
+            },
+            err => {reject(err); this.nativeStorage.setItem('Estado','NO');})
+            })
 
     })
+
+    this.loading.dismiss();
   }
 
   async loginGoogle(): Promise<User> {

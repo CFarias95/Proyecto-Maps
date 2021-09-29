@@ -26,7 +26,6 @@
         <ion-item >
             <ion-label>Para:</ion-label>
             <ion-select formControlName="origen" interface="popover" >
-                <ion-select-option value="General" >General</ion-select-option>
                 <ion-select-option *ngFor="let item of items"   [value]="item.name"  >{{item.name}}</ion-select-option>
             </ion-select>
         </ion-item>

@@ -11,7 +11,7 @@ import { ElectrolinerasService } from '../services/electrolineras.service';
 export class ElectrolinerasPage implements OnInit {
 
   public items: any = [];
-
+  filterpost ='';
   lugares:any;
   constructor(private servicio: ElectrolinerasService,private router: Router) {
 
@@ -22,7 +22,6 @@ export class ElectrolinerasPage implements OnInit {
 
   }
 
-  
   expandItem(item): void {
     if (item.expanded) {
       item.expanded = false;

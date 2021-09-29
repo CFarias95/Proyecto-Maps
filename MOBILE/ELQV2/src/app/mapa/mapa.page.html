@@ -4,6 +4,9 @@
 
   <agm-map disableDefaultUI="false" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" style="height: 100%; padding: 0;" (mapClick)="mapClicked($event)">
     <agm-marker 
+      [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" >
+    </agm-marker>
+    <agm-marker 
         *ngFor="let m of lugares; let i = index"
         [latitude]="m.latitud"
         [longitude]="m.longitud"
@@ -16,7 +19,7 @@
 
   <ion-fab horizontal="start" vertical="top" slot="fixed">
     <ion-fab-button>
-      <ion-icon name="arrow-back"></ion-icon>
+      <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
     <ion-fab-list>
       <ion-fab-button color="light">
@@ -31,15 +34,19 @@
   <ion-fab horizontal="start" vertical="bottom" slot="fixed" *ngIf="visible">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{titulo}} &nbsp; &nbsp; <ion-icon style="background-color: aliceblue; color: black;" name="locate" (click)="reRuta(id)" ></ion-icon></ion-card-title>
+        <ion-card-title>
+          {{titulo}}
+          <ion-chip outline color="dark" (click)="reRuta(id)" >
+            ver mas
+            <ion-icon name="eye"></ion-icon>
+          </ion-chip>
+      </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        {{textos}}
+         Se encuentra a {{km}} en {{textos}}
       </ion-card-content>
     </ion-card>
   </ion-fab>
-
-
 </ion-content>
 
 

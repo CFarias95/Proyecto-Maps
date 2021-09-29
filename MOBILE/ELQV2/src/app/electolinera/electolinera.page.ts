@@ -29,7 +29,7 @@ export class ElectolineraPage implements OnInit {
       this.servicio.getElectrolineraId(this.id).subscribe((ubicaciones) =>{
         this.items = ubicaciones;
         console.log(this.items);
-        this.list1 = [{expanded: false}];
+        this.list1 = [{expanded: true}];
         this.list2 = [{expanded: false}];
         this.list3 = [{expanded: false}];
         this.list4 = [{expanded: false}];

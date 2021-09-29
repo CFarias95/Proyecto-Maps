@@ -13,15 +13,14 @@ import { environment } from '../environments/environment';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { LocalNotifications } from "@ionic-native/local-notifications";
-import { FilterpPipe } from './pipes/filterp.pipe';
-import { FilternPipe } from './pipes/filtern.pipe';
-import { FilterdPipe } from './pipes/filterd.pipe';
-
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +37,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     }),
     AngularFireModule.initializeApp (environment.firebaseConfig)],
 
-  providers: [ GoogleMaps, GooglePlus,AndroidPermissions, Geolocation,{ provide: [LocalNotifications, RouteReuseStrategy], useClass: IonicRouteStrategy}],
+  providers: [ GoogleMaps, GooglePlus,AndroidPermissions,NativeStorage, LocationAccuracy,Geolocation,{ provide: [LocalNotifications, RouteReuseStrategy], useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

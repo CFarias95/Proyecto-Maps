@@ -1,7 +1,5 @@
 ion-content{
-    --background: #67B26F;  /* fallback for old browsers */
-    --background: -webkit-linear-gradient(to top, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
-    --background: linear-gradient(to top, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    --background: #278d91;  /* fallback for old browsers */
     text-align: center;
 }
 ion-item{
@@ -29,4 +27,12 @@ ion-card .list-md{
 }
 .list-md{
     background: none;
+}
+input#buscar{
+    border: currentColor;
+    border-bottom: #a9a9a9;
+    border-bottom-style: solid;
+    width: 100%;
+    height: 50px;;
+    background-color: rgba(240, 248, 255, 0.473);
 }
