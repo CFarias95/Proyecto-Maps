@@ -36,6 +36,57 @@ export class QcsService {
     return this.Qcs;
   }
 
+  public getMisQCSCreadas(id:String){
+   
+    this.qcsCollection = this.firestore.collection<Notificaciones>('quejas', ref => ref.where('IdUser', '==', id ).where('Estado','==','Creado'));
+    this.Qcs = this.qcsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+        
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Qcs;
+  }
+
+  public getMisQCSRechazadas(id:String){
+   
+    this.qcsCollection = this.firestore.collection<Notificaciones>('quejas', ref => ref.where('IdUser', '==', id ).where('Estado','==','Rechazado'));
+    this.Qcs = this.qcsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+        
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Qcs;
+  }
+
+  public getMisQCSAprobadas(id:String){
+   
+    this.qcsCollection = this.firestore.collection<Notificaciones>('quejas', ref => ref.where('IdUser', '==', id ).where('Estado','==','Aprobado'));
+    this.Qcs = this.qcsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+        
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Qcs;
+  }
+
   userDetails() {
     return this.afAuth.user
   }

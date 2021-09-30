@@ -22,6 +22,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

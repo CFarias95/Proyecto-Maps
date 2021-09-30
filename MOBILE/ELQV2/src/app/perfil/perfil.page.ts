@@ -37,7 +37,8 @@ export class PerfilPage implements OnInit {
     private usuario:AuthenticationService,
     private formBuilder: FormBuilder,
     private navCtrl: NavController,
-    private alertCtrl: AlertController,) { 
+    private alertCtrl: AlertController,
+    private authService: AuthenticationService,) { 
     this.usuario.userDetails().subscribe(user=>{
       console.log(user.uid);
       this.id = user.uid;
@@ -70,9 +71,9 @@ export class PerfilPage implements OnInit {
   tryRegister(value) {
     const user = this.usuario.updateUser(this.id, value);
     if(user){
-     
+     this.mensajeerror("Datos actualizados con exito");
     }else{   
-     
+      this.mensajeerror("Ocurrio un error, intentalo mas tarde");
     }
   }
 
@@ -82,6 +83,17 @@ export class PerfilPage implements OnInit {
     this.usuario.updateImagen(this.usuarioData,this.id,this.image);
     //this.cargarUsuario();
     
+  }
+
+  logout() {
+    this.authService.logoutUser()
+      .then(res => {
+        console.log(res);
+        this.navCtrl.navigateBack('');
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   async mensajeerror(mensajetxt: string) {

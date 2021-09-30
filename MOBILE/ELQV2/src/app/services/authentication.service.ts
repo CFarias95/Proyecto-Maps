@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
-import { finalize, first, map, switchMap } from 'rxjs/operators';
+import { finalize, first, isEmpty, map, switchMap } from 'rxjs/operators';
 import { DatosUsuario, User } from '../modelm/user';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -69,7 +69,7 @@ export class AuthenticationService {
           fileRef.getDownloadURL().subscribe(urlImage => {
             console.log(urlImage);
             this.photoURL=urlImage;
-
+            
             this.afs.collection('usersmobile').doc(uid).set({
               uid : uid,
               correo : correo,
@@ -100,7 +100,10 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(value.email, value.password)
         .then(
-          res => {resolve(res); this.nativeStorage.setItem('Estado','Logeado');},
+          res => {if (res.user.emailVerified){
+            resolve(res);
+            this.nativeStorage.setItem('Estado','Logeado');
+          }},
           err => {reject(err),this.nativeStorage.setItem('Estado','NO');})
         
           
@@ -176,12 +179,17 @@ export class AuthenticationService {
               this.nativeStorage.setItem('Estado','Logeado');
               resolve(res);
               console.log("USER UID: "+res.user.uid);
+              if(userdataGoogle.imageUrl == ""){
+                this.photoURL = userdataGoogle.imageUrl;
+              }else{
+                this.photoURL = "";
+              }
               this.afs.collection('usersmobile').doc(res.user.uid).set({
                 uid : res.user.uid,
                 correo : userdataGoogle.email,
                 nombres : userdataGoogle.givenName,
                 apellidos : userdataGoogle.familyName,
-                foto : userdataGoogle.imageUrl,  
+                foto : this.photoURL,  
               });
             },
             err => {reject(err); this.nativeStorage.setItem('Estado','NO');})

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title  style="background-color: rgba(47, 98, 100, 0.486); text-align: left; height: 60px;" >Mi perfil</ion-title>
+    <ion-title  style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">MI PERFIL</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -65,5 +65,11 @@
      
     </form>
   </ion-card-content>
-  </ion-card> 
+  </ion-card>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="logout()">
+      <ion-icon name="exit"></ion-icon>
+    </ion-fab-button>
+    
+  </ion-fab>
 </ion-content>

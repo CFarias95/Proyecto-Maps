@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">CREADAS</ion-title>
+    <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">APROBADAS</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,17 +19,17 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <ion-searchbar type="text" style=" --color:#18585a;--background:rgba(245, 245, 245, 0.705); text-align: left; --icon-color:#18585a; --border-radius:30px" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"></ion-searchbar>
 
-  <ion-card (click)="expandItem(item)" *ngFor="let item of items | filtercr: filterpost">
+  <ion-searchbar type="text" style=" --color:#18585a;--background:rgba(245, 245, 245, 0.705); text-align: left; --icon-color:#18585a; --border-radius:30px" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"></ion-searchbar>
+  <ion-card (click)="expandItem(item)" *ngFor="let item of items | filterap: filterpost">
     
     <ion-card-header  color="danger" *ngIf="item.Estado == rechazado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
     </ion-card-header>
-    <ion-card-header  color="success" *ngIf="item.Estado == aprobado">
+    <ion-card-header  style="background-color: rgba(103, 204, 63, 0.719);" *ngIf="item.Estado == aprobado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
     </ion-card-header>
-    <ion-card-header  style="background-color: rgba(142, 222, 238, 0.849);" *ngIf="item.Estado == creado">
+    <ion-card-header  color="medium" *ngIf="item.Estado == creado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
     </ion-card-header>
 
@@ -59,7 +59,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6">
-        <ion-button  routerLink="/listar-cm" style="--background: rgba(230, 238, 238, 0.445); --color:#696969;" expand="block" size="large">Aprobadas</ion-button>
+        <ion-button  routerLink="/listarqcs" style="--background: rgba(230, 238, 238, 0.445); --color:#696969;" expand="block" size="large">Creadas</ion-button>
       </ion-col>
       <ion-col size="6">
         <ion-button   routerLink="/listar-su" style="--background: rgba(230, 238, 238, 0.445); --color:#696969;" expand="block"  size="large">Rechazadas</ion-button>
@@ -67,3 +67,4 @@
     </ion-row> 
   </ion-grid> 
 </ion-footer>
+

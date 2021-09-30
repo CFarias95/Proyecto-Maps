@@ -21,7 +21,9 @@
         </div>
     
         <ion-item>
-          <ion-input type="password" placeholder="Contraseña" formControlName="password" class="form-controll" required></ion-input>
+          
+          <ion-input formControlName="password" [type]="passwordType" clearOnEdit="false"></ion-input>
+          <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.password">

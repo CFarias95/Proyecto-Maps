@@ -5,10 +5,21 @@
   >
   </agm-direction>
 </agm-map>
+
+<ion-fab horizontal="start" vertical="top" slot="fixed">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{km}}
+    </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-fab>
+
 <ion-footer translucent = "true" style="background-color: rgba(20, 112, 119, 0.493);">
   <ion-segment >
     <ion-segment-button value="rura" (click)="reRuta()" style="background-color: rgba(240, 248, 255, 0.349);" >
-      <ion-label>Datos</ion-label>
+      <ion-label>Mas informacion</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-footer>

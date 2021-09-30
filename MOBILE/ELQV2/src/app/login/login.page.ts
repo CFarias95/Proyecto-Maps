@@ -20,7 +20,10 @@ export class LoginPage implements OnInit {
 
   public isGoogleLogin = false;
   public user = null;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
 
+  
   constructor(  private navCtrl: NavController,
     private authService: AuthenticationService,
     private formBuilder: FormBuilder,
@@ -71,6 +74,12 @@ async ngOnInit() {
       });
 
   }
+
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
 
   goToRegisterPage() {
     this.navCtrl.navigateForward('/register');

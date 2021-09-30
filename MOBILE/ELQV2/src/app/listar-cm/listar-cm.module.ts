@@ -4,21 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListarqcsPageRoutingModule } from './listarqcs-routing.module';
+import { ListarCmPageRoutingModule } from './listar-cm-routing.module';
 
-import { ListarqcsPage } from './listarqcs.page';
+import { ListarCmPage } from './listar-cm.page';
 
 import { ExpandableComponent } from '../components/expandable/expandable.component';
 
-import { FiltercrPipe } from '../pipes/filtercr.pipe';
+import { FilterapPipe } from '../pipes/filterap.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListarqcsPageRoutingModule
+    ListarCmPageRoutingModule
   ],
-  declarations: [ListarqcsPage,ExpandableComponent,FiltercrPipe]
+  declarations: [ListarCmPage,ExpandableComponent,FilterapPipe]
 })
-export class ListarqcsPageModule {}
+export class ListarCmPageModule {}

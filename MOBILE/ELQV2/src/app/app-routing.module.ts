@@ -62,7 +62,15 @@ const routes: Routes = [
   {
     path: 'electolinera/:id',
     loadChildren: () => import('./electolinera/electolinera.module').then( m => m.ElectolineraPageModule)
+  },  {
+    path: 'listar-cm',
+    loadChildren: () => import('./listar-cm/listar-cm.module').then( m => m.ListarCmPageModule)
   },
+  {
+    path: 'listar-su',
+    loadChildren: () => import('./listar-su/listar-su.module').then( m => m.ListarSuPageModule)
+  },
+
 
 
 

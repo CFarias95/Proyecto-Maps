@@ -1,11 +1,11 @@
 ion-content{
     --background: #278d91;  /* fallback for old browsers */
     text-align: center;
-    font-family:fantasy;
 }
 ion-item{
     --background: #8fc7ccc4;  /* fallback for old browsers */
-    border-radius: 10px;   
+    border-radius: 10px;
+    
 }
 ion-label{
     --color: whitesmoke;
@@ -16,12 +16,15 @@ ion-label:focus{
 ion-label::content{
     --color: azure;
 }
-.swiper-slide img{
-    width: 100px;
+ion-fab-button{
+    --background: #08A8B5;
 }
-ion-toolbar{
-    background-color: #67B26F !important;
+ion-card {
+    --background: #14323581;
 }
-ion-col::hover{
-    background-color: #E0FFFF; 
+ion-card .list-md{
+    --background: #08a7b567;
+}
+.list-md{
+    background: none;
 }

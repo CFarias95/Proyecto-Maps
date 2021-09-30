@@ -26,11 +26,13 @@ export class RegisterPage implements OnInit {
     ],
     'nombre': [
       { type: 'required', message: 'Ingresa tus nombre.' },
-      { type: 'maxlength', message: 'No debe exeder der 50 caracteres.' }
+      { type: 'maxlength', message: 'No debe exeder der 50 caracteres.' },
+      { type: 'pattern', message: 'Solo se permiten letras.'}
     ],
     'apellido': [
       { type: 'required', message: 'Ingresa tus apellidos.' },
-      { type: 'maxlength', message: 'No debe exeder der 50 caracteres.' }
+      { type: 'maxlength', message: 'No debe exeder der 50 caracteres.' },
+      { type: 'pattern', message: 'Solo se permiten letras.'}
     ]
   };
 
@@ -50,15 +52,17 @@ export class RegisterPage implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.minLength(5),
-        Validators.required
+        Validators.required,
       ])),
       nombre: new FormControl('', Validators.compose([
         Validators.maxLength(50),
-        Validators.required
+        Validators.required,
+        Validators.pattern('[a-zA-Z]')
       ])),
       apellido: new FormControl('', Validators.compose([
         Validators.maxLength(50),
-        Validators.required
+        Validators.required,
+        Validators.pattern('[a-zA-Z]')
       ]))
     });
   }
@@ -79,8 +83,11 @@ export class RegisterPage implements OnInit {
     if(user){
       this.errorMessage = "";
       this.successMessage = "tu Cuenta a sido creada.";
+      alert("tu Cuenta a sido creada.");
+      this.navCtrl.navigateBack('');
     }else{
       this.errorMessage = "No se pudo crear tu cuenta verifica tu correo";
+      alert("tu Cuenta a sido creada.");
       this.successMessage = "";
     }
      

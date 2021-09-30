@@ -24,6 +24,9 @@ export class RutaPage implements OnInit {
   public destination: any;
   private geoCoder;
 
+  km: string;
+  DistanceService : any;
+
   id: string;
 
   constructor(private route: ActivatedRoute,
@@ -77,6 +80,24 @@ export class RutaPage implements OnInit {
 
           console.log("Origen: "+this.latitude +", "+ this.longitude);   
           console.log("Destino: "+this.latitudeD +", "+ this.longitudeD); 
+
+          this.DistanceService = new google.maps.DistanceMatrixService();
+          this.DistanceService.getDistanceMatrix(
+            {
+              origins: [this.origin],
+              destinations: [ this.destination],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false,
+            }, (response, status) => {
+              console.log(JSON.stringify(response.rows[0].elements[0]), status);
+              const distance = response.rows[0].elements[0].distance.text;
+              const tiempo = response.rows[0].elements[0].duration.text;
+              console.log(distance);
+              this.km = tiempo + " " +distance;
+            })
+    
         });
         
         

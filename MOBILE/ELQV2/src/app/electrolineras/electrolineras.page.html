@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title style="background-color: rgba(47, 98, 100, 0.486); text-align: left; height: 60px;">Electrolineras Registradas</ion-title>
+      <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">ELECTROLINERAS</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +19,8 @@
     </ion-fab-list>
   </ion-fab>
 
-  <input type="text" id="buscar" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
+  <ion-searchbar type="text" style=" --color:#18585a;--background:rgba(245, 245, 245, 0.705); text-align: left; --icon-color:#18585a; --border-radius:30px" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"></ion-searchbar>
+
 
   <ion-item *ngIf="!items || items.length == 0">
     <p>No existe registros.</p>

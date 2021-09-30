@@ -3,11 +3,11 @@ import { AuthenticationService } from '../services/authentication.service';
 import { QcsService } from '../services/qcs.service';
 
 @Component({
-  selector: 'app-listarqcs',
-  templateUrl: './listarqcs.page.html',
-  styleUrls: ['./listarqcs.page.scss'],
+  selector: 'app-listar-su',
+  templateUrl: './listar-su.page.html',
+  styleUrls: ['./listar-su.page.scss'],
 })
-export class ListarqcsPage implements OnInit {
+export class ListarSuPage implements OnInit {
 
   items:any = [];
   filterpost ='';
@@ -16,19 +16,18 @@ export class ListarqcsPage implements OnInit {
   rechazado = "Rechazado";
   creado = "Creado";
   
+
   constructor(private servicio: QcsService, private user: AuthenticationService) { }
 
   ngOnInit() {
     this.user.userDetails().subscribe(usuario => {
       this.id = usuario.uid;
-      this.servicio.getMisQCSCreadas(this.id).subscribe(data=> {
+      this.servicio.getMisQCSRechazadas(this.id).subscribe(data=> {
         this.items = data;
         console.log(data);
       });
       
     });
-
-    
   }
 
   expandItem(item): void {

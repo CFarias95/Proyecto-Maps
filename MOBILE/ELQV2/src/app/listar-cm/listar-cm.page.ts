@@ -3,11 +3,11 @@ import { AuthenticationService } from '../services/authentication.service';
 import { QcsService } from '../services/qcs.service';
 
 @Component({
-  selector: 'app-listarqcs',
-  templateUrl: './listarqcs.page.html',
-  styleUrls: ['./listarqcs.page.scss'],
+  selector: 'app-listar-cm',
+  templateUrl: './listar-cm.page.html',
+  styleUrls: ['./listar-cm.page.scss'],
 })
-export class ListarqcsPage implements OnInit {
+export class ListarCmPage implements OnInit {
 
   items:any = [];
   filterpost ='';
@@ -15,20 +15,20 @@ export class ListarqcsPage implements OnInit {
   aprobado = "Aprobado";
   rechazado = "Rechazado";
   creado = "Creado";
-  
-  constructor(private servicio: QcsService, private user: AuthenticationService) { }
+
+
+  constructor( private servicio: QcsService, private user: AuthenticationService) { }
+
 
   ngOnInit() {
     this.user.userDetails().subscribe(usuario => {
       this.id = usuario.uid;
-      this.servicio.getMisQCSCreadas(this.id).subscribe(data=> {
+      this.servicio.getMisQCSAprobadas(this.id).subscribe(data=> {
         this.items = data;
         console.log(data);
       });
       
     });
-
-    
   }
 
   expandItem(item): void {
