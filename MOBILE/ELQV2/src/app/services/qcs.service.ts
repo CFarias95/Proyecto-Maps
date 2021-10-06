@@ -11,9 +11,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class QcsService {
 
   private qcsCollection: AngularFirestoreCollection<Notificaciones>;
-  private qcsCollection2: AngularFirestoreCollection<Notificaciones>;
+  private quejasCollection: AngularFirestoreCollection<Notificaciones>;
   private Qcs: Observable<any>;
-  private Qcs2: Observable<Notificaciones[]>;
+  private quejas: Observable<any>;
   fecha :Date;
   constructor( 
     private firestore: AngularFirestore, 
@@ -85,6 +85,44 @@ export class QcsService {
     );
 
     return this.Qcs;
+  }
+
+  public getMisQCSNum(id:String,estado:string){
+   
+    this.qcsCollection = this.firestore.collection<Notificaciones>('quejas', ref => ref.where('IdUser', '==', id ).where('Notify','==','Activa').where('Estado', '==', estado ));
+    this.Qcs = this.qcsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Qcs;
+  }
+
+  public getMisQCSNumTodas(id:String){
+   
+    this.qcsCollection = this.firestore.collection<Notificaciones>('quejas', ref => ref.where('IdUser', '==', id ).where('Notify','==','Activa'));
+    this.Qcs = this.qcsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return {id, ...data};
+        });
+      })
+    );
+
+    return this.Qcs;
+  }
+
+  public updateMisQCS(id:string){
+    return this.firestore.collection('quejas').doc(id).update({
+      Notify: "Desactivada"
+    });
   }
 
   userDetails() {

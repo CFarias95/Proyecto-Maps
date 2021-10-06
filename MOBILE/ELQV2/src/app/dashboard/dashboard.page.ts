@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Notificaciones } from '../modelm/notificaciones';
 import { AuthenticationService } from '../services/authentication.service';
 import { NotificacionesService } from '../services/notificaciones.service';
+import { QcsService } from '../services/qcs.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,10 @@ export class DashboardPage implements OnInit {
   userEmail: string;
   userName: String;
   public items: any = [];
+  id: String;
+  notificar: any;
+  promociones: boolean;
+  noticias:boolean;
 
   slideOpts = {
     slidesPerView: 3,
@@ -108,23 +113,31 @@ export class DashboardPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticationService,
-    private notificaciones : NotificacionesService
+    private notificaciones : NotificacionesService,
+    private servicio: QcsService,
   ) { }
 
   
   ngOnInit() {
     this.getNoticias();
+   
+   
     this.authService.userDetails().subscribe(res => {
       console.log('res', res);
       if (res !== null) {
+        this.id = res.uid;
         this.userEmail = res.email;
         this.userName = res.displayName;
+        this.comprobarQuejas();
+        this.noticias = false;
+        this.promociones = false;
       } else {
         this.navCtrl.navigateBack('');
       }
     }, err => {
       console.log('err', err);
     })
+
   }
 
   logout() {
@@ -145,6 +158,20 @@ export class DashboardPage implements OnInit {
     })
 
   }
+
+  comprobarQuejas(){
+    this.servicio.getMisQCSNumTodas(this.id).subscribe((data) => {
+      //alert(data.lenght);
+      if(data.lenght == 0){    
+        this.notificar = false;
+        console.log("estado: "+this.notificar);
+      }else{
+        this.notificar = data;
+        console.log("estado: "+this.notificar);
+      }
+    });
+  }
+  
 
 
 }

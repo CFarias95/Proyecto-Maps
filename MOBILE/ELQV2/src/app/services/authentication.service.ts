@@ -9,6 +9,7 @@ import { FileI } from '../modelm/file.interface';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import  firebase from 'firebase';
+import { AlertController, NavController } from '@ionic/angular';
 
 
 
@@ -28,7 +29,9 @@ export class AuthenticationService {
     private storage: AngularFireStorage,
     private afs: AngularFirestore, 
     private google : GooglePlus,
-    private nativeStorage: NativeStorage) { 
+    private nativeStorage: NativeStorage,
+    public alertController: AlertController,
+    private navCtrl: NavController) { 
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -112,20 +115,46 @@ export class AuthenticationService {
   } 
 
   //salir sesion
-  logoutUser() {
-    return new Promise<void>((resolve, reject) => {
-      if (this.afAuth.currentUser) {
-        this.afAuth.signOut()
-          .then(() => {
-            console.log("Log OUT");
-            this.nativeStorage.setItem('Estado','NO');
-            resolve();
-          }).catch((error) => {
-            reject();
-          });
-      }
-    })
-  }
+  async  logoutUser() {
+    const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Confirmar!',
+        message: '<strong>Seguro que quieres salir</strong>!!!',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Si',
+            handler: () => {
+              return new Promise<void>((resolve, reject) => {
+                if (this.afAuth.currentUser) {
+                  this.afAuth.signOut()
+                    .then(() => {
+                      console.log("Log OUT");
+                      this.nativeStorage.setItem('Estado','NO').then(res=>{
+                        resolve();
+                        this.navCtrl.navigateBack('/login');
+                      },err=>{
+                        console.log(err);
+                      }              
+                      );           
+                    }).catch((error) => {
+                      reject();
+                    });
+                }
+              })
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    }
 
   //Get user Data
   getUserData(id: string){
@@ -181,16 +210,23 @@ export class AuthenticationService {
               console.log("USER UID: "+res.user.uid);
               if(userdataGoogle.imageUrl == ""){
                 this.photoURL = userdataGoogle.imageUrl;
+                this.afs.collection('usersmobile').doc(res.user.uid).set({
+                  uid : res.user.uid,
+                  correo : userdataGoogle.email,
+                  nombres : userdataGoogle.givenName,
+                  apellidos : userdataGoogle.familyName,
+                  foto : this.photoURL,  
+                });
               }else{
                 this.photoURL = "";
+                this.afs.collection('usersmobile').doc(res.user.uid).set({
+                  uid : res.user.uid,
+                  correo : userdataGoogle.email,
+                  nombres : userdataGoogle.givenName,
+                  apellidos : userdataGoogle.familyName,
+                });
               }
-              this.afs.collection('usersmobile').doc(res.user.uid).set({
-                uid : res.user.uid,
-                correo : userdataGoogle.email,
-                nombres : userdataGoogle.givenName,
-                apellidos : userdataGoogle.familyName,
-                foto : this.photoURL,  
-              });
+              
             },
             err => {reject(err); this.nativeStorage.setItem('Estado','NO');})
             })

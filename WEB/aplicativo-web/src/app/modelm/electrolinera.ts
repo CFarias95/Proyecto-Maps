@@ -17,4 +17,5 @@ export interface Electrolinera {
     estado : string;
     imagen: string;
     horariotexto: string;
+    sector:string;
 }

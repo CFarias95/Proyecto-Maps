@@ -11,10 +11,10 @@
       <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="light">
+      <ion-fab-button color="light" routerLink="/dashboard" data-desc="Menú">
         <ion-icon routerLink="/dashboard" name="grid"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light">
+      <ion-fab-button color="light" routerLink="/crearqcs" data-desc="Añadir">
         <ion-icon routerLink="/crearqcs" name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
@@ -58,11 +58,15 @@
 <ion-footer translucent = "true" style="background-color: rgba(20, 112, 119, 0.493);">
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
-        <ion-button  routerLink="/listarqcs" style="--background: rgba(230, 238, 238, 0.445); --color:#696969;" expand="block" size="large">Creadas</ion-button>
+     
+      <ion-col size="4">
+        <ion-button  routerLink="/listarqcs" style="--background: rgba(230, 238, 238, 0.445); --color:#696969; font-size: smaller;" expand="block" size="large">Pendientes</ion-button>
       </ion-col>
-      <ion-col size="6">
-        <ion-button   routerLink="/listar-su" style="--background: rgba(230, 238, 238, 0.445); --color:#696969;" expand="block"  size="large">Rechazadas</ion-button>
+      <ion-col size="4">     
+        <ion-button style="--background: rgba(230, 238, 238, 0.445); --color:#696969; font-size: smaller;" expand="block" size="large">Aprobadas</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button   routerLink="/listar-su" style="--background: rgba(230, 238, 238, 0.445); --color:#696969; font-size: smaller;" expand="block"  size="large">Rechazadas</ion-button>
       </ion-col>
     </ion-row> 
   </ion-grid> 

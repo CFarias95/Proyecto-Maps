@@ -18,6 +18,7 @@ export interface Electrolinera {
     longitud: number;
     estado : string;
     imagen: string;
+    sector: string;
 }
 export interface ElectrolineraDatos {
     id?: string;

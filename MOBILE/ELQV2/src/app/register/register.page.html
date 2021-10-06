@@ -22,6 +22,7 @@
         </ng-container>
       </div>
 
+      <br>
       <ion-item>
       
         <ion-input type="text" formControlName="apellido" placeholder= "Apellidos"></ion-input>
@@ -35,6 +36,7 @@
         </ng-container>
       </div>
 
+      <br>
       <ion-item>
         <ion-input type="text" formControlName="email" placeholder= "Correo"></ion-input>
       </ion-item>
@@ -47,9 +49,11 @@
         </ng-container>
       </div>
       
+      <br>
       <ion-item>
 
-        <ion-input type="password" formControlName="password" class="form-controll"  placeholder = "Contraseña" required></ion-input>
+        <ion-input [type]="passwordType" formControlName="password" class="form-controll"  placeholder = "Contraseña" required></ion-input>
+        <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
       </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.password">
@@ -60,13 +64,14 @@
         </ng-container>
       </div>
 
+      <br>
       <ion-item>
         <label position="floating" style="color:rgb(255, 255, 255)" class="btn btn-info" >IMAGEN
           <input type="file" accept=".png, .jpg" (change)="enviarimagen($event)" style="color:black;display:none;"/>
         </label>
       </ion-item>
 
-      <ion-item *ngIf="image2" style="padding: 10%;">
+      <ion-item *ngIf="image2" style="padding: 10%; text-align: center;">
         <img [src]= "image2" style="width: 200px; ">
       </ion-item>
 

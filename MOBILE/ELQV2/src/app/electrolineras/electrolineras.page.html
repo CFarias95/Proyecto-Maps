@@ -10,28 +10,40 @@
       <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="light">
+      <ion-fab-button color="light" routerLink="/mapa" data-desc="Mapa">
         <ion-icon routerLink="/mapa" name="map"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light">
+      <ion-fab-button color="light" routerLink="/dashboard" data-desc="Menú">
         <ion-icon routerLink="/dashboard" name="grid"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 
-  <ion-searchbar type="text" style=" --color:#18585a;--background:rgba(245, 245, 245, 0.705); text-align: left; --icon-color:#18585a; --border-radius:30px" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"></ion-searchbar>
-
-
+  <ion-row>
+    <ion-col size="10">
+      <ion-searchbar type="text" style=" --color:#18585a;--background:rgba(245, 245, 245, 0.705); text-align: left; --icon-color:#18585a; --border-radius:30px" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"></ion-searchbar>
+    </ion-col>
+    <ion-col size="2">
+      <ion-select  [(ngModel)]="filterpost1" name="filterpost1" interface="popover"  style=" color:#ecf3f3;--background:rgba(245, 245, 245, 0.705); text-align: center;">
+        <ion-select-option value="">Todo</ion-select-option>
+        <ion-select-option value="Norte">Norte</ion-select-option>
+        <ion-select-option value="Centro">Centro</ion-select-option>
+        <ion-select-option value="Sur">Sur</ion-select-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+ 
   <ion-item *ngIf="!items || items.length == 0">
     <p>No existe registros.</p>
   </ion-item>
 
-  <ion-card (click)="expandItem(item)" *ngFor="let item of items | filterep: filterpost">
+  <ion-card (click)="expandItem(item)" *ngFor="let item of (items | filterep: filterpost) | filterep: filterpost1 ">
     <ion-item>
       <ion-avatar slot="start">
         <img [src]="item.imagen" alt="imagen" *ngIf="item.imagen">
       </ion-avatar>
-      <ion-label button (click)="reRuta(item.id)" >{{item.name}} <ion-icon name="arrow-forward"></ion-icon></ion-label>
+      <ion-label button (click)="reRuta(item.id)" >{{item.name}} </ion-label>
+      <img src="../../assets/download.png" width="10px">
     </ion-item>
   </ion-card>
   

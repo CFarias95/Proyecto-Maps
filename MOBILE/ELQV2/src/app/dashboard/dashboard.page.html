@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">MENU</ion-title>
+    <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">MENÙ </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -19,35 +19,41 @@
       </ion-slides>
     </ion-row>
     <br>
-    <ion-row>   
-      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border-style: solid; border-color:#278d91 ;">
-        <img src="../../assets/mapa.png" width="90px"alt="mapa" routerLink="/mapa">
-        <h2>Mapa</h2>
-      </ion-col>
+    <ion-row>
 
-      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border-style: solid; border-color:#278d91 ;">
-        <img src="../../assets/electrolineras.png" width="90px" alt="electrolineras"routerLink="/electrolineras">
-        <h2>Electrolineras</h2>
-      </ion-col>
-
-      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border-style: solid; border-color:#278d91 ;" >
-        <img src="../../assets/quejas.png" alt="quejas"  width="90px" routerLink="/listarqcs"  >
-        <h2>Opinones</h2>
-      </ion-col>
-
-      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border-style: solid; border-color:#278d91 ;">
+      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border: 4px; border-style: solid; border-color:#278d91 ;">
         <img src="../../assets/usuario.png" width="90px" alt="usuario" routerLink="/perfil">
         <h2>Perfil</h2>
       </ion-col>
 
-      <ion-col size="6"  style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border-style: solid; border-color:#278d91 ;">
+      <ion-col size="6"  style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border: 4px; border-style: solid; border-color:#278d91 ;">
+        <ion-badge *ngIf="noticias" color="light"><ion-icon name="notifications-outline"></ion-icon></ion-badge>
         <img src="../../assets/noticias.png" width="100px" alt="quejas"  routerLink="/noticias"  >
         <h2>Noticias</h2>
       </ion-col>
-      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border-style: solid; border-color:#278d91 ;">
-        <img src="../../assets/gift.png" width="100px" alt="quejas"  routerLink="/promos"  >
-        <h2>Promos</h2>
+
+      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border: 4px; border-style: solid; border-color:#278d91 ;">
+        <img src="../../assets/mapa.png" width="90px"alt="mapa" routerLink="/mapa">
+        <h2>Mapa</h2>
       </ion-col>
+
+      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border: 4px; border-style: solid; border-color:#278d91 ;">
+        <img src="../../assets/electrolineras.png" width="90px" alt="electrolineras" routerLink="/electrolineras">
+        <h3>Electrolineras</h3>
+      </ion-col>
+
+      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border: 4px; border-style: solid; border-color:#278d91 ;">
+        <ion-badge *ngIf="promociones" color="danger"><ion-icon name="notifications-outline"></ion-icon></ion-badge>
+        <img src="../../assets/gift.png" width="100px" alt="quejas"  routerLink="/promos" >     
+        <h3>Promociones</h3>
+      </ion-col>
+
+      <ion-col size="6" style="background-color: rgba(240, 255, 247, 0.384); border-radius: 10px; border: 4px; border-style: solid; border-color:#278d91 ;" >
+        <ion-badge *ngIf="notificar?.length" color="danger"><ion-icon name="notifications-outline"></ion-icon></ion-badge>
+        <img src="../../assets/quejas.png" alt="quejas"  width="90px" routerLink="/listarqcs">
+        <h3>Sugerencias</h3>
+      </ion-col>
+
     </ion-row>   
   </ion-grid>
 </ion-content>

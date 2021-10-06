@@ -68,6 +68,8 @@ export class EditElectrolineraComponent implements OnInit {
       longitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
       estado:['',Validators.compose([Validators.required])],
       horariotexto:['',Validators.compose([])],
+      sector:['',Validators.compose([Validators.required])],
+      
       
     });
 

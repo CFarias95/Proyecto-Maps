@@ -91,7 +91,7 @@ export class RutaPage implements OnInit {
               avoidHighways: false,
               avoidTolls: false,
             }, (response, status) => {
-              console.log(JSON.stringify(response.rows[0].elements[0]), status);
+              console.log(JSON.stringify(response), status);
               const distance = response.rows[0].elements[0].distance.text;
               const tiempo = response.rows[0].elements[0].duration.text;
               console.log(distance);

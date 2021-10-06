@@ -9,18 +9,15 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
 
- 
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-    spaceBetween: 10,
-    loop: true,
-    effect: 'coverflow',
-  };
-  
+   
   constructor(public navCtrl: NavController,private nativeStorage: NativeStorage) {
     this.nativeStorage.getItem('Estado').then(res=>{
-      this.navCtrl.navigateForward('/dashboard');
+      if(res == 'Logeado'){
+        this.navCtrl.navigateForward('/dashboard');
+      }else{
+        this.navCtrl.navigateForward('');
+      }
+      
     }, err => {
       console.log("Error: "+ err);
     });

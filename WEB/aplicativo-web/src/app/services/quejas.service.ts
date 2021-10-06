@@ -57,7 +57,8 @@ export class QuejasService {
 
   aprobarQCS(documentId: string){
     return this.quejasCollection.doc(documentId).update({
-      Estado: "Aprobado"
+      Estado: "Aprobado",
+      Notify: "Activa"
     });
   }
 
@@ -65,6 +66,7 @@ export class QuejasService {
     return this.quejasCollection.doc(documentId).update({
       Estado: "Rechazado",
       Razon: razon,
+      Notify: "Activa"
     });
   }
 

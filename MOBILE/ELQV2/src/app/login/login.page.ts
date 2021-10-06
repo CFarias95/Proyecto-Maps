@@ -7,6 +7,7 @@ import { LoadingController, NavController, Platform } from '@ionic/angular';
 //import * as firebase from 'firebase';
 import { AuthenticationService } from '../services/authentication.service';
 import  firebase  from 'firebase/app';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +32,20 @@ export class LoginPage implements OnInit {
     private fireAuth: AngularFireAuth,
     private platform: Platform,
     private router: Router,
+    private nativeStorage: NativeStorage
    
-) { }
+) { 
+  this.nativeStorage.getItem('Estado').then(res=>{
+    if(res == 'Logeado'){
+      this.navCtrl.navigateForward('/dashboard');
+    }else{
+      //this.navCtrl.navigateForward('');
+    }
+    
+  }, err => {
+    console.log("Error: "+ err);
+  });
+}
 
 async ngOnInit() {
 

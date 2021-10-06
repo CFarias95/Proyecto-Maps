@@ -78,6 +78,7 @@ export class FirebasestorageService {
             longitud: 0,
             estado : 'Inactivo',
             horariotexto: horariotexto,
+            sector: '',
             imagen: this.photoURL,
           }); 
         });

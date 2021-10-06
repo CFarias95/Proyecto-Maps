@@ -91,17 +91,29 @@
       Se permiten solo letras.
     </span>
 
+    <ion-item lines="full" color="dark">
+      <ion-label position="stacked">Sector</ion-label>
+      <ion-select formControlName="sector" [(ngModel)]="electrolinera.sector">
+        <ion-select-option value="Norte">Norte</ion-select-option>
+        <ion-select-option value="Centro">Centro</ion-select-option>
+        <ion-select-option value="Sur">Sur</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sector.errors?.required">
+      Seleciones un estado.
+    </span>
+
     <!-- estado -->
-      <ion-item lines="full" color="dark">
-        <ion-label position="stacked">Estado</ion-label>
-        <ion-select formControlName="estado" [(ngModel)]="electrolinera.estado">
-          <ion-select-option value="Activo">Activo</ion-select-option>
-          <ion-select-option value="Inactivo">Inactivo</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.estado.errors?.required">
-        Seleciones un estado.
-      </span>
+    <ion-item lines="full" color="dark">
+      <ion-label position="stacked">Estado</ion-label>
+      <ion-select formControlName="estado" [(ngModel)]="electrolinera.estado">
+        <ion-select-option value="Activo">Activo</ion-select-option>
+        <ion-select-option value="Inactivo">Inactivo</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.estado.errors?.required">
+      Seleciones un estado.
+    </span>
       
     </ion-col>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +15,10 @@ export class RegisterPage implements OnInit {
   successMessage: string = '';
   public image: any;
   public image2: any;
+
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
   validation_messages = {
     'email': [
       { type: 'required', message: 'Un correo es requrrdo.' },
@@ -40,7 +44,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public alertController: AlertController
   
   ) { }
 
@@ -57,12 +62,12 @@ export class RegisterPage implements OnInit {
       nombre: new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.required,
-        Validators.pattern('[a-zA-Z]')
+        Validators.pattern('[a-zA-Z ]*')
       ])),
       apellido: new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.required,
-        Validators.pattern('[a-zA-Z]')
+        Validators.pattern('[a-zA-Z ]*')
       ]))
     });
   }
@@ -78,16 +83,21 @@ export class RegisterPage implements OnInit {
     console.log(this.image);
   }
 
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
   tryRegister(value) {
     const user = this.authService.registerUser(value,this.image);
     if(user){
       this.errorMessage = "";
       this.successMessage = "tu Cuenta a sido creada.";
-      alert("tu Cuenta a sido creada.");
+      this.presentAlert("Mensaje","Tù cuenta ha sido creada, verifica tù correo");
       this.navCtrl.navigateBack('');
     }else{
-      this.errorMessage = "No se pudo crear tu cuenta verifica tu correo";
-      alert("tu Cuenta a sido creada.");
+      this.errorMessage = "No se pudo crear tu cuenta verifica tu correo.";
+      this.presentAlert("Error","Ocurrio un erro, intenta màs tarde.");
       this.successMessage = "";
     }
      
@@ -97,6 +107,19 @@ export class RegisterPage implements OnInit {
     this.navCtrl.navigateBack('');
   }
 
+  async presentAlert(titulo: string, texto: string ) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: titulo,
+      message: texto,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
 
 }

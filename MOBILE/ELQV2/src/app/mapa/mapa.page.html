@@ -22,10 +22,10 @@
       <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
     <ion-fab-list>
-      <ion-fab-button color="light">
+      <ion-fab-button color="light" routerLink="/dashboard" data-desc="Menú">
         <ion-icon routerLink="/dashboard" name="grid"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="light">
+      </ion-fab-button>     
+      <ion-fab-button color="light" routerLink="/electrolineras" data-desc="Electrolineras">
         <ion-icon routerLink="/electrolineras" name="list"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
@@ -36,7 +36,7 @@
       <ion-card-header>
         <ion-card-title>
           {{titulo}}
-          <ion-chip outline color="dark" (click)="reRuta(id)" >
+          <ion-chip style="--background-color: white; --color: white;" outline (click)="reRuta(id)" >
             ver mas
             <ion-icon name="eye"></ion-icon>
           </ion-chip>

@@ -12,6 +12,7 @@ export class ElectrolinerasPage implements OnInit {
 
   public items: any = [];
   filterpost ='';
+  filterpost1 = '';
   lugares:any;
   constructor(private servicio: ElectrolinerasService,private router: Router) {
 
