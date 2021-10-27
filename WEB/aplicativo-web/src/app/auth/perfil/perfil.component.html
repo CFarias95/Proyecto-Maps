@@ -1,4 +1,4 @@
-<h2>Mis datos</h2>
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan">Este módulo te permire ver/editar tus datos personales</h3>
 
     
 
@@ -6,10 +6,11 @@
 
         <ion-col style="text-align: center;">
         
-            <img [src]="usuario.foto" width="200px">    
-            <br>
-            <br>
+            <img [src]="usuario.foto" width="250px"> 
 
+            <br>
+            <br>
+            
             <ion-button color="success">
               <label style="color:rgb(255, 255, 255)" class="btn">
                 CAMBIAR FOTO
@@ -21,7 +22,8 @@
 
         <ion-col style="text-align: center;">
           <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate >
-          <ion-item lines="full" color="dark">
+
+          <ion-item lines="full">
             <ion-label position="stacked">Nombres</ion-label>
             <ion-input formControlName="name" type="text" [(ngModel)]="usuario.nombres"></ion-input>
           </ion-item>
@@ -34,8 +36,10 @@
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.pattern">
             Solo se permiten letras.
           </span>
-    
-          <ion-item lines="full" color="dark">
+          
+          <br>
+
+          <ion-item lines="full">
             <ion-label position="stacked">Apellidos</ion-label>
             <ion-input formControlName="apellido" type="text" [(ngModel)]="usuario.apellidos"></ion-input>
           </ion-item>
@@ -46,7 +50,9 @@
             Solo se permiten letras.
           </span>
         
-          <ion-item lines="full" color="dark">
+          <br>
+
+          <ion-item lines="full" >
             <ion-label position="stacked">Direccion</ion-label>
             <ion-input formControlName="direccion" type="direccion" [(ngModel)]="usuario.direccion"></ion-input>
           </ion-item>
@@ -60,7 +66,9 @@
             Maximo 30 caracteres.
           </span>
       
-          <ion-item lines="full" color="dark">
+          <br>
+
+          <ion-item lines="full">
             <ion-label position="stacked">Teléfono</ion-label>
             <ion-input maxlength="10" formControlName="mobile" type="text" required [(ngModel)]="usuario.telefono"></ion-input>
           </ion-item>
@@ -77,9 +85,11 @@
             Maximo 10 números.
           </span>
     
-          <ion-item lines="full" color="dark">
+          <br>
+
+          <ion-item lines="full">
             <ion-label position="stacked">Correo</ion-label>
-            <ion-input formControlName="email" type="email" [(ngModel)]="usuario.correo" readonly></ion-input>
+            <ion-input formControlName="email" type="email" [(ngModel)]="usuario.correo" readonly ></ion-input>
           </ion-item>
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
             Email requerido.
@@ -87,16 +97,17 @@
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
             Email invalido.
           </span>
-
+          <br>
           <ion-button type="submit" color="success" >ACTUALIZAR</ion-button>
         </form>
 
         </ion-col>
         <ion-col style="text-align: center;">
           <form [formGroup]="ionicForm2" (ngSubmit)="CambiarContra()" novalidate >
-            <ion-item lines="full" color="dark">
+            <ion-item lines="full">
               <ion-label position="stacked">Contraseña Nueva</ion-label>
-              <ion-input formControlName="pss" type="text"></ion-input>
+              <ion-input formControlName="pss" [type]="passwordType"></ion-input>
+              <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
             </ion-item>
             <span class="error ion-padding" *ngIf="isSubmitted && errorControl2.pss.errors?.required">
               Si quieres Cambiar contraseña ingresa una nueva.
@@ -105,9 +116,12 @@
              Se requieren minimo 5 caracteres.
             </span>
 
-            <ion-item lines="full" color="dark">
+            <br>
+            <ion-item lines="full">
               <ion-label position="stacked">Repita Contraseña</ion-label>
-              <ion-input formControlName="pss2" type="text"></ion-input>
+              <ion-input formControlName="pss2" [type]="passwordType2"></ion-input>
+              <ion-icon slot="end" [name]="passwordIcon2" class="passwordIcon" (click)='hideShowPassword2()'></ion-icon>
+           
             </ion-item>
             <span class="error ion-padding" *ngIf="isSubmitted && errorControl2.pss2.errors?.required">
               Si quieres Cambiar contraseña ingresa una nueva.
@@ -115,7 +129,7 @@
             <span class="error ion-padding" *ngIf="isSubmitted && errorControl2.pss2.errors?.minlength">
              Se requieren minimo 5 caracteres.
             </span>
-
+            <br>
             <ion-button type="submit" color="success">CAMBIAR CONTRASEÑA</ion-button>
           </form>
         </ion-col>

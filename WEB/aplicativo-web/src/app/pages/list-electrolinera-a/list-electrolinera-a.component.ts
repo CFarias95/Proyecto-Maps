@@ -28,7 +28,7 @@ export class ListElectrolineraAComponent implements OnInit {
     
   }
   public GetElectrolinera() {
-    this.serviceStore.ObtenerElectrolineras().subscribe((r)=>{
+    this.serviceStore.ObtenerElectrolinerasActivas().subscribe((r)=>{
       this.electrolinera= r.map(i =>
        {
        this.electrolinera = i.payload.doc.data() as {}; 
@@ -42,10 +42,10 @@ export class ListElectrolineraAComponent implements OnInit {
   // ELIMINAR ELECTROLINERA
   public eliminarElectrolinera(documentId) {
     this.serviceStore.eliminarElectrolinera(documentId).then(() => {
-      this.mensajeerror('Electrolinera eliminada !');
+      this.mensajeerror('Electrolinera desactivada!');
     }, (error) => {
       console.error(error);
-      this.mensajeerror('No se pudo eliminar la Electrolinera');
+      this.mensajeerror('No se pudo desactivar la electrolinera');
     });
   }
 

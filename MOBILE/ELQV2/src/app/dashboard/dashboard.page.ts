@@ -110,6 +110,7 @@ export class DashboardPage implements OnInit {
   }
 
   filterpost = new Date().toISOString();
+  
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticationService,

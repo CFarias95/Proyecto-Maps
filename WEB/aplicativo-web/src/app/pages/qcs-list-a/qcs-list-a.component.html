@@ -1,3 +1,4 @@
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan">Este módulo te permite gestionar las quejas, comentarios y/o sugerencias registradas por usuarios de la app móvil</h3>
 <div id="pestanas">
   <ul>
      <li><a (click)="GetTodas()">Todas</a></li>
@@ -5,9 +6,7 @@
      <li><a (click)="GetRechazadas()">Rechazadas</a></li>
   </ul>
 </div>
-
-
-<h1>Quejas, Comentarios y/o Sugerencias Aprobadas</h1>
+<br>
 <input type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
 <br>
 <table class="table table-striped" style="display: table;">
@@ -17,19 +16,19 @@
       <th scope="col" >Tipo</th>
       <th scope="col" >Fecha</th>
       <th scope="col" >Estado</th>
-      <th scope="col" >Origen</th>
+      <th scope="col" >Electrolinera</th>
       <th scope="col" ></th>
       <th scope="col" >Acciones</th>
       <th scope="col" ></th>
     </tr>
   </thead>
-  <ng-container *ngIf="!quejas || quejas.length == 0">
-    <p class="centrarmensaje">No existen Datos a mostrar.</p>
+  <ng-container *ngIf="quejas.length == 0">
+    <p class="centrarmensaje">No existen datos a mostrar.</p>
   </ng-container>
-  <tbody *ngFor="let q of quejas | filterq: filterpost | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index">
+  <tbody *ngFor="let q of quejas | filterq: filterpost | paginate: { itemsPerPage: 7, currentPage: pageActual };let indice=index">
     <td   style="text-align: center; padding-top: 10px;"><img src="../../../assets/img/queja.png" width = "50px"> </td>
     <td   style="text-align: center; padding-top: 10px;">{{q.Tipo}}</td>
-    <td   style="text-align: center; padding-top: 10px;"> {{q.Fecha}}</td>
+    <td   style="text-align: center; padding-top: 10px;"> {{q.Fecha | date:'YYYY-MM-dd'}}</td>
     <td   style="text-align: center; padding-top: 10px; background-color: rgb(12, 184, 12);">{{q.Estado}}</td>
     <td   style="text-align: center; padding-top: 10px;">{{q.Origen}}</td>
     <td   style="text-align: center;"><ion-button  button (click)="ver(q.id)" color="primary">Ver</ion-button></td>

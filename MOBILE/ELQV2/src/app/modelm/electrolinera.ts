@@ -1,3 +1,4 @@
+
 export interface Electrolinera {
     id?: string;
     usuario: string,
@@ -6,10 +7,10 @@ export interface Electrolinera {
     referencia: string;
     tipoconector: string;
     numeroconectores: string;
-    lunes: string;
-    martes: string;
-    miercoles: string;
-    jueves: string;
+    lunes: {lower:number,upper: number};
+    martes: {lower:number,upper: number};
+    miercoles: {lower:number,upper: number};
+    jueves: {lower:number,upper: number};
     viernes: string;
     sabado: string;
     domingo: string;

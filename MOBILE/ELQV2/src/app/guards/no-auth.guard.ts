@@ -15,11 +15,11 @@ export class NoAuthGuard implements CanActivate {
       return this.authSvc.user$.pipe(
         take(1),
         map((user) => {
-          if (!user) {
-            return true;
-          } else {
+          if (user) {
             this.router.navigate(['/dashboard']);
             return false;
+          } else {
+            return true;
           }
         })
       );

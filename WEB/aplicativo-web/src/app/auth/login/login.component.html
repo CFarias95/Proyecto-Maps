@@ -1,87 +1,54 @@
- <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <!-- <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/auto.jpg);">
-            <div class="login-box card">
-                <div class="card-body">
-                    <form [formGroup]="myFormUser" (ngSubmit)="loginUser()">
-                        <h3 class="box-title m-b-20">Iniciar Sesión</h3>
-                        <div class="form-group ">
-                            <div class="col-xs-12">
-                                <input class="form-control" type="email" required="" placeholder="Username" formControlName="usuarioF"> </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Password" formControlName="passwordF"> </div>
-                        </div>
-                        <div class="form-group text-center">
-                            <div class="col-xs-12 p-b-20">
-                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                                <div class="social">
-                                    <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
-                                    <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group m-b-0">
-                            <div class="col-sm-12 text-center">
-                                Don't have an account? <a routerLink="/register" class="text-info m-l-5"><b>Sign Up</b></a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="../../assets/img/logo_size_invert.jpg" alt="IMG">
+					<img src="../../assets/img/logo_size_invert.jpg" alt="IMG" (click)="home()">
 				</div>
 
 				<form class="login100-form validate-form" (ngSubmit)="loginUser()" [formGroup]="myFormUser" >
 					<span class="login100-form-title">
-						Login
+						Inicia sesión
 					</span>
 
 					<div class="wrap-input100 validate-input form-group" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Correo" formControlName="usuarioF">
+						<input style="text-align: center" class="input100" type="text" name="email" placeholder="Correo" formControlName="usuarioF">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<ion-icon slot="end" name="mail" ></ion-icon>
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input form-group" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Contraseña" formControlName="passwordF">
+                     
+						<input  style="text-align: center" class="input100" [type]="passwordType"  name="pass" placeholder="Contraseña" formControlName="passwordF">
 						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
+						<span class="symbol-input100" (click)='hideShowPassword()'>
+							<ion-button shape="round" fill ><ion-icon slot="end" [name]="passwordIcon"></ion-icon></ion-button>
 						</span>
 					</div>
 					
 					<div class="container-login100-form-btn form-group">
 						<button class="login100-form-btn">
-							Login
+							Inicia sesión
 						</button>
 					</div>
 
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Recuperar
-						</span>
-						<button class="txt2" (click)="cambiarcontra()">
-							Correo / Contraseña?
-                        </button>
-					</div>
+                    <br>
+
+					
 				</form>
+
+                <div class="text-center p-t-12" style="padding: 0px 300px 0px 300px;">
+
+                    <span class="txt1">
+                        Recuperar
+                    </span>
+                    <button class="txt2" (click)="cambiarcontra()">
+                        contraseña?
+                    </button>
+
+                </div>
+
 			</div>
 		</div>
 	</div>

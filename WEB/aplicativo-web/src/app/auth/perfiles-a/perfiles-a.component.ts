@@ -12,7 +12,7 @@ import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
 })
 export class PerfilesAComponent implements OnInit {
 
-  usuario:any;
+  usuario:any = [];
   mensaje:string;
   id: string;
   pageActual: number= 1;
@@ -26,37 +26,59 @@ export class PerfilesAComponent implements OnInit {
     private serviceAuth : FirebaseauthService,
     private router: Router,
     ) { 
-      this.serviceAuth.getCurrentUser().then(r=>{
-        this.id = r.uid;
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.id = user.uid;
         if (this.id){
           this.cargarUsuario();
         } 
-      }); 
+ 
     }
 
   ngOnInit() {}
 
   //Cargar usuarios
   async cargarUsuario(){
-    this.Servicio.getAdministradores().subscribe(administrador => {
+    this.Servicio.getAdministradoresActivos(this.id).subscribe(administrador => {
       this.usuario = administrador;
     });
   }
 
   habilitar(id:string){
     this.Servicio.habilitarAdministrador(id).then(() => {
-      this.mensaje="Se habilito el perfil del usuario.";
+      this.mensaje="Se habilitó el perfil del usuario.";
       this.mensajeerror(this.mensaje);
 
     });
   }
 
-  dehabilitar(id:string){
-    this.Servicio.deshabilitarAdministrador(id).then(() => {
-      this.mensaje="Se Deshabilito el perfil del usuario.";
-      this.mensajeerror(this.mensaje);
+  async dehabilitar(id:string){
+    let alert = this.alertCtrl.create({
+      header: 'Deshabilitar',
+      message: '¿Seguro que quieres deshabilar el perfil?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancelaste la operacion');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: data => {
+              
+              this.Servicio.deshabilitarAdministrador(id).then(() => {
+                this.mensaje="Se deshabilito el perfil del usuario.";
+                this.mensajeerror(this.mensaje);
+              });
 
+          }
+        }
+      ]
     });
+    
+    (await alert).present();
+
   }
 
   async mensajeerror(mensajetxt: string) {

@@ -26,28 +26,29 @@
     <ion-card-header  color="danger" *ngIf="item.Estado == rechazado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
     </ion-card-header>
+    <br>
     <ion-card-header  style="background-color: rgba(103, 204, 63, 0.719);" *ngIf="item.Estado == aprobado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
     </ion-card-header>
+    <br>
     <ion-card-header  color="medium" *ngIf="item.Estado == creado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
     </ion-card-header>
-
     <ion-card-content>
       <app-expandable expandHeight="800px" [expanded]="item.expanded">
         <ion-list>         
             <ion-item>
               <h3>Fecha: {{item.Fecha}}</h3>
             </ion-item>
+            <br>
             <ion-item>
               <h3>Estado: {{item.Estado}}</h3>
             </ion-item>
+            <br>
             <ion-item>
               <h3>{{item.Texto}}</h3>
             </ion-item>
-            <ion-item *ngIf="item.Razon">
-              <h3>Motivo rechazo: {{item.Razon}}</h3>
-            </ion-item>
+            
         </ion-list>
       </app-expandable>
     </ion-card-content>

@@ -1,85 +1,87 @@
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan">Este módulo te permite registrar un nuevo perfil administrador de electrolinera</h3>
 <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate > 
-  <h3 class="box-title m-b-20">Agregar una nueva Electrolinera</h3>
-
-  <ion-item lines="full" color="dark">
-    <ion-label position="stacked">Email</ion-label>
-    <ion-input formControlName="email" type="text" placeholder="Correo del usuario"></ion-input>
+  
+  <ion-item lines="full" >
+    <ion-label position="stacked">Correo</ion-label>
+    <ion-input clearInput formControlName="email" type="text" placeholder="Correo del usuario"></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-    Email requerida.
+    Correo requerida.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.minlength">
-    Minimo 5 caracteres.
+    Mínimo 5 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
     Formato del correo incorrecto.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Contraseña</ion-label>
-    <ion-input formControlName="pass" type="text" placeholder="Contraseña del usuario"></ion-input>
+    <ion-input clearInput formControlName="pass" [type]="passwordType" placeholder="Contraseña del usuario"></ion-input>
+    <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.pass.errors?.required">
     Contraseña requerida.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.pass.errors?.minlength">
-    Minimo 2 caracteres.
+    Mínimo 2 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.pass.errors?.maxlength">
-    MAximo 10 caracteres.
+    Máximo 10 caracteres.
   </span>
-
-  <ion-item lines="full" color="dark">
-    <ion-label position="stacked">Telefono</ion-label>
-    <ion-input formControlName="phone" type="text" placeholder="Telefono del usuario"></ion-input>
+  <br>
+  <ion-item lines="full" >
+    <ion-label position="stacked">Teléfono</ion-label>
+    <ion-input clearInput formControlName="phone" type="text" placeholder="Telefono del usuario"></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.required">
-    Telefono requerida.
+    Teléfono requerida.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.minlength">
-    Minimo 2 caracteres.
+    Mínimo 2 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.maxlength">
-    MAximo 10 caracteres.
+    Máximo 10 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.pattern">
-    Se permiten solo numeros.
+    Se permiten solo números.
   </span>
+  <br>
   <!-- nombre -->
-  <ion-item lines="full" color="dark">
+  <ion-item lines="full" >
     <ion-label position="stacked">Nombre</ion-label>
-    <ion-input formControlName="name" type="text" placeholder="Nombre Electrolinera"></ion-input>
+    <ion-input clearInput formControlName="name" type="text" placeholder="Nombre Electrolinera"></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
     Nombre requeridos.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
-    Minimo 2 caracteres.
+    Mínimo 2 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.pattern">
-    Solo se permiten letras.
+    No se permiten caracteres especiales.
   </span>
-
+  <br>
 <!-- direccion -->
-<ion-item lines="full" color="dark">
+<ion-item lines="full" >
   <ion-label position="stacked">Direccion</ion-label>
-  <ion-input formControlName="direcion" type="text" placeholder="Direccion Electrolinera"></ion-input>
+  <ion-input clearInput formControlName="direcion" type="text" placeholder="Direccion Electrolinera"></ion-input>
 </ion-item>
 <span class="error ion-padding" *ngIf="isSubmitted && errorControl.direcion.errors?.required">
   Direccion requerida.
 </span>
 <span class="error ion-padding" *ngIf="isSubmitted && errorControl.direcion.errors?.minlength">
-  Minimo 2 caracteres.
+  Mínimo 2 caracteres.
 </span>
 <span class="error ion-padding" *ngIf="isSubmitted && errorControl.direcion.errors?.maxlength">
-  Maximo 50 caracteres.
+  Máximo 50 caracteres.
 </span>
-
+<br>
 
   <!-- boton -->
   <ion-row>
     <ion-col>
-      <ion-button expand="full"  type="submit" color="success" >Guardar</ion-button>
+      <ion-button expand="full"  type="submit" color="success" >Registrar</ion-button>
     </ion-col>
   </ion-row>
 

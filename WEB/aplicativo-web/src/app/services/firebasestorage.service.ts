@@ -85,6 +85,7 @@ export class FirebasestorageService {
       })
     ).subscribe();
     
+    
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +116,16 @@ export class FirebasestorageService {
     return this.firestore.collection('electrolineras').snapshotChanges();
   }
 
+   // Metodo para obtener todos los autos
+   public ObtenerElectrolinerasInactivas() {
+    return this.firestore.collection('electrolineras',ref => ref.where('estado','==','Inactivo')).snapshotChanges();
+  }
+
+  // Metodo para obtener todos los autos
+  public ObtenerElectrolinerasActivas() {
+    return this.firestore.collection('electrolineras',ref => ref.where('estado','==','Activo')).snapshotChanges();
+  }
+
   // Metodo para actualizar un auto
   public actualizarElectrolinera(data: any, documentId: string) {
     return this.firestore.collection('electrolineras').doc(documentId).update(data);
@@ -122,7 +133,21 @@ export class FirebasestorageService {
   
   // Metodo para eliminar un auto
   public eliminarElectrolinera(documentId: string) {
-    return this.firestore.collection('electrolineras').doc(documentId).delete();
+    //return this.firestore.collection('electrolineras').doc(documentId).delete();
+    return this.firestore.collection('electrolineras').doc(documentId).update({
+      estado: "Inactivo"
+    }
+
+    );
+  }
+
+  public activarElectrolinera(documentId: string) {
+    //return this.firestore.collection('electrolineras').doc(documentId).delete();
+    return this.firestore.collection('electrolineras').doc(documentId).update({
+      estado: "Activo"
+    }
+
+    );
   }
 
   //Actualizar imagen

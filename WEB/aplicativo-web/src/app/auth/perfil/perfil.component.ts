@@ -19,7 +19,11 @@ export class PerfilComponent implements OnInit {
   mensaje:string;
   id: string;
   public image: any;
-  
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
+  passwordType2: string = 'password';
+  passwordIcon2: string = 'eye-off';
   
 
   constructor(
@@ -28,25 +32,28 @@ export class PerfilComponent implements OnInit {
     private alertCtrl: AlertController,
     private serviceAuth : FirebaseauthService,) {
       
-    this.serviceAuth.getCurrentUser().then(r=>{
-      this.id = r.uid;
-      if (this.id){
-        this.cargarUsuario();
-      } 
-    });   
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.id= user.uid;
+      this.cargarUsuario();
+    // this.serviceAuth.getCurrentUser().then(r=>{
+    //   this.id = r.uid;
+    //   if (this.id){
+    //     this.cargarUsuario();
+    //   } 
+    // });   
    }
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)])],
-      apellido: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zA-Z ]*')])],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*'), Validators.minLength(3)])],
+      apellido: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*')])],
       direccion: ['',Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(30)])],
       mobile: ['',Validators.compose([Validators.required, Validators.pattern('^[0-9]+$'),Validators.maxLength(10), Validators.minLength(9)])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
     })
     this.ionicForm2 = this.formBuilder.group({
-      pss:['',Validators.compose([Validators.minLength(5),Validators.required])],
-      pss2:['',Validators.compose([Validators.minLength(5),Validators.required])],
+      pss:['',Validators.compose([Validators.minLength(5),Validators.required,Validators.pattern('[a-zñA-Z0-9-_!.,:;"$%&/()?¿/*/*-+]*')])],
+      pss2:['',Validators.compose([Validators.minLength(5),Validators.required,Validators.pattern('[a-zñA-Z0-9-_!.,:;"$%&/()?¿]*/*-+')])],
     })
   }
 
@@ -57,16 +64,38 @@ export class PerfilComponent implements OnInit {
     console.log(this.ionicForm.valid);
     
     if(!this.ionicForm.valid) { 
-      this.mensaje="Valida que los campos esten completos";
+      this.mensaje="Valida los campos!";
       this.mensajeerror(this.mensaje);
       return false;
     } else {
-      this.Servicio.updateAdministrador(this.usuario, this.id).then(() => {
-        this.mensaje="Se actualizó tu perfil.";
+      if(this.usuario.nombres.trim() == '' || this.usuario.apellidos.trim() == '' || this.usuario.direccion.trim() == ''){
+        this.mensaje="Los campos no pueden estar vacíos!";
         this.mensajeerror(this.mensaje);
-      });
+        return false;
+      }else{
+        this.usuario.nombres = this.usuario.nombres.trim();
+        this.usuario.apellidos = this.usuario.apellidos.trim();
+        this.usuario.direccion = this.usuario.direccion.trim();
+        this.Servicio.updateAdministrador(this.usuario, this.id).then(() => {
+          this.mensaje="Se actualizó tu perfil.";
+          this.mensajeerror(this.mensaje);});
+      }
+
+      
+      
     }
   }
+  
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
+  hideShowPassword2() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
 
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -90,11 +119,12 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  async subirImagen(event: any): Promise<void> {
+  async subirImagen(event: any) {
     this.image = event.target.files[0];
-
     this.Servicio.updateImagen(this.usuario,this.id,this.image);
-    this.cargarUsuario();
+    this.mensaje="Se actualizó tu perfil.";
+    this.mensajeerror(this.mensaje);
+    //this.cargarUsuario();
     
   }
 
@@ -114,7 +144,7 @@ export class PerfilComponent implements OnInit {
     console.log(valor.pss);
     if(valor.pss == valor.pss2){
       this.serviceAuth.cambiarContraseña(valor.pss).then(()=>{
-        this.mensaje="Se cambio de contraseña";
+        this.mensaje="Se actualizó tu perfil.";
         this.mensajeerror(this.mensaje);
   
       });

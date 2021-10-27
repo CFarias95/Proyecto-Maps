@@ -23,11 +23,11 @@
       <ion-card-title>Horarios: </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <app-expandable expandHeight="800px" [expanded]="list2.expanded">                
-        <h3 style="color: aliceblue;">De Lunes a Viernes esta disponible de {{items.lunes}}</h3>
-        <h3 style="color: aliceblue;">Los Sabados de {{items.martes}}</h3>
-        <h3 style="color: aliceblue;" >Los Domingos de {{items.miercoles}}</h3>
-        <h3 style="color: aliceblue;" >Los Feriados de {{items.jueves}}</h3> 
+      <app-expandable expandHeight="800px" [expanded]="true">    
+        <h3 style="color: aliceblue;" >Lunes a Viernes entre {{lunes1}} y {{lunes2}}</h3>
+        <h3 style="color: aliceblue;" >Los Sabados entre {{martes1}} y {{martes2}}</h3>
+        <h3 style="color: aliceblue;" >Los Domingos entre {{miercoles1}} y {{miercoles2}}</h3>
+        <h3 style="color: aliceblue;" >Los Feriados entre {{jueves1}} y {{jueves2}}</h3> 
         <h3 style="color: aliceblue;" >Nota:  {{items.horariotexto}}</h3>   
       </app-expandable>
     </ion-card-content>
@@ -38,7 +38,7 @@
       <ion-card-title>Forma de Pago: </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <app-expandable expandHeight="800px" [expanded]="list3.expanded">                
+      <app-expandable expandHeight="800px" [expanded]="true">                
         <h3 style="color: aliceblue;" >Ten en cuenta que el uso de la electrolinera {{items.formaspago}}</h3> 
       </app-expandable>
     </ion-card-content>
@@ -49,7 +49,7 @@
       <ion-card-title>Tipo conector: </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <app-expandable expandHeight="800px" [expanded]="list4.expanded">                
+      <app-expandable expandHeight="800px" [expanded]="true">                
         <h3 style="color: aliceblue;" >El tipo de conector disponible es {{items.tipoconector}}</h3> 
         <h3 style="color: aliceblue;" >Cuenta con {{items.numeroconectores}} conector(es)</h3> 
       </app-expandable>

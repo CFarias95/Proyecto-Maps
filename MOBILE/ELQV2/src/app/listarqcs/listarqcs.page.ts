@@ -25,7 +25,7 @@ export class ListarqcsPage implements OnInit {
   ngOnInit() {
     this.user.userDetails().subscribe(usuario => {
       this.id = usuario.uid;
-      this.quejasRechazadas();
+      //this.quejasRechazadas();
       this.servicio.getMisQCSCreadas(this.id).subscribe(data=> {
         this.items = data;
         console.log(data);

@@ -39,6 +39,7 @@ export class PerfilPage implements OnInit {
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private authService: AuthenticationService,) { 
+      
     this.usuario.userDetails().subscribe(user=>{
       console.log(user.uid);
       this.id = user.uid;

@@ -54,16 +54,16 @@ export class EditElectrolineraComponent implements OnInit {
   ngOnInit() {
     
     this.ionicForm = this.formBuilder.group({
-      name: ['',Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5)])],
-      direcion: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(90)])],
+      name: ['',Validators.compose([Validators.required, Validators.pattern('[a-zñA-ZÑ0-9áéíóúÁÉÍÓÚ ]*'), Validators.minLength(5)])],
+      direcion: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(200)])],
       referencia: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(50)])],
       tipoconector: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(20)])],
       numeroconectores: ['',Validators.compose([Validators.required, Validators.minLength(1), , Validators.maxLength(3),Validators.pattern('^[0-9]+$')])],
-      lunes:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      martes:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      miercoles:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      jueves:['',Validators.compose([Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern('[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}')])],
-      formaspago:['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(20),Validators.pattern('[a-zA-Z ]*')])],
+      lunes:['',Validators.compose([Validators.required])],
+      martes:['',Validators.compose([Validators.required])],
+      miercoles:['',Validators.compose([Validators.required])],
+      jueves:['',Validators.compose([Validators.required])],
+      formaspago:['',Validators.compose([Validators.required,Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*')])],
       latitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
       longitud:['',Validators.compose([Validators.required, Validators.minLength(5)])],
       estado:['',Validators.compose([Validators.required])],
@@ -182,7 +182,7 @@ export class EditElectrolineraComponent implements OnInit {
     this.image = event.target.files[0];
 
     this.serviceStore.updateImagen(this.ionicForm.value,this.id,this.image);
-    this.mensajeerror('Se actualizo la electrolinera');
+    this.mensajeerror('Se actualizó la electrolinera');
     this.cargarElectrolinera();
     
   }
@@ -192,16 +192,30 @@ export class EditElectrolineraComponent implements OnInit {
     this.isSubmitted = true;
     console.log(this.ionicForm.value);
     console.log(this.ionicForm.valid);
-    
+    console.log(this.ionicForm.value.lunes);
+    if(this.ionicForm.value.horariotexto){
+      console.log(this.ionicForm.value.horariotexto);
+    }else{
+      console.log("Campo hora texto vacío");
+    }
+
+
+    //this.ionicForm.value.horariotexto.set("");
     if(!this.ionicForm.valid) { 
       this.mensaje="Valida que los campos esten completos y correctos";
       this.mensajeerror(this.mensaje);
       return false;
     } else {
-      this.serviceStore.actualizarElectrolinera(this.ionicForm.value, this.id).then(() => {
-        this.mensaje="Se actualizó la Electrolinera.";
+      if(this.ionicForm.value.name.trim() == '' ||  this.ionicForm.value.name.trim() == '' ||  this.ionicForm.value.referencia.trim() == '' ||  this.ionicForm.value.tipoconector.trim() == '' ||  this.ionicForm.value.formaspago.trim() == ''){
+        this.mensaje="Los campos no pueden estar vacíos";
         this.mensajeerror(this.mensaje);
-      });
+      }else{
+        this.serviceStore.actualizarElectrolinera(this.ionicForm.value, this.id).then(() => {
+          this.mensaje="Se actualizó la electrolinera.";
+          this.mensajeerror(this.mensaje);
+        });
+      }
+      
     }
   }
 

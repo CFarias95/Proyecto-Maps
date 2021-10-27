@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { async } from 'rxjs';
+import { AdminService } from 'src/app/services/admin.service';
+import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
 @Component({
@@ -22,12 +26,51 @@ export class NotificacionesCComponent implements OnInit {
   oculto2:string= "";
   pageActual: number= 1;
   filterpost ='';
- 
-  
-  constructor(private serviceStore: NotificacionesService, private router: Router, ) { }
+  id: string;
+  tipo:string;
+
+  constructor(private serviceStore: NotificacionesService, 
+    private router: Router,
+    private alertCtrl: AlertController,
+    private serviceAuth : FirebaseauthService,
+    private Servicio: AdminService,  ) {
+       
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      this.id = user.uid;
+      console.log("ID: "+this.id);
+      if (this.id){
+        this.Servicio.getAdministrador(this.id).subscribe(administrador => {
+          this.tipo = administrador.tipo;
+          console.log("Tipo: "+this.tipo);
+          if(this.tipo.match('Admin')){
+              this.serviceStore.getNotify().subscribe((r)=>{
+                this.notificaciones= r.map(i =>
+                {
+                this.notificaciones = i.payload.doc.data() as {}; 
+                const id = i.payload.doc.id; 
+                return {id, ...this.notificaciones} 
+                }      
+                )
+              })  
+          }else{
+            this.serviceStore.getNotifyUser(this.id).subscribe((r)=>{
+              this.notificaciones= r.map(i =>
+              {
+              this.notificaciones = i.payload.doc.data() as {}; 
+              const id = i.payload.doc.id; 
+              return {id, ...this.notificaciones} 
+              }      
+              )
+            })
+          }
+        });
+
+      }
+    }
 
   ngOnInit() {
-    this.obtenerNotify();
+    
     this.MyNotificationForm = new FormGroup({
       tituloF: new FormControl('',[Validators.required,Validators.maxLength(20)]),
       textoF: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(30)]),
@@ -95,24 +138,59 @@ export class NotificacionesCComponent implements OnInit {
 
    // CREAR UN METODO PARA OBTENER TODAS LAS NOTIFICACIONES
    public obtenerNotify() {
-    this.serviceStore.getNotify().subscribe((r)=>{
-      this.notificaciones= r.map(i =>
-       {
-       this.notificaciones = i.payload.doc.data() as {}; 
-       const id = i.payload.doc.id; 
-       return {id, ...this.notificaciones} 
-       }      
-      )
-    })  
+
+    console.log("Tipo de usuario actual: "+this.tipo);
+
+     if(this.tipo.match('Admin')){
+
+        this.serviceStore.getNotify().subscribe((r)=>{
+          this.notificaciones= r.map(i =>
+          {
+          this.notificaciones = i.payload.doc.data() as {}; 
+          const id = i.payload.doc.id; 
+          return {id, ...this.notificaciones} 
+          }      
+          )
+        })  
+     }else{
+      this.serviceStore.getNotifyUser(this.id).subscribe((r)=>{
+        this.notificaciones= r.map(i =>
+        {
+        this.notificaciones = i.payload.doc.data() as {}; 
+        const id = i.payload.doc.id; 
+        return {id, ...this.notificaciones} 
+        }      
+        )
+      })
+     }
+    
   }
 
   //ELIMINAR notificacion
    public eliminarNotify(documentId) {
     this.serviceStore.removeNotify(documentId).then(() => {
       console.log('Documento eliminado!');
+      this.mensajeerror("Se elimino la notificación.");
     }, (error) => {
       console.error(error);
     });
+  }
+
+  async mensajeerror(mensajetxt: string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Mensaje',
+      message: mensajetxt,
+      buttons: [
+       {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   // METODO PARA CARGAR LOS DATOS EN LOS CAMPOS DEL FORMULARIO 

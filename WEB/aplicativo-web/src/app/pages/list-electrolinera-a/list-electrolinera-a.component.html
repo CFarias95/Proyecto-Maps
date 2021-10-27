@@ -1,4 +1,4 @@
- 
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan">Este módulo te permite gestionar las electrolineras registradas</h3>
 <div id="pestanas">
   <ul>
      <li><a (click)="GetTodos()">Creadas</a></li>
@@ -7,7 +7,7 @@
   </ul>
 </div>
 
-  <h1 class="centrarmensaje">Lista de Electrolineras Activas</h1>
+  <h2 class="centrarmensaje">Lista de Electrolineras Activas</h2>
   <input type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
 <br>
 <table class="table table-striped" style="display: table;">
@@ -15,22 +15,19 @@
     <tr>
       <th scope="col" >#</th>
       <th scope="col" >Nombre</th>
-      <th scope="col" >Estado</th>
-      <th scope="col" >Ver</th>
-      <th scope="col" >Editar</th>
-      <th scope="col" >Eliminar</th>
+      <th scope="col" >Estado Electrolinera</th>
+      <th scope="col" >Acciones</th>
+
     </tr>
   </thead>
   <ng-container *ngIf="!electrolinera || electrolinera.length == 0">
-    <p class="centrarmensaje">No existen Datos a mostrar.</p>
+    <p class="centrarmensaje">No existen datos a mostrar.</p>
   </ng-container>
-  <tbody *ngFor="let electro of electrolinera | filtere: filterpost | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index">
-    <td  *ngIf="electro.estado == estado" style="text-align: center;"> <img src="../../../assets/img/R8447f75e4af9573eb61ef5175cce3821.png" width = "50px"></td>
-    <td  *ngIf="electro.estado == estado" style="text-align: center;">{{electro.name}}</td>
-    <td  *ngIf="electro.estado == estado" style="text-align: center;">{{electro.estado}}</td>
-    <td  *ngIf="electro.estado == estado" style="text-align: center;"><ion-button  button (click)="reEditElectrolinera(electro.id)" color="success" >X</ion-button></td>
-    <td  *ngIf="electro.estado == estado" style="text-align: center;"><ion-button  button (click)="reEditElectrolinera(electro.id)" color="primary" >X</ion-button></td>
-    <td  *ngIf="electro.estado == estado" style="text-align: center;"><ion-button  button (click)="eliminarElectrolinera(electro.id)" color="danger">X</ion-button></td>
+  <tbody *ngFor="let electro of electrolinera | filtere: filterpost | paginate: { itemsPerPage: 7, currentPage: pageActual };let indice=index">
+    <td   style="text-align: center;"> <img src="../../../assets/img/R8447f75e4af9573eb61ef5175cce3821.png" width = "50px"></td>
+    <td   style="text-align: center; padding-top: 1%;">{{electro.name}}</td>
+    <td   style="text-align: center; padding-top: 1%;">{{electro.estado}}</td>
+    <td   style="text-align: center;"><ion-button  button (click)="reEditElectrolinera(electro.id)" color="success" >VER/EDITAR</ion-button><ion-button  button (click)="eliminarElectrolinera(electro.id)" color="danger">DESACTIVAR</ion-button></td>
   </tbody>
   
   </table>

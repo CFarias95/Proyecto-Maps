@@ -35,11 +35,10 @@ export class NotificacionesEditComponent implements OnInit {
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)])],
-      titulo: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zA-Z ]*')])],
-      texto: ['',Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(50)])],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zñA-ZÑ0-9áéíóúÁÉÍÓÚ%$ ]*'), Validators.minLength(3)])],
+      titulo: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zñA-ZÑ0-9áéíóúÁÉÍÓÚ%$ ]*')])],
+      texto: ['',Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(100)])],
       fecha: ['',Validators.compose([Validators.required])],
-      hora: ['', Validators.compose([Validators.required])],
     })
   }
   atras(){
@@ -57,9 +56,13 @@ export class NotificacionesEditComponent implements OnInit {
 
     this.isSubmitted = true;
     if(this.ionicForm.valid){
-      this.service.updateNotifi(this.id,this.ionicForm.value);
-      this.mensajeerror('Se actualizo la notificacion');
-      this.router.navigate(['panel/notify']);
+      if(this.ionicForm.value.name.trim() == '' || this.ionicForm.value.titulo.trim() == '' || this.ionicForm.value.texto.trim() == '' ){
+        this.mensajeerror('Los campos no pueden estar vacíos');
+      }else{
+        this.service.updateNotifi(this.id,this.ionicForm.value);
+        this.mensajeerror('Se actualizo la notificación');
+        this.router.navigate(['panel/notify']);
+      }
     }else{
       this.mensajeerror('Verifica los campos');
     }
@@ -69,7 +72,7 @@ export class NotificacionesEditComponent implements OnInit {
   async subirImagen(event: any): Promise<void> {
     this.image = event.target.files[0];
     this.service.updateImagen(this.ionicForm.value,this.id,this.image);
-    this.mensajeerror('Se actualizo la notificacion');
+    this.mensajeerror('Se actualizó la notificación');
     this.router.navigate(['panel/notify']);
   }
 

@@ -99,8 +99,6 @@ export class MapaPage implements OnInit {
         }
       );
       
-    
-      
       this.geolocation.getCurrentPosition().then((resp) => {
         console.log("Coordenates: "+resp.coords.latitude +" - "+ resp.coords.longitude );
         // resp.coords.latitude

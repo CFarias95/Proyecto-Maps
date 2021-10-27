@@ -15,5 +15,4 @@ export class FilterapPipe implements PipeTransform {
     return resultPosts;
   }
 
-
 }

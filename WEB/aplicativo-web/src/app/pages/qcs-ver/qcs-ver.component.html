@@ -1,38 +1,38 @@
-<h1>Queja, Comentario y/o Sugerencia Detallada</h1>
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan">Este módulo te permite ver el detalle de la queja, comentario o sugerencia</h3>
 <form  novalidate > 
-  <ion-item lines="full" color="dark">
+  <ion-item lines="full" >
     <ion-label position="stacked">Tipo</ion-label>
     <ion-label >{{quejas.Tipo}}</ion-label>
   </ion-item>
-
-  <ion-item lines="full" color="dark">
-    <ion-label position="stacked">Origen</ion-label>
+  <br>
+  <ion-item lines="full" >
+    <ion-label position="stacked">Electrolinera</ion-label>
     <ion-label>{{quejas.Origen}}</ion-label>
   </ion-item>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Fecha</ion-label>
-    <ion-label >{{quejas.Fecha}}</ion-label>
+    <ion-label >{{quejas.Fecha | date:'YYYY-MM-dd'}}</ion-label>
   </ion-item>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Estado Actual</ion-label>
     <ion-label >{{quejas.Estado}}</ion-label>
   </ion-item>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Contenido</ion-label>
     <ion-label class="ion-text-wrap">{{quejas.Texto}}</ion-label>
   </ion-item>
-
-  <ion-item lines="full" color="dark" *ngIf="quejas.Estado == estado">
+  <br>
+  <ion-item lines="full"  *ngIf="quejas.Estado == estado">
     <ion-label position="stacked">Motivo Rechazo:</ion-label>
     <ion-label class="ion-text-wrap">{{quejas.Razon}}</ion-label>
   </ion-item>
 
   <ion-row>
     <ion-col>
-      <ion-button  (click)="atras()" color="success" expand="full" >Atras</ion-button>
+      <ion-button  (click)="atras()" color="success" expand="full" >Regresar</ion-button>
     </ion-col>
   </ion-row>
 

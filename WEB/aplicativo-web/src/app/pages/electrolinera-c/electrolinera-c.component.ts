@@ -17,6 +17,8 @@ export class ElectrolineraCComponent implements OnInit {
   mensaje:string;
   id: string;
   public image: any;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
   
   constructor(
     private serviceStore: FirebasestorageService,
@@ -29,41 +31,51 @@ export class ElectrolineraCComponent implements OnInit {
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
-      name: ['',Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5)])],
+      name: ['',Validators.compose([Validators.required, Validators.pattern('[a-zñA-ZÑ0-9áéíóúÁÉÍÓÚ ]*'), Validators.minLength(5)])],
       direcion: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(50)])],
-      phone: ['',Validators.compose([Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(9), , Validators.maxLength(10)])],
+      phone: ['',Validators.compose([Validators.required,Validators.pattern('[0-9]*'),Validators.minLength(9),Validators.maxLength(10)])],
       pass: ['',Validators.compose([Validators.required, Validators.minLength(5), , Validators.maxLength(50)])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
    });
   }
 
   async submitForm(){
+
     this.isSubmitted = true;
-    //console.log(this.ionicForm.value);
-    //console.log(this.ionicForm.valid);
     if(this.ionicForm.valid)
     {
       let {email,pass,phone,direcion,name} = this.ionicForm.value;
       //console.log(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF);
-
-      const user = await this.serviceAuth.register(email,pass,'','','',phone,'Electro',this.image);
-      if (user) {
-        console.log(user.uid);
-        const electro = this.serviceStore.CrearElectrolinera(name,direcion,'','','','','','','','','','','','',user.uid,this.image).then(() => {
-          this.mensaje="Se registro la Electrolinera en el sistema";
-          this.presentAlertConfirm(this.mensaje);
-        });
-
-        const isVerified = this.serviceAuth.isEmailVerified(user);
+      if(name.trim() == '' || pass.trim() == '' || direcion.trim() == '' ){
+        this.mensaje="Los campos no pueden estar vacíos";
+        this.presentAlertConfirm(this.mensaje);
       }else{
-        if(this.serviceAuth.errores=="The email address is already in use by another account."){
-          //console.log(this.authSvc.errores);}
-          this.mensaje="El correo ya esta usado por otro usuario.";
-          this.presentAlertConfirm(this.mensaje);
+
+        name = name.trim();
+        pass = pass.trim();
+        direcion = direcion.trim();
+
+        const user = await this.serviceAuth.register(email,pass,name,'No definido','No definido',phone,'Electro',this.image);
+
+        if (user) {
+          //console.log(user.uid);
+          this.serviceStore.CrearElectrolinera(name,direcion,'','','','','','','','','','','','',user.uid,this.image).then(() => {
+            this.mensaje="Se envió un mensaje de confirmación al correo ingresado.";
+            this.presentAlertConfirm(this.mensaje);
+            this.router.navigate(['panel/list-electrolinera']);
+          });
+        }else{
+          if(this.serviceAuth.errores.code=="auth/email-already-in-use"){
+            //console.log(this.authSvc.errores);}
+            this.mensaje="El correo ya esta usado por otro usuario.";
+            this.presentAlertConfirm(this.mensaje);
+            this.router.navigate(['panel/electro1']);
+          }else{
+            this.mensaje=this.serviceAuth.errores.message;
+            this.presentAlertConfirm(this.mensaje);
+          }          
         }
-        
       }
-      this.router.navigate(['panel/electro1'])
     }
     else
     {
@@ -96,6 +108,11 @@ export class ElectrolineraCComponent implements OnInit {
     
     this.router.navigate(['panel/electro1']);
      
+  }
+
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
   }
 
   get errorControl() {

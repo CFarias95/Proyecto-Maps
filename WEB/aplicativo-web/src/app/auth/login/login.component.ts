@@ -13,6 +13,9 @@ import { AdminService } from 'src/app/services/admin.service';
 export class LoginComponent implements OnInit {
 
   myFormUser: FormGroup;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
   user: any
   constructor(
     private serviceAuth : FirebaseauthService,
@@ -30,21 +33,26 @@ export class LoginComponent implements OnInit {
   async loginUser(){
 
     let {usuarioF,passwordF} = this.myFormUser.value;
-    this.user = await this.serviceAuth.login(usuarioF,passwordF)
-    if(this.user){
-      console.log(this.user.displayName);
-      console.log(this.user.photoURL);
-      
-      this.router.navigate(['panel'])
-    }else{
-      this.presentAlert();
-    } 
+    this.serviceAuth.login(usuarioF,passwordF).then(res=>{
+      console.log(res);
+       if(res){
+        console.log(res.displayName);
+        console.log(res.photoURL);
+        //this.router.navigate(['panel'])
+        window.location.replace('panel');
+      }else{
+        this.presentAlert();
+      } 
+    });
+    // console.log(this.user);
+   
   }
+
   async presentAlert() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '--background: #fff',
       header: 'Error',
-      message: 'Verifica tu usuario y/o Contraseña',
+      message: 'Verifica tu usuario y/o contraseña',
       buttons: ['OK']
     });
 
@@ -54,23 +62,74 @@ export class LoginComponent implements OnInit {
     console.log('onDidDismiss resolved with role', role);
   }
 
+  home(){
+    this.router.navigate(['home'])
+  }
+
   //metodo para cambiar la contraseña
   async cambiarcontra(){
 
-    let {usuarioF} = this.myFormUser.value;
-    if(usuarioF == ''){
-      this.mensajeerror("Ingresa el correo en el campo para restablecer contraseña");
-    }else{
-      this.Servicio.resetPassword(usuarioF).then(() => {
-        this.mensajeerror("Se envió un correo para cambiar la contraseña. ");
-        });
-    }
+    // let {usuarioF} = this.myFormUser.value;
+    // if(usuarioF == ''){
+    //   this.mensajeerror("Ingresa el correo en el campo para restablecer contraseña");
+    // }else{
+    //   this.Servicio.resetPassword(usuarioF).then(() => {
+    //     this.mensajeerror("Se envió un correo para cambiar la contraseña. ");
+    //     });
+    // }
+    let alert = this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Recuperar Contraseña',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Ingresa tú correo'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('You Clicked on Cancel');
+          }
+        },
+        {
+          text: 'Restablecer',
+          handler: data => {
+            if (data.email != '') {
+              console.log(data.email);
+              this.Servicio.resetPassword(data.email).then(() => {
+                console.log('Revisa tú correo!');
+               this. mensajeerror('Revisa tú correo!');
+              }, (error) => {
+                console.error(error);
+                this. mensajeerror('Ocurrió un error, intentalo más tarde');
+              });
+
+            } else {
+              // invalid login
+              this. mensajeerror('Debe ingresar un correo');
+              return false;
+            }
+          }
+        }
+      ]
+    });
     
+    (await alert).present();
+
   }
+ // mostrar ocultar texto contraseñas
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+    
   //mostramos mensajes
   async mensajeerror(mensajetxt: string) {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: 'background: #fff',
       header: 'Mensaje',
       message: mensajetxt,
       buttons: [

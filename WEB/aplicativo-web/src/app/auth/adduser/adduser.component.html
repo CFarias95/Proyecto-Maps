@@ -1,22 +1,23 @@
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan">Este módulo te permite registrar un nuevo perfil administrador del sistema web</h3>
 <form [formGroup]="ionicForm" (ngSubmit)="registerUser()" novalidate > 
-  
-  <ion-item lines="full" color="dark">
+
+  <ion-item lines="full" >
     <ion-label position="stacked">Nombres</ion-label>
-    <ion-input formControlName="name" type="text"></ion-input>
+    <ion-input clearInput formControlName="name" type="text"></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
     Nombres requeridos.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
-    Minimo 2 caracteres.
+    Mínimo  2 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.pattern">
     Solo se permiten letras.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Apellidos</ion-label>
-    <ion-input formControlName="apellido" type="text" ></ion-input>
+    <ion-input clearInput formControlName="apellido" type="text" ></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.apellido.errors?.required">
     Apellidos requeridos.
@@ -24,24 +25,24 @@
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.apellido.errors?.pattern">
     Solo se permiten letras.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Direccion</ion-label>
-    <ion-input formControlName="direccion" type="direccion"></ion-input>
+    <ion-input clearInput formControlName="direccion" type="direccion"></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.direccion.errors?.required">
     Direccion requerida.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.apellido.errors?.minlength">
-    Minimo 2 caracteres.
+    Mínimo  2 caracteres.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.apellido.errors?.maxlength">
-    Maximo 30 caracteres.
+    Máximo 30 caracteres.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Teléfono</ion-label>
-    <ion-input maxlength="10" formControlName="mobile" type="text" ></ion-input>
+    <ion-input clearInput maxlength="10" formControlName="mobile" type="text" ></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.required">
     Su números  de teléfono es Requerido.
@@ -50,15 +51,15 @@
     Solo se permiten números.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.minlength">
-    Minimo 9 números.
+    Mínimo  9 números.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.maxlength">
-    Maximo 10 números.
+    Máximo 10 números.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Correo</ion-label>
-    <ion-input formControlName="email" type="email" ></ion-input>
+    <ion-input clearInput formControlName="email" type="email" ></ion-input>
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
     Email requerido.
@@ -66,26 +67,31 @@
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
     Email invalido.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Contraseña</ion-label>
-    <ion-input formControlName="pass" type="text" ></ion-input>
+    <ion-input clearInput formControlName="pass" [type]="passwordType" ></ion-input>
+    <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+           
   </ion-item>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.pass.errors?.required">
     Contraseña requerida.
   </span>
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.pass.errors?.minlength">
-    Contraseña invalida.
+    Contraseña incorrecta.
   </span>
-
-  <ion-item lines="full" color="dark">
+  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.pass.errors?.pattern">
+    Contraseña incorrecta, no se permiten espacios en blanco.
+  </span>
+  <br>
+  <ion-item lines="full" >
     <ion-label position="stacked">Foto</ion-label>
-    <ion-input formControlName="foto" type="file" accept=".png, .jpg" (change)="enviarimagen($event)" style="color:black"></ion-input>
+    <ion-input clearInput formControlName="foto" type="file" accept=".png, .jpg" (change)="enviarimagen($event)" ></ion-input>
   </ion-item>
-
+  <br>
   <ion-row>
     <ion-col>
-      <ion-button expand="full"  type="submit" color="success" >Guardar</ion-button>
+      <ion-button expand="full"  type="submit" color="success" >Registrar</ion-button>
     </ion-col>
   </ion-row>
 

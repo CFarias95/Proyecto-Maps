@@ -24,7 +24,8 @@
       <ion-searchbar type="text" style=" --color:#18585a;--background:rgba(245, 245, 245, 0.705); text-align: left; --icon-color:#18585a; --border-radius:30px" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"></ion-searchbar>
     </ion-col>
     <ion-col size="2">
-      <ion-select  [(ngModel)]="filterpost1" name="filterpost1" interface="popover"  style=" color:#ecf3f3;--background:rgba(245, 245, 245, 0.705); text-align: center;">
+      
+      <ion-select selectedText="." [(ngModel)]="filterpost1" name="filterpost1" interface="popover"  style=" color:#ecf3f3;--background:rgba(245, 245, 245, 0.705); text-align: center;">
         <ion-select-option value="">Todo</ion-select-option>
         <ion-select-option value="Norte">Norte</ion-select-option>
         <ion-select-option value="Centro">Centro</ion-select-option>
@@ -37,7 +38,7 @@
     <p>No existe registros.</p>
   </ion-item>
 
-  <ion-card (click)="expandItem(item)" *ngFor="let item of (items | filterep: filterpost) | filterep: filterpost1 ">
+  <ion-card (click)="expandItem(item)" *ngFor="let item of items | filterep: filterpost: filterpost1 ">
     <ion-item>
       <ion-avatar slot="start">
         <img [src]="item.imagen" alt="imagen" *ngIf="item.imagen">

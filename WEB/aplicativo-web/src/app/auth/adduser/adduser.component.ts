@@ -19,6 +19,8 @@ export class AdduserComponent implements OnInit {
   mensaje:string;
   id: string;
   public image: any;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
   
   constructor(
     public formBuilder: FormBuilder, 
@@ -31,12 +33,12 @@ export class AdduserComponent implements OnInit {
   ngOnInit() {
     
     this.ionicForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)])],
-      apellido: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zA-Z ]*')])],
+      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*'), Validators.minLength(3)])],
+      apellido: ['',Validators.compose([Validators.required,  Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*')])],
       direccion: ['',Validators.compose([Validators.required, Validators.minLength(3),Validators.maxLength(30)])],
       mobile: ['',Validators.compose([Validators.required, Validators.pattern('^[0-9]+$'),Validators.maxLength(10), Validators.minLength(9)])],
       email: ['', Validators.compose([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
-      pass: ['', Validators.compose([Validators.required,  Validators.minLength(7)])],
+      pass: ['', Validators.compose([Validators.required,  Validators.minLength(7),Validators.pattern('[a-zñA-ZÑ0-9!,$%&/()=?¿_@.]*')])],
     })
   }
   //enviar imagen
@@ -63,41 +65,43 @@ export class AdduserComponent implements OnInit {
     await alert.present();
   }
 
-  private redirectUser(isVerified: boolean): void {
-    if (isVerified) {
-      this.router.navigate(['panel']);
-    } else {
-      this.mensaje="Se envió un mensaje de confirmación al correo ingresado.";
-      this.presentAlertConfirm(this.mensaje);
-      this.router.navigate(['/login']);
-     
-    }
-  }
-
+  
   async registerUser(){
 
     this.isSubmitted = true;
-    console.log(this.ionicForm.value);
-    console.log(this.ionicForm.valid);
-
     if(this.ionicForm.valid)
     {
       let {name,apellido,direccion,email,pass,mobile} = this.ionicForm.value;
       //console.log(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF);
-
-      const user = await this.serviceAuth.register(email,pass,name,apellido,direccion,mobile,this.image);
-      if (user) {
-        const isVerified = this.serviceAuth.isEmailVerified(user);
-        this.redirectUser(isVerified);
+      if(name.trim() == '' || apellido.trim() == '' || direccion.trim() == '' || mobile.trim() == ''){
+        this.mensaje="Los campos no pueden estar vacíos.";
+        this.presentAlertConfirm(this.mensaje);
       }else{
-        if(this.serviceAuth.errores=="The email address is already in use by another account."){
-          //console.log(this.authSvc.errores);}
-          this.mensaje="El correo ya esta usado por otro usuario.";
-          this.presentAlertConfirm(this.mensaje);
-        }
+
+        name = name.trim();
+        apellido = apellido.trim();
+        direccion = direccion.trim();
+
+        const user = this.serviceAuth.register(email,pass,name,apellido,direccion,mobile,'Admin',this.image);
         
-      }
-      this.router.navigate(['/login'])
+        if (user) {
+
+          this.mensaje="Se envió un mensaje de confirmación al correo ingresado.";
+          this.presentAlertConfirm(this.mensaje);
+          this.router.navigate(['panel/perfiles']);
+          
+        }else{
+          if(this.serviceAuth.errores.code=="auth/email-already-in-use"){
+            //console.log(this.authSvc.errores);}
+            this.mensaje="El correo ya esta usado por otro usuario.";
+            this.presentAlertConfirm(this.mensaje);
+            this.router.navigate(['panel/perfiles']);
+          }else{
+            this.mensaje=this.serviceAuth.errores.message;
+            this.presentAlertConfirm(this.mensaje);
+          }        
+        }      
+      }     
     }
     else
     {
@@ -106,6 +110,11 @@ export class AdduserComponent implements OnInit {
       this.presentAlertConfirm(this.mensaje);
       return false;
     }
+  }
+
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
   }
 
   get errorControl() {

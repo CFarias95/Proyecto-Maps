@@ -41,6 +41,10 @@ export class NotificacionesService {
     return this.db.collection('notificaciones').snapshotChanges();
   }
 
+  getNotifyUser(id:string){
+    return this.db.collection('notificaciones', ref => ref.where('userID','==', id)).snapshotChanges();
+  }
+
 //recuperar una notificacion especifica
   getNotifyId(documentId: string){
     return this.notificacionesCollection.doc<Notificaciones>(documentId).valueChanges();
@@ -53,7 +57,7 @@ export class NotificacionesService {
 
 
 //agregar una notificacion
-  addNotify(data, image?: FileI){
+  addNotify(data, id: string,image?: FileI){
     this.filePath = `notificaciones/${data.titulo}`;
     const fileRef = this.storage.ref(this.filePath);
     if(image){
@@ -68,10 +72,10 @@ export class NotificacionesService {
               titulo: data.titulo,
               texto : data.texto,
               fecha : data.fecha,
-              hora: data.hora,
               name: data.name,
               tipo: data.tipo,
               estado : "Activo",
+              userID : id,
               imagen : this.photoURL
             });
           });
@@ -82,10 +86,10 @@ export class NotificacionesService {
         titulo: data.titulo,
         texto : data.texto,
         fecha : data.fecha,
-        hora: data.hora,
         name: data.name,
         tipo: data.tipo,
         estado : "Activo",
+        userID : id,
         imagen : ""
       });
     }

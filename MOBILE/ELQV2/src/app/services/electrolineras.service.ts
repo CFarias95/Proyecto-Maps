@@ -45,7 +45,7 @@ export class ElectrolinerasService {
     return this.firestore.collection('electrolineras').snapshotChanges();
   }
 
-  public getElectrolinerasActivas(userid : string){
+  public getElectrolinerasActivas(){
    
     this.electrolineraCollection2 = this.firestore.collection<Electrolinera>('electrolineras', ref => ref.where('estado', '==', 'Activo'));
     this.Electrolineras = this.electrolineraCollection2.snapshotChanges().pipe(
@@ -54,7 +54,7 @@ export class ElectrolinerasService {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
         
-          return id;
+          return {id, ...data};
         });
       })
     );

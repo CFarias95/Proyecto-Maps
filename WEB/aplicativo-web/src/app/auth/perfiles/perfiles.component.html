@@ -1,3 +1,6 @@
+
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan"> Este módulo te permite gestionar los usuarios registrados en el sistema web</h3>
+
 <div id="pestanas">
   <ul>
      <li class="activa"><a>Todos</a></li>
@@ -6,25 +9,27 @@
   </ul>
 </div>
 
-<h1>Usuarios</h1>
+<h2>Usuarios</h2>
 
-<input type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
+<input style="height:30px;" type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
 <br>
 <table class="table table-striped" style="display: table;">
   <thead>
     <tr>
       <th scope="col" >Nombres</th>
-      <th scope="col" >Estado</th>
-      <th scope="col" >Accion</th>
+      <th scope="col" >Estado Perfil</th>
+      <th scope="col" >Tipo</th>
+      <th scope="col" >Acciones</th>
     </tr>
   </thead>
-  <ng-container *ngIf="!usuario || usuario.length == 0">
+  <ng-container *ngIf="usuario.length == 0">
     <p class="centrarmensaje">No existen usuarios a mostrar.</p>
   </ng-container>
   <tbody *ngFor="let user of usuario | filter: filterpost | paginate: { itemsPerPage: 10, currentPage: pageActual };let indice=index">
-    <td *ngIf="user.uid != id && user.nombres != nombre" style="text-align: center;">{{user.nombres}}</td>
-    <td *ngIf="user.uid != id && user.nombres == nombre" style="text-align: center; background-color: palegoldenrod;">No Definido</td>
-    <td *ngIf="user.uid != id" style="text-align: center;">{{user.estado}}</td>
+    <td *ngIf="user.uid != id && user.direccion != nombre" style="text-align: center; padding-top: 10px;">{{user.nombres}}</td>
+    <td *ngIf="user.uid != id && user.direccion == nombre" style="text-align: center; padding-top: 10px; background-color: palegoldenrod;">El usuario {{user.nombres}} no ha actualizado su información</td>
+    <td *ngIf="user.uid != id" style="text-align: center; padding-top: 10px;">{{user.estado}}</td>
+    <td *ngIf="user.uid != id" style="text-align: center; padding-top: 10px;">{{user.tipo}}</td>
     <td *ngIf="user.uid != id && user.estado == activo"style="text-align: center;"><ion-button  button (click)="dehabilitar(user.uid)" color="success" >Desahilitar</ion-button></td>
     <td *ngIf="user.uid != id && user.estado != activo" style="text-align: center;"><ion-button  button (click)="habilitar(user.uid)" color="success" >Habilitar</ion-button></td>
   </tbody>

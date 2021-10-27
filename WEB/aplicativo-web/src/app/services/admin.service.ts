@@ -36,8 +36,18 @@ export class AdminService {
   }
 
   //recuperar datos del admin
-  getAdministradores(){
-    return this.usuariosCollection.valueChanges();
+  getAdministradores(id:string){
+    return this.db.collection<DatosUsuario>('users', ref => ref.where('uid','!=',id)).valueChanges();
+  } 
+
+  //recuperar datos del admin
+  getAdministradoresActivos(id:string){
+    return this.db.collection<DatosUsuario>('users', ref => ref.where('estado','==','Activo').where('uid','!=',id)).valueChanges();
+  } 
+
+   //recuperar datos del admin
+   getAdministradoresInactivos(id:string){
+    return this.db.collection<DatosUsuario>('users', ref => ref.where('estado','==','Inactivo').where('uid','!=',id)).valueChanges();
   } 
 
   //actualizar admin
@@ -65,7 +75,7 @@ export class AdminService {
     this.filePath = `perfiles/${id}`;
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, image);
-    task.snapshotChanges()
+    return task.snapshotChanges()
       .pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(urlImage => {

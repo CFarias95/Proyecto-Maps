@@ -25,30 +25,37 @@ export class SidebarComponent implements OnInit {
     private serviceAuth : FirebaseauthService, 
     private serviceElectro : FirebasestorageService, 
     private router: Router, 
-    private Servicio: AdminService) { }
+    private Servicio: AdminService ) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.uid= user.uid;
+      if(user){
+        console.log("Usuario encontrado");
+        this.Servicio.getAdministrador(this.uid).subscribe(administrador => {
+          this.usuario = administrador;
+          this.imagen = administrador.foto;
+          this.nombre = administrador.nombres;
+          this.tipo = administrador.tipo;
+          console.log(this.tipo);
+          if(this.tipo != 'Admin'){
+            this.serviceElectro.MyElectrolinera(this.uid).subscribe(electro =>{
+              //console.log(electro);
+              this.uidElectro = electro[0];
+              console.log(this.uidElectro)
+            })
+            
+          }
+        
+        });
+      }else{
+        console.log("Usuario no encontrado");
+        this.usuario = new Array[0];
+        this.imagen = "";
+        this.nombre = ""
+        this.tipo = ""
+      }
+     }
 
-  ngOnInit(): void {
-    
-    this.serviceAuth.getCurrentUser().then(r=>{
-      this.uid = r.uid;
-      //console.log(this.uid);
-      this.Servicio.getAdministrador(this.uid).subscribe(administrador => {
-        this.usuario = administrador;
-        this.imagen = administrador.foto;
-        this.nombre = administrador.nombres;
-        this.tipo = administrador.tipo;
-        console.log(this.tipo);
-        if(this.tipo != 'Admin'){
-          this.serviceElectro.MyElectrolinera(this.uid).subscribe(electro =>{
-            //console.log(electro);
-            this.uidElectro = electro[0];
-            console.log(this.uidElectro)
-          })
-          
-        }
-      
-      });
-    });
+  ngOnInit(){
 
   }
  
@@ -95,7 +102,12 @@ export class SidebarComponent implements OnInit {
 
   salir(){
 
-    this.router.navigate(['login']);
+    this.imagen = '';
+    this.nombre = '';
+    this.tipo = '';
+    this.serviceAuth.logout();
+    //this.router.navigate(['login']);
+    window.location.replace('/login');
   }
 
 }

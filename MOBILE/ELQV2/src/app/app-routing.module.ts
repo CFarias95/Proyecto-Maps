@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-
+    canActivate: [NoAuthGuard],
   },
   {
     path: 'mapa',
@@ -85,9 +85,6 @@ const routes: Routes = [
     loadChildren: () => import('./listar-su/listar-su.module').then( m => m.ListarSuPageModule),
     canActivate: [AuthGuard],
   },
-
-
-
 
 ];
 

@@ -1,77 +1,88 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="secondary" (click)="reElectroC()">
+    <ion-buttons slot="secondary" (click)="reElectroC()" >
       Iniciar Sesion
       <ion-button (click)="reElectroC()">
         <ion-icon slot="icon-only" name="person-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Electrolineras</ion-title>
+    <ion-title >Electrolineras</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<br>
 <ion-content [fullscreen]="true" class="homepage">
   
-  <ion-slides>
-    <ion-slide>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide >
       <div class="slide">
-        <img src="../../assets/img/Green and Black Refined Sports Football Event Banner (1).jpg"/>
+        <img src="../../assets/img/1.png" />
       </div>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide >
       <div class="slide">
-        <img src="../../assets/img/Green and Black Refined Sports Football Event Banner.jpg"/>
+        <img src="../../assets/img/2.png" />
       </div>
       
     </ion-slide>
 
-    <ion-slide>
-      <img src="./slide-3.png" />
+    <ion-slide class="slide">
+      <img src="../../assets/img/3.png"  />
     </ion-slide>
 
   </ion-slides>
 
+  <br>
+
  <section class="page-content">
   <h1>Todo lo que necesitas saber sobre los puntos de recarga</h1>
  <h2 class="light-green"> <img alt="surtidos puntos" width="42" height="42" src="https://cfassets.electromaps.com/img/surtidor-home.png">
-  <br>Localiza los puntos de carga para vehículos eléctricos de uso público</h2>
+  <br>Localiza los puntos de recarga para vehículos eléctricos de uso público</h2>
+
+  <agm-map disableDefaultUI="false" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" style="height: 300px;">
+    <agm-marker 
+        *ngFor="let m of lugares"
+        [latitude]="m.latitud"
+        [longitude]="m.longitud">
+    </agm-marker>
+  </agm-map>
+
   <section class="homemapa">
-    <img src="../../assets/img/maps.png" width="80%">
   </section> 
+
   <div class="container">
-    <h1> Servicios</h1>
+    <h1>Servicios</h1>
     <div class="row">
       <div class="col">
-        <ion-card>
-          <img src="../../assets/img/puntodecarga.jpg" />
+        <ion-card >
+          <img src="../../assets/img/puntodecarga.jpg" width="500px" height="278px" />
           <ion-card-header>
             <ion-card-title>Encuentra la mejor opción</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            Elige entre los diferentes puntos de carga, segun tu ubicacion actual puedes escoger el punto de carga que mas te conviene.
+            Elige entre los diferentes puntos de recarga, segun tú ubicación actual puedes escoger el punto de carga que más te conviene.
           </ion-card-content>
         </ion-card>
       </div>
       <div class="col">
-        <ion-card>
-          <img src="../../assets/img/google-maps_2.jpg" />
+        <ion-card >
+          <img src="../../assets/img/google-maps_2.jpg" width="500px" height="300px" />
           <ion-card-header>
             <ion-card-title>Buscar puntos de recarga</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            Localiza los puntos de carga mas cercanos a tu posicion sin tener que estar saliendo de la App.
+            Localiza los puntos de recarga más cercanos a tú posición  sin tener que estar saliendo de la App.
           </ion-card-content>
         </ion-card>
       </div>
       <div class="col">
         <ion-card>
-          <img src="../../assets/img/5cf726706d14f.jpeg" />
+          <img src="../../assets/img/5cf726706d14f.jpeg" width="500px" height="300px"/>
           <ion-card-header>
             <ion-card-title>Datos</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            Obtener informacion sobre los puntos de carga en un solo lugar.
+            Obtener información sobre los puntos de recarga en un solo lugar.
           </ion-card-content>
         </ion-card>
       </div>
@@ -86,52 +97,18 @@
       <div class="col">
         <img src="../../assets/img/Facil de instalar (3).png">
       </div>
-      <div class="row">
-        <div class="col-xs-12 app-bottons">
-
-            <a>
-              <img src="https://cfassets.electromaps.com/img/app/android.png"  style="width: 150px;" alt="app android">
-            </a>
-    
-          
-        </div>
-      </div>
-      
-      
-      
+        
     </div>
   </section>
  </section> 
   
   <footer>
     <div class="container footer-middle">
-      <!-- <div class = "row">
-        <div class ="col">
-          <div class="footer-pad">
-            <h4>Realizado por:</h4>
-            <ul class="list-unstyled">
-              <li>Estefania Aguilar</li>
-              <li>Carlos Farias</li>
-            </ul>
-          </div>
-        </div>
-        <div class ="col">
-          <div class="footer-pad">
-            <h4>Contactos:</h4>
-            <ul class="list-unstyled">
-              <li>Estefania Aguilar - 0987456321</li>
-              <li>Carlos Farias - 1478523698</li>
-            </ul>
-          </div>
-        </div>
-        <div class ="col">
-          
-        </div>
-      </div> -->
+
       <div class="row">
         <div class="col-md-12 copy">
           <p class="text-center">
-            © Copyright 2020 - Todos los derechos reservado. Estefania Aguilar- Carlos Farias
+            © Copyright 2021 - Todos los derechos reservado. Estefania Aguilar- Carlos Farias
           </p>
         </div>
       </div>

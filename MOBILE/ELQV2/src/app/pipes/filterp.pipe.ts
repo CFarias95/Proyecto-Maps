@@ -8,8 +8,11 @@ export class FilterpPipe implements PipeTransform {
   transform(value: any, args: any): any {
     const resultPosts = [];
     for(const promo of value){
-      if(promo.fecha.indexOf(args) > -1 || promo.fecha >= args ){
-         resultPosts.push(promo);
+      const fecha = new Date(promo.fecha).getTime();
+      const fecha1 = new Date(args).getTime();
+
+      if(fecha >= fecha1 ){
+        resultPosts.push(promo);
       };
     };
     return resultPosts;

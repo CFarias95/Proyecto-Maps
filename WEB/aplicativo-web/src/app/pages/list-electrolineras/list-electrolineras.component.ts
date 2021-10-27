@@ -30,7 +30,7 @@ export class ListElectrolinerasComponent implements OnInit {
   public mostrar = false;
   pageActual: number= 1;
   filterpost = '';
-  
+  estado = "Inactivo";
   
   constructor(
     private serviceStore: FirebasestorageService, 
@@ -76,14 +76,46 @@ export class ListElectrolinerasComponent implements OnInit {
     })  
   }
 
+  // DESACTIVAR ELECTROLINERA
+  async eliminarElectrolinera(documentId){
+      let alert = this.alertCtrl.create({
+        header: 'Deshabilitar',
+        message: '¿Seguro que quieres deshabilar la electrolinera?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: data => {
+              console.log('Cancelaste la operacion');
+            }
+          },
+          {
+            text: 'Aceptar',
+            handler: data => {
+                
+              this.serviceStore.eliminarElectrolinera(documentId).then(() => {
+                this.mensajeerror('Electrolinera desactivada!');
+              }, (error) => {
+                console.error(error);
+                this.mensajeerror('No se pudo desactivar la electrolinera');
+              });
   
-  // ELIMINAR ELECTROLINERA
-  public eliminarElectrolinera(documentId) {
-    this.serviceStore.eliminarElectrolinera(documentId).then(() => {
-      this.mensajeerror('Electrolinera eliminada !');
+            }
+          }
+        ]
+      });
+      
+      (await alert).present();
+  
+    }
+
+   // AVTIVAR ELECTROLINERA
+   public HabilitarElectrolinera(documentId) {
+    this.serviceStore.activarElectrolinera(documentId).then(() => {
+      this.mensajeerror('Electrolinera activada!');
     }, (error) => {
       console.error(error);
-      this.mensajeerror('No se pudo eliminar la Electrolinera');
+      this.mensajeerror('No se pudo activar la electrolinera');
     });
   }
 

@@ -13,7 +13,7 @@ export class NotificacionesService {
   private notifyCollection2: AngularFirestoreCollection<Notificaciones>;
   private Notify: Observable<any>;
   private Notify2: Observable<Notificaciones[]>;
-
+  filterpost = new Date().toISOString();
   constructor(private firestore: AngularFirestore) { }
 
   public getNoticias(){

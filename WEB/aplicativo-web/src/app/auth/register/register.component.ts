@@ -68,20 +68,18 @@ export class RegisterComponent implements OnInit {
       let {emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF} = this.myFormUser.value;
       //console.log(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF);
 
-      const user = await this.serviceAuth.register(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF,'Admin',this.image);
-
-      if (user) {
-        const isVerified = this.serviceAuth.isEmailVerified(user);
-        this.redirectUser(isVerified);
-      }else{
-        if(this.serviceAuth.errores=="The email address is already in use by another account."){
+      this.serviceAuth.register(emailF,passwordF,nombresF,apellidosF,direccionF,telefonoF,'Admin',this.image).then(res=>{
+        this.mensaje="Se registro el usuario, verifica tú correo.";
+          this.presentAlertConfirm();
+      });
+      if(this.serviceAuth.errores=="The email address is already in use by another account."){
           //console.log(this.authSvc.errores);}
           this.mensaje="El correo ya esta usado por otro usuario.";
           this.presentAlertConfirm();
-        }
-        
+      }else{
+          this.mensaje="Ocurrio un error, intentalo más tarde.";
+          this.presentAlertConfirm();
       }
-
       this.router.navigate(['/login'])
     }
     else

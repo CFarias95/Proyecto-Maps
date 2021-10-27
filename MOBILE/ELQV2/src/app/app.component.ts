@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Notificaciones } from './modelm/notificaciones';
 import { NotificacionesService } from './services/notificaciones.service';
+import { NotificationsService } from './services/notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { NotificacionesService } from './services/notificaciones.service';
 export class AppComponent {
 
   
-  constructor( ) {}
+  constructor( private notificationsService : NotificationsService) {
+    this.notificationsService.inicializar();
+  }
 
 }

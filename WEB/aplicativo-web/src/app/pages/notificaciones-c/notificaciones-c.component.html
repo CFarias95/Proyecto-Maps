@@ -1,5 +1,5 @@
  
-  <h1>Notificaciones</h1>
+<h3 style="background: gainsboro; border-radius: 5px; color:darkcyan"> Este módulo te permite gestionar las notificaciones creadas</h3>
   <input type="text" class="forms-control" placeholder="Buscar.."  [(ngModel)]="filterpost" name="filterpost"/>
 <br>
 <table class="table table-striped" style="display: table;">
@@ -7,24 +7,24 @@
     <tr>
       <th scope="col" >#</th>
       <th scope="col" >Nombre</th>
-      <th scope="col" >Titulo</th>
-      <th scope="col" >Fecha</th>
-      <th scope="col" ></th>
+      <th scope="col" >Título</th>
+      <th scope="col" >Tipo</th>
+      <th scope="col" >Fecha Vencimiento</th>
       <th scope="col" >Acciones</th>
-      <th scope="col" ></th>
+
+    
     </tr>
   </thead>
-  <ng-container *ngIf="!notificaciones || notificaciones.length == 0">
-    <p class="centrarmensaje">No existen Datos a mostrar.</p>
-  </ng-container>
-  <tbody *ngFor="let n of notificaciones | filtern: filterpost | paginate: { itemsPerPage: 5, currentPage: pageActual };let indice=index">
+  <tbody *ngFor="let n of notificaciones | filtern: filterpost | paginate: { itemsPerPage: 10, currentPage: pageActual };let indice=index">
+    <ng-container *ngIf="!notificaciones || notificaciones.length == 0">
+      <p class="centrarmensaje">No existen Datos a mostrar.</p>
+    </ng-container>
     <td  style="text-align: center;"> <img src="../../../assets/img/notifi.png" width = "50px"></td>
-    <td  style="text-align: center;">{{n.name}}</td>
-    <td  style="text-align: center;">{{n.titulo}}</td>
-    <td  style="text-align: center;">{{n.fecha}}</td>
-    <td  style="text-align: center;"><ion-button  button  color="success" (click)="edit(n.id)">Ver</ion-button></td>
-    <td  style="text-align: center;"><ion-button  button  color="primary" (click)="edit(n.id)">Editar</ion-button></td>
-    <td  style="text-align: center;"><ion-button  button  color="danger" (click)="eliminarNotify(n.id)">Eliminar</ion-button></td>
+    <td  style="text-align: center; padding-top: 1%;">{{n.name}}</td>
+    <td  style="text-align: center; padding-top: 1%;">{{n.titulo}}</td>
+    <td  style="text-align: center; padding-top: 1%;">{{n.tipo}}</td>
+    <td  style="text-align: center; padding-top: 1%;">{{n.fecha | date:'YYYY-MM-dd'}}</td>
+    <td  style="text-align: center;"><ion-button  button  color="success" (click)="edit(n.id)">Ver/EDITAR</ion-button><ion-button  button  color="danger" (click)="eliminarNotify(n.id)">Eliminar</ion-button></td>
   </tbody>
   </table>
 

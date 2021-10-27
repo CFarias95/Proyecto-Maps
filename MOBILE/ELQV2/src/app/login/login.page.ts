@@ -35,16 +35,18 @@ export class LoginPage implements OnInit {
     private nativeStorage: NativeStorage
    
 ) { 
-  this.nativeStorage.getItem('Estado').then(res=>{
-    if(res == 'Logeado'){
-      this.navCtrl.navigateForward('/dashboard');
-    }else{
-      //this.navCtrl.navigateForward('');
-    }
+
+   this.nativeStorage.getItem('Estado').then(res=>{
+      if(res == 'Logeado'){
+        this.navCtrl.navigateForward('/dashboard');
+      }else{
+        //this.navCtrl.navigateForward('');
+      }
+      
+    }, err => {
+      console.log("Error: "+ err);
+    });
     
-  }, err => {
-    console.log("Error: "+ err);
-  });
 }
 
 async ngOnInit() {

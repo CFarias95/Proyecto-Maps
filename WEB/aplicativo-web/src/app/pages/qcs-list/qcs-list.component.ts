@@ -31,51 +31,62 @@ export class QcsListComponent implements OnInit {
     private Servicio: AdminService,  
     private lectroservicio: FirebasestorageService,
     private serviceAuth : FirebaseauthService ) {
-      this.serviceAuth.getCurrentUser().then(r=>{
-        this.id = r.uid;
-        console.log("ID: "+this.id);
-        if (this.id){
-          this.Servicio.getAdministrador(this.id).subscribe(administrador => {
-            this.tipo = administrador.tipo;
-            console.log("Tipo: "+this.tipo);
-            if(this.tipo.startsWith("Admin")){
-              this.serviceStore.getQCS().subscribe((r)=>{
-                this.quejas= r.map(i =>
-                 {
-                 this.quejas = i.payload.doc.data() as {}; 
-                 const id = i.payload.doc.id; 
-                 return {id, ...this.quejas} 
-                 }      
-                )
-              });  
-            }else{
-              this.lectroservicio.obtenerElectrolineraIdUser(this.id).subscribe(electrolinera => {
-                console.log(electrolinera);
-          
-                this.serviceStore.getQCSMias(electrolinera[0].name).subscribe(misquejas=>{
-                  console.log(misquejas);
-                  this.quejas = misquejas;
-                });
       
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.id = user.uid;
+
+      console.log("ID: "+this.id);
+      if (this.id){
+        this.Servicio.getAdministrador(this.id).subscribe(administrador => {
+          this.tipo = administrador.tipo;
+          console.log("Tipo: "+this.tipo);
+          if(this.tipo.startsWith("Admin")){
+            this.serviceStore.getQCS().subscribe((r)=>{
+              this.quejas= r.map(i =>
+                {
+                this.quejas = i.payload.doc.data() as {}; 
+                const id = i.payload.doc.id; 
+                return {id, ...this.quejas} 
+                }      
+              )
+            });  
+          }else{
+
+            this.lectroservicio.obtenerElectrolineraIdUser(this.id).subscribe(electrolinera => {
+
+              console.log(electrolinera);
+              console.log(electrolinera[0].name);
+
+              this.serviceStore.getQCSMias(electrolinera[0].name).subscribe(misquejas=>{
+                console.log("Mis quejas"+misquejas);
+                //this.quejas = misquejas;
+                this.quejas= misquejas.map(i =>
+                  {
+                  this.quejas = i.payload.doc.data() as {}; 
+                  const id = i.payload.doc.id; 
+                  return {id, ...this.quejas} 
+                  }      
+                )
               });
-              
-            }
-          });
-        } 
-      });
+    
+            });
+            
+          }
+        });
+      } 
+     
     }
 
 
   ngOnInit() {
     
   }
-  //cargar datos de usuario
-  //Cargar usuario
  
    // CREAR UN METODO PARA OBTENER TODAS LAS quejas
   aprobar(documentId){
     this.serviceStore.aprobarQCS(documentId).then(() => {
-      console.log('Queja Aprobada!');
+      console.log('Aprobado!');
+      this.mensajeerror('Aprobado!');
     }, (error) => {
       console.error(error);
     });
@@ -88,12 +99,13 @@ export class QcsListComponent implements OnInit {
       inputs: [
         {
           name: 'razon',
-          placeholder: 'Razon del rechazo'
+          placeholder: 'Razón del rechazo',
+          max: 100,
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           handler: data => {
             console.log('You Clicked on Cancel');
@@ -105,7 +117,7 @@ export class QcsListComponent implements OnInit {
             if (data.razon != '') {
               console.log(data.razon);
               this.serviceStore.RechazarQCS(documentId,data.razon ).then(() => {
-                console.log('Queja Rechazada!');
+                console.log('Rechazada!');
               }, (error) => {
                 console.error(error);
               });
@@ -133,6 +145,23 @@ export class QcsListComponent implements OnInit {
 
   ver(documentId){
     this.router.navigate(['panel/qcsver',documentId]);
+  }
+
+  async mensajeerror(mensajetxt: string) {
+    const alert = await this.atrCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Mensaje',
+      message: mensajetxt,
+      buttons: [
+       {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
   
 }

@@ -24,6 +24,7 @@ import { QcsVerComponent } from './pages/qcs-ver/qcs-ver.component';
 import { ElectrolineraCComponent } from './pages/electrolinera-c/electrolinera-c.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 import { PagesComponent } from './pages/pages.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -36,26 +37,26 @@ const routes: Routes = [
     path: 'panel',
     component: PagesComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'electrolinera', component: ElectrolinerasComponent },
-      { path: 'list-electrolinera', component: ListElectrolinerasComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'adduser', component: AdduserComponent },
-      { path: 'notify', component: NotificacionesCComponent },
-      { path: 'qcs', component: QcsListComponent },
-      { path: 'qcsa', component: QcsListAComponent },
-      { path: 'qcsr', component: QcsListRComponent },
-      { path: 'qcsver/:id', component: QcsVerComponent },
-      { path: 'perfil', component: PerfilComponent },
-      { path: 'perfiles', component: PerfilesComponent },
-      { path: 'perfilesa', component: PerfilesAComponent },
-      { path: 'perfilesi', component: PerfilesIComponent },
-      { path: 'editelectrolinera/:id', component: EditElectrolineraComponent },
-      { path: 'notifyc', component: NotificacionesCreateComponent },
-      { path: 'notifye/:id', component: NotificacionesEditComponent },
-      { path: 'electroa', component: ListElectrolineraAComponent },
-      { path: 'electroi', component: ListElectrolineraIComponent },
-      { path: 'electro1', component: ElectrolineraCComponent },
+      { path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard] },
+      { path: 'electrolinera', component: ElectrolinerasComponent,canActivate:[AuthGuard] },
+      { path: 'list-electrolinera', component: ListElectrolinerasComponent,canActivate:[AuthGuard] },
+      { path: 'register', component: RegisterComponent,canActivate:[AuthGuard] },
+      { path: 'adduser', component: AdduserComponent,canActivate:[AuthGuard] },
+      { path: 'notify', component: NotificacionesCComponent,canActivate:[AuthGuard] },
+      { path: 'qcs', component: QcsListComponent,canActivate:[AuthGuard] },
+      { path: 'qcsa', component: QcsListAComponent,canActivate:[AuthGuard] },
+      { path: 'qcsr', component: QcsListRComponent,canActivate:[AuthGuard] },
+      { path: 'qcsver/:id', component: QcsVerComponent,canActivate:[AuthGuard] },
+      { path: 'perfil', component: PerfilComponent,canActivate:[AuthGuard] },
+      { path: 'perfiles', component: PerfilesComponent,canActivate:[AuthGuard] },
+      { path: 'perfilesa', component: PerfilesAComponent,canActivate:[AuthGuard] },
+      { path: 'perfilesi', component: PerfilesIComponent,canActivate:[AuthGuard] },
+      { path: 'editelectrolinera/:id', component: EditElectrolineraComponent,canActivate:[AuthGuard] },
+      { path: 'notifyc', component: NotificacionesCreateComponent,canActivate:[AuthGuard] },
+      { path: 'notifye/:id', component: NotificacionesEditComponent,canActivate:[AuthGuard] },
+      { path: 'electroa', component: ListElectrolineraAComponent,canActivate:[AuthGuard] },
+      { path: 'electroi', component: ListElectrolineraIComponent,canActivate:[AuthGuard] },
+      { path: 'electro1', component: ElectrolineraCComponent,canActivate:[AuthGuard] },
       
       { path: '', redirectTo: 'perfil', pathMatch: 'full' },
     ],

@@ -22,8 +22,13 @@ export class FirebaseauthService {
   errores=null;
   private usuariosCollection: AngularFirestoreCollection<DatosUsuario>;
   private usuario: Observable<DatosUsuario[]>;
+  userData: any;
 
-  constructor(private afAuth: AngularFireAuth, private storage: AngularFireStorage, private afs: AngularFirestore,) { 
+  constructor(
+    private afAuth: AngularFireAuth, 
+    private afAuthUser: AngularFireAuth, 
+    private storage: AngularFireStorage, 
+    private afs: AngularFirestore,) { 
 
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -44,7 +49,6 @@ export class FirebaseauthService {
         });
       })
     );
-
     
   }
 
@@ -62,12 +66,39 @@ export class FirebaseauthService {
   //metodo para login//
   async login(email: string, password: string) 
   {
+    
     try {
-      const { user } = await this.afAuth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-      return user;
+        const { user } = await this.afAuth.signInWithEmailAndPassword(
+          email,
+          password
+        );
+        if(user.emailVerified){
+
+        
+          if (user) {
+            this.userData = user;
+            localStorage.setItem('user', JSON.stringify(this.userData));
+            JSON.parse(localStorage.getItem('user'));
+          } else {
+            localStorage.setItem('user', null);
+            JSON.parse(localStorage.getItem('user'));
+          }
+          return user;
+
+          // this.usuariosCollection.doc(user.uid).valueChanges().subscribe(res => {
+          //   if(res.estado == 'Activo'){
+          //     console.log("Usuario Activo");
+          //     console.log(user);
+          //     return user;
+
+          //   }else{
+          //     console.log("Usuario Inactivo");
+          //   }
+          //  });
+        }else{
+          user.sendEmailVerification();
+        }
+      //return user;
     } catch (error) {
       console.log(error);
     }
@@ -77,51 +108,74 @@ export class FirebaseauthService {
   async register(email: string, password: string, nombres: string, apellidos: string, direccion : string ,telefono: string,tipo:string, image?: FileI) 
   {
     try {
-      const { user } = await this.afAuth.createUserWithEmailAndPassword(email,password);
-      const uid = user.uid;
-      const correo = user.email;
-      this.filePath = `perfiles/${uid}`;
-      const fileRef = this.storage.ref(this.filePath);
-      const task = this.storage.upload(this.filePath, image);
-      task.snapshotChanges()
-      .pipe(
-        finalize(() => {
-         fileRef.getDownloadURL().subscribe(urlImage => {
-           console.log(urlImage);
-           this.photoURL=urlImage;
 
-           this.afs.collection('users').doc(uid).set({
-             uid : uid,
-             correo : correo,
-             nombres : nombres,
-             apellidos : apellidos,
-             direccion: direccion,
-             telefono : telefono,
-             tipo: tipo,
-             estado : "Activo",
-             foto : this.photoURL,  
-           })
-         });
-       })
-     ).subscribe();
+        const { user } = await this.afAuthUser.createUserWithEmailAndPassword(email,password);
+        const uid = user.uid;
+        const correo = user.email;
+        this.filePath = `perfiles/${uid}`;
+        const fileRef = this.storage.ref(this.filePath);
+        if(image){
+          const task = this.storage.upload(this.filePath, image);
+          task.snapshotChanges()
+          .pipe(
+            finalize(() => {
+            fileRef.getDownloadURL().subscribe(urlImage => {
+              console.log(urlImage);
+              this.photoURL=urlImage;
+              this.afs.collection('users').doc(uid).set({
+                uid : uid,
+                correo : correo,
+                nombres : nombres,
+                apellidos : apellidos,
+                direccion: direccion,
+                telefono : telefono,
+                tipo: tipo,
+                estado : "Activo",
+                foto : this.photoURL,  
+                })
+              });
+            })
+          );
+        }else{
 
-    user.updateProfile({
-      displayName: nombres,
-      photoURL: this.photoURL
-    });
-    
-    return user;
-     
+          this.afs.collection('users').doc(uid).set({
+            uid : uid,
+            correo : correo,
+            nombres : nombres,
+            apellidos : apellidos,
+            direccion: direccion,
+            telefono : telefono,
+            tipo: tipo,
+            estado : "Activo",
+            foto : "",  
+            })
 
+        }
+
+        user.updateProfile({
+          displayName: nombres,
+          photoURL: this.photoURL
+        });
+        
+        user.sendEmailVerification();
+        this.afAuthUser.signOut();
+        //(await this.afAuthUser.currentUser).delete();
+        return user;
+      
     } catch (error) {
       console.log(error);
+      this.errores = error;
+      return false;
     }
+
   }
   
   //metodo pasa salir//
   async logout() {
     try {
-      await this.afAuth.signOut();
+      localStorage.removeItem('user');
+      this.afAuth.signOut();
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }
@@ -129,7 +183,9 @@ export class FirebaseauthService {
 
   //obtener el usuario actual//
   getCurrentUser() {
-    return this.afAuth.authState.pipe(first()).toPromise();
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
       
   }
 
@@ -146,6 +202,7 @@ export class FirebaseauthService {
   getUsuario(id: string){
     return this.usuariosCollection.doc<DatosUsuario>(id).valueChanges();
   }
+
   //actualizar usuario
   updateUsuario(usuario:DatosUsuario, id: string){
   

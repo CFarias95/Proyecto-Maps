@@ -12,8 +12,6 @@ import { ExpandableComponent } from '../components/expandable/expandable.compone
 
 import { FilterpPipe } from '../pipes/filterp.pipe';
 
-
-
 @NgModule({
   imports: [
     CommonModule,

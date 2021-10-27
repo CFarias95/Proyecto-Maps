@@ -27,12 +27,10 @@ export class QcsListRComponent implements OnInit {
     private lectroservicio: FirebasestorageService,
     private serviceAuth : FirebaseauthService
   ) {
-    this.serviceAuth.getCurrentUser().then(r=>{
-      this.id = r.uid;
-      if (this.id){
-        this.cargarUsuario();
-      } 
-    });
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.id = user.uid;
+    this.cargarUsuario();
+    
    }
 
   ngOnInit() {

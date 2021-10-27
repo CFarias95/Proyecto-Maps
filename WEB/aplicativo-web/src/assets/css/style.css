@@ -1000,7 +1000,10 @@ File: scss
   position: relative; }
 
 .container-fluid {
-  padding: 25px 25px; }
+  padding: 25px 25px;
+  height: 95vh;
+  overflow-y: auto;
+ }
 
 .card {
   
@@ -1552,8 +1555,9 @@ ul#themecolors {
   position: absolute;
   right: 0;
   border-top: 1px solid rgba(120, 130, 140, 0.13);
-  background: #ffffff; }
-
+  background: #ffffff;
+ }
+  
 /*******************
  scrollbar
 *******************/

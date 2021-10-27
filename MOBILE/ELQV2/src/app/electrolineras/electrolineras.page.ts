@@ -39,7 +39,7 @@ export class ElectrolinerasPage implements OnInit {
   }
 
   getElectrolineras(){
-    this.servicio.getElectrolinerasUbicaciones().subscribe((ubicaciones) =>{
+    this.servicio.getElectrolinerasActivas().subscribe((ubicaciones) =>{
       this.items = ubicaciones;
       console.log(this.lugares);
     })
