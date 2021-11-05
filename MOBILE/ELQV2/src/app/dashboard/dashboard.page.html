@@ -1,18 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">MENÙ </ion-title>
+    <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">MENÚ</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <ion-grid fixed style="--ion-grid-padding: 2%">
     <ion-row>
-      <ion-slides style="background-color: rgba(56, 110, 103, 0.507);" >
+      <ion-slides  loop="true" [options]="{ slidesPerView:1, autoplay: {delay: 1600} }" style="background-color: rgba(56, 110, 103, 0.507);" >
         <ion-slide *ngFor="let item of items | filterd: filterpost">
           <div class="slide">
             <img [src]="item.imagen" *ngIf="item.imagen">
             <h2>{{item.titulo}}</h2>
             <p>{{item.texto}}</p>
+            <p>Origen: {{item.origen}}</p>
+            <p>Válido hasta: {{item.fecha | date:'YYYY-MM-dd'}}</p>
           </div>
         </ion-slide>
 

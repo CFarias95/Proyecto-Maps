@@ -17,6 +17,7 @@
   <thead>
     <tr>
       <th scope="col" >Nombres</th>
+      <th scope="col" >Correo</th>
       <th scope="col" >Estado Perfil</th>
       <th scope="col" >Tipo</th>
       <th scope="col" >Acciones</th>
@@ -27,6 +28,7 @@
   </ng-container>
   <tbody *ngFor="let user of usuario | filter: filterpost | paginate: { itemsPerPage: 10, currentPage: pageActual };let indice=index">
     <td *ngIf="user.uid != id && user.direccion != nombre" style="text-align: center; padding-top: 10px;">{{user.nombres}}</td>
+    <td *ngIf="user.uid != id && user.direccion != nombre" style="text-align: center; padding-top: 10px;">{{user.correo}}</td>
     <td *ngIf="user.uid != id && user.direccion == nombre" style="text-align: center; padding-top: 10px; background-color: palegoldenrod;">El usuario {{user.nombres}} no ha actualizado su información</td>
     <td *ngIf="user.uid != id" style="text-align: center; padding-top: 10px;">{{user.estado}}</td>
     <td *ngIf="user.uid != id" style="text-align: center; padding-top: 10px;">{{user.tipo}}</td>

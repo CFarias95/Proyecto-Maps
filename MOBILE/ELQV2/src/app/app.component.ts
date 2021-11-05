@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { Notificaciones } from './modelm/notificaciones';
-import { NotificacionesService } from './services/notificaciones.service';
-import { NotificationsService } from './services/notifications.service';
+import { LoadingController, Platform } from '@ionic/angular';
+
+//import { NotificationsService } from './services/notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +11,27 @@ import { NotificationsService } from './services/notifications.service';
 export class AppComponent {
 
   
-  constructor( private notificationsService : NotificationsService) {
-    this.notificationsService.inicializar();
+  constructor( 
+    //private notificationsService : NotificationsService,
+    private platform: Platform,
+    public loadingController: LoadingController) {
+    
+    //this.notificationsService.inicializar();
+    
+    this.platform.ready().then(async () => {
+      const loading =  this.loadingController.create({
+        cssClass: 'my-custom-class',
+        message: 'Cargando...',
+        duration: 2000
+      });
+      (await loading).present();
+  
+      (await loading).onDidDismiss();
+      
+      console.log('Loading dismissed!');
+    });
+
+    
   }
 
 }

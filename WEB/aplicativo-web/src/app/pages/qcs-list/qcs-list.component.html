@@ -17,6 +17,7 @@
       <th scope="col" >Fecha</th>
       <th scope="col" >Estado</th>
       <th scope="col" >Electrolinera</th>
+      <th scope="col" >Usuario</th>
       <th scope="col" ></th>
       <th scope="col" >Acciones</th>
       <th scope="col" ></th>
@@ -32,9 +33,10 @@
     <td  style="text-align: center; padding-top: 10px;"> {{q.Fecha | date:'YYYY-MM-dd'}}</td>
     <td  style="text-align: center; padding-top: 10px;">{{q.Estado}}</td>
     <td  style="text-align: center; padding-top: 10px;">{{q.Origen}}</td>
+    <td  style="text-align: center; padding-top: 10px;">{{q.User}}</td>
     <td  style="text-align: center;"><ion-button  button (click)="ver(q.id)" color="primary">Ver</ion-button></td>
-    <td  style="text-align: center;"><ion-button  button (click)="aprobar(q.id)" color="success">Aprobar</ion-button></td>
-    <td  style="text-align: center;"><ion-button  button (click)="rechazar(q.id)" color="danger">Rechazar</ion-button></td>
+    <td *ngIf="q.Estado == creado" style="text-align: center;"><ion-button  button (click)="aprobar(q.id)" color="success">Aprobar</ion-button></td>
+    <td *ngIf="q.Estado == creado" style="text-align: center;"><ion-button  button (click)="rechazar(q.id)" color="danger">Rechazar</ion-button></td>
   </tbody>
   </table>
   <pagination-controls (pageChange)="pageActual = $event" style="text-align: center;"  previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>

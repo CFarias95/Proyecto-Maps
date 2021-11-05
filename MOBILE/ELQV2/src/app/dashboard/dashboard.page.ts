@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Notificaciones } from '../modelm/notificaciones';
 import { AuthenticationService } from '../services/authentication.service';
+import { ElectrolinerasService } from '../services/electrolineras.service';
 import { NotificacionesService } from '../services/notificaciones.service';
+//import { NotificationsService } from '../services/notifications.service';
 import { QcsService } from '../services/qcs.service';
 
 @Component({
@@ -116,7 +118,11 @@ export class DashboardPage implements OnInit {
     private authService: AuthenticationService,
     private notificaciones : NotificacionesService,
     private servicio: QcsService,
-  ) { }
+    //private notificationsService : NotificationsService,
+    private servicioElectrolineras: ElectrolinerasService
+  ) { 
+    //this.notificationsService.inicializar();
+  }
 
   
   ngOnInit() {
@@ -155,7 +161,7 @@ export class DashboardPage implements OnInit {
   getNoticias(){
     this.notificaciones.getNoticias().subscribe((notificaciones) =>{
       this.items = notificaciones;
-      console.log(this.items);
+      console.log(this.items.userID);
     })
 
   }

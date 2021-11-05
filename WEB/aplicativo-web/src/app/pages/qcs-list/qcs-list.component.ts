@@ -23,6 +23,9 @@ export class QcsListComponent implements OnInit {
   nombre; string;
   electro : Electrolinera;
 
+  creado= 'Creado';
+ 
+
   constructor(
     private serviceStore: QuejasService,
     private router: Router,

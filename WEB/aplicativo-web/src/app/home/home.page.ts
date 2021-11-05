@@ -23,12 +23,12 @@ export class HomePage {
   }};
   slideOpts = {
     initialSlide: 0,
-    speed: 100,
+    speed: 900,
     loop: true,
     allowSlideNext: true,
     allowTouchMove: true,
     allowSlidePrev: true,
-
+    autoplay: {delay: 1700}
   };
 
   @ViewChild('search',{static:false})

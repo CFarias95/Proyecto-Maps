@@ -5,7 +5,9 @@ import { AlertController } from '@ionic/angular';
 import { Notificaciones } from 'src/app/modelm/notificaciones';
 import { AdminService } from 'src/app/services/admin.service';
 import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
+import { FirebasestorageService } from 'src/app/services/firebasestorage.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
+import { Electrolinera } from '../../modelm/electrolinera';
 
 @Component({
   selector: 'app-notificaciones-create',
@@ -21,6 +23,8 @@ export class NotificacionesCreateComponent implements OnInit {
   id: string;
   image: any;
   mydate = new Date().toISOString();
+  electrolinera:Electrolinera;
+  origen:string;
 
   constructor(
     public formBuilder: FormBuilder,  
@@ -28,11 +32,24 @@ export class NotificacionesCreateComponent implements OnInit {
     private service : NotificacionesService, 
     private router:Router,
     private serviceAuth : FirebaseauthService,
+    private serviceStore: FirebasestorageService,
   ) { 
     console.log("Fecha de hoy: "+this.mydate);
     const user = JSON.parse(localStorage.getItem('user'));
     this.id = user.uid;
-    console.log("USUARIO: "+ this.id);   
+
+    console.log("USUARIO: "+ this.id);
+    this.serviceStore.getElectrolineraId(this.id).subscribe(administrador => {
+      this.electrolinera = administrador;
+      this.origen = administrador.name;
+      //console.log(this.electrolinera);
+    });
+
+    if(!this.origen){
+      this.origen = 'Administrador';
+    }
+    
+    
   }
 
   ngOnInit() {
@@ -58,7 +75,7 @@ export class NotificacionesCreateComponent implements OnInit {
         this.ionicForm.value.name = this.ionicForm.value.name.trim();
         this.ionicForm.value.titulo = this.ionicForm.value.titulo.trim();
         this.ionicForm.value.texto = this.ionicForm.value.texto.trim();
-        this.service.addNotify(this.ionicForm.value,this.id, this.image);
+        this.service.addNotify(this.ionicForm.value,this.id,this.origen, this.image);
         this.mensajeerror('La notificación de "'+this.ionicForm.value.tipo+'" fue creada y enviada');
         this.router.navigate(['panel/notify']);
       }

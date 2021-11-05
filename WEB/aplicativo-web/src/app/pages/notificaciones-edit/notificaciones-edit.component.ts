@@ -60,7 +60,7 @@ export class NotificacionesEditComponent implements OnInit {
         this.mensajeerror('Los campos no pueden estar vacíos');
       }else{
         this.service.updateNotifi(this.id,this.ionicForm.value);
-        this.mensajeerror('Se actualizo la notificación');
+        this.mensajeerror('Se actualizó la notificación');
         this.router.navigate(['panel/notify']);
       }
     }else{

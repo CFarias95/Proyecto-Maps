@@ -17,6 +17,7 @@
       <th scope="col" >Fecha</th>
       <th scope="col" >Estado</th>
       <th scope="col" >Electrolinera</th>
+      <th scope="col" >Usuario</th>
       <th scope="col" ></th>
       <th scope="col" >Acciones</th>
       <th scope="col" ></th>
@@ -31,6 +32,7 @@
     <td   style="text-align: center; padding-top: 10px;"> {{q.Fecha | date:'YYYY-MM-dd'}}</td>
     <td   style="text-align: center; padding-top: 10px; background-color: rgb(12, 184, 12);">{{q.Estado}}</td>
     <td   style="text-align: center; padding-top: 10px;">{{q.Origen}}</td>
+    <td  style="text-align: center; padding-top: 10px;">{{q.User}}</td>
     <td   style="text-align: center;"><ion-button  button (click)="ver(q.id)" color="primary">Ver</ion-button></td>
     <td   style="text-align: center;"><ion-button  button  color="success">Aprobada</ion-button></td>
   

@@ -34,6 +34,16 @@
           <ion-item>
             <h3>{{item.texto}}</h3>
           </ion-item>
+          <br>
+          <ion-item>
+            <h3>Origen:{{item.origen}}</h3>
+          </ion-item>
+          <br>
+          <br>
+          <ion-item>
+            <p>Válido hasta: {{item.fecha | date:'YYYY-MM-dd'}}</p>
+          </ion-item>
+
       </ion-list>
     </app-expandable>
   </ion-card-content>

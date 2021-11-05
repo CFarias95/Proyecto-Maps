@@ -31,41 +31,47 @@ export class NotificationsService {
     this.inicializar();
    }
 
-  inicializar(){
+   inicializar(){
 
     console.log("Se inicializo el servicio de notificaciones");
-    this.user.userDetails().subscribe(usuario => {
+
+     this.user.userDetails().subscribe(usuario => {
       this.id = usuario.uid;
-      //this.quejasRechazadas();
+      console.log("usuario ACtual: "+this.id);
       this.servicio.getMisQCSNumTodas(this.id).subscribe(data=> {
-        if(data?.length){  
+        if(data.length > 0){  
         for (let index = 0; index < data.length; index++) {
           //this.presentAlert(data[index].Estado,texto);
           const titulo = "ELQ notifica que";
-          const texto = "Tú " + data[index].Tipo + " a "+ data[index].Origen + " fue "+ data[index].Estado;
-          this.createNotify(titulo,texto,index);
+          const texto = "Tu " + data[index].Tipo + " a "+ data[index].Origen + " esta en estado "+ data[index].Estado;
+          this.createNotify(titulo,texto,index+1);
           this.servicio.updateMisQCS(data[index].id);
-        }}
+        }
+        
+      }else{
+          console.log("usuario ACtual: "+this.id +" no tiene notificciones pendientes");
+        }
       });
     });
 
-    this.notificaciones.getNoticias().subscribe(res =>{
-      if(res){
-        const titulo = "Noticias en ELQ";
-        const texto = "Tienes nuevas noticias por revisar" ;
-        this.createNotify(titulo,texto,20);
-      }
-    });
-
-    this.notificaciones.getPromociones().subscribe(res =>{
-      if(res){
-        const titulo = "Promociones en ELQ";
-        const texto = "Tienes nuevas promociones por revisar" ;
-        this.createNotify(titulo,texto,30);
-      }
-    });
-
-
+    //if (this.id){
+      this.notificaciones.getNoticias().subscribe(res =>{
+        if(res.length > 0){
+          const titulo = "Noticias en ELQ";
+          const texto = "Tienes nuevas noticias por revisar" ;
+          this.createNotify(titulo,texto,20);
+        }
+      });
+  
+      this.notificaciones.getPromociones().subscribe(res =>{
+        if(res.length > 0){
+          const titulo = "Promociones en ELQ";
+          const texto = "Tienes nuevas promociones por revisar" ;
+          this.createNotify(titulo,texto,30);
+        }
+      });
+   // }
+    
   }
 
   createNotify(titulo : string, texto: string, id:number) {
@@ -76,6 +82,7 @@ export class NotificationsService {
       text: texto,
       led: 'FF0000',
     });
+    
   }
 
 }

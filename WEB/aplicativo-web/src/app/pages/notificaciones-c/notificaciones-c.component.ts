@@ -86,55 +86,55 @@ export class NotificacionesCComponent implements OnInit {
   }
 
   //METODO PARA ACTUALIZAR Y AGREGAR UN NUEVA NOTIFICACION
-  public nuevaNotify(form, documentId = this.documentId) {
+  // public nuevaNotify(form, documentId = this.documentId) {
 
-    if (this.currentStatus == 1) {
-      let data = {
-        titulo: form.tituloF,
-        texto: form.textoF,
-        fecha: form.fechaF,
-        hora: form.horaF,
-      }
+  //   if (this.currentStatus == 1) {
+  //     let data = {
+  //       titulo: form.tituloF,
+  //       texto: form.textoF,
+  //       fecha: form.fechaF,
+  //       hora: form.horaF,
+  //     }
       
-      this.serviceStore.addNotify(data, this.image)
-      //console.log('Documento creado exitósamente!');
-      this.MyNotificationForm.setValue({
-        tituloF: '',
-        textoF: '',
-        fechaF: '',
-        horaF: '',
-        fotoF: '',
-        idF: ''
-      });
+  //     this.serviceStore.addNotify(data, this.image)
+  //     //console.log('Documento creado exitósamente!');
+  //     this.MyNotificationForm.setValue({
+  //       tituloF: '',
+  //       textoF: '',
+  //       fechaF: '',
+  //       horaF: '',
+  //       fotoF: '',
+  //       idF: ''
+  //     });
       
-    } else {
+  //   } else {
       
-      let data = {
-        titulo: form.tituloF,
-        texto: form.textoF,
-        fecha: form.fechaF,
-        hora: form.horaF,
-      }
-      this.serviceStore.updateNotifi(documentId, data).then(() => {
-        this.MyNotificationForm.setValue({
-          tituloF: '',
-          textoF: '',
-          fechaF: '',
-          horaF: '',
-          urlF: '',
-          idF: ''
-        });
-        this.boton="Registrar"
-        console.log('Documento editado exitósamente');
-      }, (error) => {
-        console.log(error);
-      });
-    }
+  //     let data = {
+  //       titulo: form.tituloF,
+  //       texto: form.textoF,
+  //       fecha: form.fechaF,
+  //       hora: form.horaF,
+  //     }
+  //     this.serviceStore.updateNotifi(documentId, data).then(() => {
+  //       this.MyNotificationForm.setValue({
+  //         tituloF: '',
+  //         textoF: '',
+  //         fechaF: '',
+  //         horaF: '',
+  //         urlF: '',
+  //         idF: ''
+  //       });
+  //       this.boton="Registrar"
+  //       console.log('Documento editado exitósamente');
+  //     }, (error) => {
+  //       console.log(error);
+  //     });
+  //   }
 
-    this.oculto = "display:none";
-    this.oculto2 = "";
+  //   this.oculto = "display:none";
+  //   this.oculto2 = "";
 
-  }
+  // }
 
    // CREAR UN METODO PARA OBTENER TODAS LAS NOTIFICACIONES
    public obtenerNotify() {

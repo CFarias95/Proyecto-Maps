@@ -38,7 +38,7 @@ export class CrearqcsPage implements OnInit {
     private alertCtrl: AlertController,) {
       this.athservice.userDetails().subscribe(usuario => {
         this.id = usuario.uid;
-        this.user = usuario.email;   
+        this.user = usuario.displayName;   
       });
      }
 
@@ -59,7 +59,7 @@ export class CrearqcsPage implements OnInit {
 
 
   getElectrolineras(){
-    this.servicio.getElectrolinerasUbicaciones().subscribe((ubicaciones) =>{
+    this.servicio.getElectrolinerasActivas().subscribe((ubicaciones) =>{
       this.items = ubicaciones;
       
     })
@@ -69,10 +69,10 @@ export class CrearqcsPage implements OnInit {
   createQCS(value){
     const QCS = this.qcsService.crearQcs(value,this.user,this.id);
     if(QCS){
-      this.mensajeerror('Gracias por enviarnos tu opinion');
+      this.mensajeerror('Gracias por enviarnos tu '+value.tipo);
       this.router.navigate(['listarqcs']);
     }else{
-      this.mensajeerror('No se pudo porcesar tu solicitud en este momento intenta mas tarde');
+      this.mensajeerror('No se pudo porcesar tu solicitud en este momento intenta más tarde');
       this.router.navigate(['crearqcs']);
     }
 

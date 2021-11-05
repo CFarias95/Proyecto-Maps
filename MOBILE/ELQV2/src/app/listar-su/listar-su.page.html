@@ -25,12 +25,15 @@
     
     <ion-card-header  style="background-color: #F78181;" *ngIf="item.Estado == rechazado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
+      
     </ion-card-header>
     <ion-card-header  color="success" *ngIf="item.Estado == aprobado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
+      
     </ion-card-header>
     <ion-card-header  style="background-color: rgba(165, 42, 42, 0.349);" *ngIf="item.Estado == creado">
       <ion-card-title >{{item.Tipo}} a {{item.Origen}}</ion-card-title>
+     
     </ion-card-header>
 
     <ion-card-content>

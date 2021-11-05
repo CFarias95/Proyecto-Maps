@@ -3,6 +3,7 @@
         <ion-title style="background-color:  #278d91; text-align: center; color:aliceblue; height: 60px; font-family:'Times New Roman', Times, serif">¿Que nos quieres decir?</ion-title>
     </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
     <form class="form" [formGroup]="validations_form" (ngSubmit)="createQCS(validations_form.value)">
         <ion-item>
@@ -22,7 +23,7 @@
           </ng-container>
         </div>
     
-
+        <br> 
         <ion-item >
             <ion-label>Para:</ion-label>
             <ion-select formControlName="origen" interface="popover" >
@@ -37,9 +38,9 @@
             </div>
           </ng-container>
         </div>
-
+        <br> 
         <ion-item>
-            <ion-label>Descripcion:</ion-label>
+            <ion-label>Descripción:</ion-label>
             <ion-textarea rows="10" cols="20" placeholder="Texto..." formControlName="texto"></ion-textarea>    
         </ion-item>
         <div class="validation-errors">

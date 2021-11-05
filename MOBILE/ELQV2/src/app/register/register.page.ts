@@ -62,12 +62,12 @@ export class RegisterPage implements OnInit {
       nombre: new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.required,
-        Validators.pattern('[a-zA-Z ]*')
+        Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*')
       ])),
       apellido: new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.required,
-        Validators.pattern('[a-zA-Z ]*')
+        Validators.pattern('[a-zñA-ZÑáéíóúÁÉÍÓÚ ]*')
       ]))
     });
   }
@@ -89,18 +89,19 @@ export class RegisterPage implements OnInit {
   }
 
   tryRegister(value) {
-    const user = this.authService.registerUser(value,this.image);
-    if(user){
-      this.errorMessage = "";
-      this.successMessage = "tu Cuenta a sido creada.";
-      this.presentAlert("Mensaje","Tù cuenta ha sido creada, verifica tù correo");
+    const user = this.authService.registerUser(value,this.image).then(res=>{
+      if(res != false){
+        this.errorMessage = "";
+      this.successMessage = "Tu cuenta fue creda con exito.";
+      this.presentAlert("Mensaje","Tu cuenta ha sido creada, verifica tu correo");
       this.navCtrl.navigateBack('');
-    }else{
-      this.errorMessage = "No se pudo crear tu cuenta verifica tu correo.";
-      this.presentAlert("Error","Ocurrio un erro, intenta màs tarde.");
-      this.successMessage = "";
-    }
-     
+      }else{
+        this.errorMessage = "No se pudo crear tu cuenta verifica tu correo.";
+        this.presentAlert("Error","Ocurrio un error, intenta más tarde.");
+        this.successMessage = "";
+      }
+    });
+        
   }
 
   goLoginPage() {

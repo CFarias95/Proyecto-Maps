@@ -9,7 +9,7 @@ import { FileI } from '../modelm/file.interface';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import  firebase from 'firebase';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 
 
 
@@ -23,7 +23,8 @@ export class AuthenticationService {
   user$: Observable<User>;
   private usuariosCollection: AngularFirestoreCollection<DatosUsuario>;
   private Usuario: Observable<any>;
-  public loading: any;
+  
+
   constructor(
     private afAuth: AngularFireAuth, 
     private storage: AngularFireStorage,
@@ -31,7 +32,11 @@ export class AuthenticationService {
     private google : GooglePlus,
     private nativeStorage: NativeStorage,
     public alertController: AlertController,
-    private navCtrl: NavController) { 
+    private navCtrl: NavController,
+    public loadingController: LoadingController
+    ) { 
+
+     
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -95,6 +100,7 @@ export class AuthenticationService {
 
     }catch(error){
       console.log(error);
+      return false;
     }
   }
 
@@ -103,13 +109,24 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(value.email, value.password)
         .then(
-          res => {if (res.user.emailVerified){
-            resolve(res);
-            this.nativeStorage.setItem('Estado','Logeado');
-          }},
-          err => {reject(err),this.nativeStorage.setItem('Estado','NO');})
-        
-          
+          res => {
+            if(res.user.emailVerified){
+              this.getUserData(res.user.uid).subscribe(res2=>{
+                if(res2){
+                  resolve(res);
+                  this.nativeStorage.setItem('Estado','Logeado');
+                }else{
+                  reject("EL usuario es del aplicativo web");
+                  this.nativeStorage.setItem('Estado','NO');
+                }        
+                
+              },err=>{
+                reject(err);
+                this.nativeStorage.setItem('Estado','NO');
+              });
+            }
+          },
+          err => {reject(err);this.nativeStorage.setItem('Estado','NO');})    
     })
     
   } 
@@ -194,8 +211,17 @@ export class AuthenticationService {
     return this.afAuth.user
   }
 
-  googleLogin(){
+  async googleLogin(){
 
+    const loading =  this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Cargando...',
+      duration: 5000
+    });
+    
+    (await loading).present();
+
+    
     return this.google.login({}).then(res => {
       const userdataGoogle = res;
       //alert ( "Resultado del login: "+JSON.stringify(res));
@@ -204,13 +230,13 @@ export class AuthenticationService {
       return new Promise<any>((resolve, reject) => {
         this.afAuth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null,userdataGoogle.accessToken ))
           .then(
-            res => {
+            async res => {
               this.nativeStorage.setItem('Estado','Logeado');
               resolve(res);
               console.log("USER UID: "+res.user.uid);
-              if(userdataGoogle.imageUrl == ""){
+              if(userdataGoogle.imageUrl != ""){
                 this.photoURL = userdataGoogle.imageUrl;
-                this.afs.collection('usersmobile').doc(res.user.uid).set({
+                this.afs.collection('usersmobile').doc(res.user.uid).update({
                   uid : res.user.uid,
                   correo : userdataGoogle.email,
                   nombres : userdataGoogle.givenName,
@@ -219,21 +245,27 @@ export class AuthenticationService {
                 });
               }else{
                 this.photoURL = "";
-                this.afs.collection('usersmobile').doc(res.user.uid).set({
+                this.afs.collection('usersmobile').doc(res.user.uid).update({
                   uid : res.user.uid,
                   correo : userdataGoogle.email,
                   nombres : userdataGoogle.givenName,
                   apellidos : userdataGoogle.familyName,
                 });
               }
+              res.user.updateProfile({
+                displayName: userdataGoogle.givenName+' '+userdataGoogle.familyName,
+                photoURL: this.photoURL
+              });
               
+              if(!res.user.emailVerified){
+                res.user.sendEmailVerification();
+              }
+             
+              (await loading).dismiss();
             },
-            err => {reject(err); this.nativeStorage.setItem('Estado','NO');})
+             async err => {reject(err); this.nativeStorage.setItem('Estado','NO'); (await loading).dismiss();})
             })
-
-    })
-
-    this.loading.dismiss();
+          })
   }
 
   async loginGoogle(): Promise<User> {

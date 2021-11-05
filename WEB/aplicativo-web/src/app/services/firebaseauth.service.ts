@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatosUsuario, User } from '../modelm/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { first, map, switchMap } from 'rxjs/operators';
+import { first, map, switchMap, take } from 'rxjs/operators';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileI } from '../modelm/file.interface';
@@ -114,14 +114,20 @@ export class FirebaseauthService {
         const correo = user.email;
         this.filePath = `perfiles/${uid}`;
         const fileRef = this.storage.ref(this.filePath);
+
         if(image){
+
+          
           const task = this.storage.upload(this.filePath, image);
+          console.log("Nuevo usuario Creado");
           task.snapshotChanges()
           .pipe(
             finalize(() => {
-            fileRef.getDownloadURL().subscribe(urlImage => {
-              console.log(urlImage);
+              fileRef.getDownloadURL().subscribe(res=>{ console.log(res)});
+              fileRef.getDownloadURL().subscribe(urlImage => {
+              console.log( "URL DE LA IMAGEN "+urlImage);
               this.photoURL=urlImage;
+
               this.afs.collection('users').doc(uid).set({
                 uid : uid,
                 correo : correo,
@@ -135,7 +141,7 @@ export class FirebaseauthService {
                 })
               });
             })
-          );
+          ).subscribe();
         }else{
 
           this.afs.collection('users').doc(uid).set({
@@ -161,11 +167,12 @@ export class FirebaseauthService {
         this.afAuthUser.signOut();
         //(await this.afAuthUser.currentUser).delete();
         return user;
-      
     } catch (error) {
-      console.log(error);
+
+      console.log("Erorr: "+error);
       this.errores = error;
       return false;
+      
     }
 
   }

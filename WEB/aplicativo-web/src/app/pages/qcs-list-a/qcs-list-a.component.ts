@@ -59,6 +59,13 @@ export class QcsListAComponent implements OnInit {
           console.log(electrolinera[0].name);
           this.serviceStore.getQCSMiasAprobadas(electrolinera[0].name).subscribe(misquejas=>{
             console.log(misquejas);
+            this.quejas= misquejas.map(i =>
+              {
+              this.quejas = i.payload.doc.data() as {}; 
+              const id = i.payload.doc.id; 
+              return {id, ...this.quejas} 
+              }      
+            )
           });
 
         });

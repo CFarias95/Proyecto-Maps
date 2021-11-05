@@ -8,6 +8,7 @@ import { LoadingController, NavController, Platform } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import  firebase  from 'firebase/app';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NotificationsService } from '../services/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginPage implements OnInit {
   public user = null;
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
-
+  public loading: any;
   
   constructor(  private navCtrl: NavController,
     private authService: AuthenticationService,
@@ -32,22 +33,9 @@ export class LoginPage implements OnInit {
     private fireAuth: AngularFireAuth,
     private platform: Platform,
     private router: Router,
-    private nativeStorage: NativeStorage
-   
-) { 
-
-   this.nativeStorage.getItem('Estado').then(res=>{
-      if(res == 'Logeado'){
-        this.navCtrl.navigateForward('/dashboard');
-      }else{
-        //this.navCtrl.navigateForward('');
-      }
-      
-    }, err => {
-      console.log("Error: "+ err);
-    });
-    
-}
+    private nativeStorage: NativeStorage,
+    private notificationsService : NotificationsService,
+) { }
 
 async ngOnInit() {
 
@@ -82,10 +70,10 @@ async ngOnInit() {
       .then(res => {
         console.log(res);
         this.errorMessage = "";
+        this.notificationsService.inicializar();
         this.navCtrl.navigateForward('dashboard');
-        
       }, err => {
-        this.errorMessage = "Valida el Correo y la contraseña ingresada";
+        this.errorMessage = "Valida el correo y la contraseña ingresada";
       });
 
   }
@@ -100,12 +88,13 @@ async ngOnInit() {
     this.navCtrl.navigateForward('/register');
   }
 
-  googleL(){
-
+  async googleL(){
     const user = this.authService.googleLogin().then(res=>{
       //alert (JSON.stringify(res));
+      this.notificationsService.inicializar();
       this.router.navigate(['dashboard']);
     },err=>{
+      this.errorMessage = "No eres un usuario de la app";
       console.log(JSON.stringify(err))
     });
     //alert (JSON.stringify(user));

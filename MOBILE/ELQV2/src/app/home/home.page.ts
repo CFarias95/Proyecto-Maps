@@ -10,20 +10,7 @@ import { NotificacionesComponent } from '../components/notificaciones/notificaci
 export class HomePage {
 
    
-  constructor(public navCtrl: NavController,private nativeStorage: NativeStorage) {
-
-    this.nativeStorage.getItem('Estado').then(res=>{
-      if(res == 'Logeado'){
-        this.navCtrl.navigateForward('/dashboard');
-      }else{
-        //this.navCtrl.navigateForward('');
-      }
-      
-    }, err => {
-      console.log("Error: "+ err);
-    });
-      
-  }
+  constructor(public navCtrl: NavController,private nativeStorage: NativeStorage) {}
 
   login(){
     this.navCtrl.navigateForward('/login');

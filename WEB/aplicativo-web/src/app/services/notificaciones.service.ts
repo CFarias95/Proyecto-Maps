@@ -57,7 +57,7 @@ export class NotificacionesService {
 
 
 //agregar una notificacion
-  addNotify(data, id: string,image?: FileI){
+  addNotify(data, id: string,nombre:string,image?: FileI){
     this.filePath = `notificaciones/${data.titulo}`;
     const fileRef = this.storage.ref(this.filePath);
     if(image){
@@ -76,7 +76,8 @@ export class NotificacionesService {
               tipo: data.tipo,
               estado : "Activo",
               userID : id,
-              imagen : this.photoURL
+              imagen : this.photoURL,
+              origen: nombre
             });
           });
         })
@@ -90,7 +91,8 @@ export class NotificacionesService {
         tipo: data.tipo,
         estado : "Activo",
         userID : id,
-        imagen : ""
+        imagen : "",
+        origen: nombre
       });
     }
     

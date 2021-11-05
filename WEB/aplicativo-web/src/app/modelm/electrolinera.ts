@@ -1,6 +1,6 @@
 export interface Electrolinera {
     id?: string;
-    usuario: string,
+    usuario: string;
     name: string;
     direccion: string;
     referencia: string;

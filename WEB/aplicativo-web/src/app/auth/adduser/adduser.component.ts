@@ -82,25 +82,23 @@ export class AdduserComponent implements OnInit {
         apellido = apellido.trim();
         direccion = direccion.trim();
 
-        const user = this.serviceAuth.register(email,pass,name,apellido,direccion,mobile,'Admin',this.image);
-        
-        if (user) {
-
-          this.mensaje="Se envió un mensaje de confirmación al correo ingresado.";
-          this.presentAlertConfirm(this.mensaje);
-          this.router.navigate(['panel/perfiles']);
-          
-        }else{
-          if(this.serviceAuth.errores.code=="auth/email-already-in-use"){
-            //console.log(this.authSvc.errores);}
-            this.mensaje="El correo ya esta usado por otro usuario.";
+        this.serviceAuth.register(email,pass,name,apellido,direccion,mobile,'Admin',this.image).then(res =>{
+          if(res != false){
+            this.mensaje="Se envió un mensaje de confirmación al correo ingresado.";
             this.presentAlertConfirm(this.mensaje);
             this.router.navigate(['panel/perfiles']);
           }else{
-            this.mensaje=this.serviceAuth.errores.message;
-            this.presentAlertConfirm(this.mensaje);
-          }        
-        }      
+            if(this.serviceAuth.errores.code=="auth/email-already-in-use"){
+              //console.log(this.authSvc.errores);}
+              this.mensaje="El correo ya esta usado por otro usuario.";
+              this.presentAlertConfirm(this.mensaje);
+              this.router.navigate(['panel/perfiles']);
+            }else{
+              this.mensaje=this.serviceAuth.errores.message;
+              this.presentAlertConfirm(this.mensaje);
+            } 
+          }
+        });   
       }     
     }
     else
