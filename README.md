@@ -1,5 +1,5 @@
 
-# Proyecto ElQ
+# Proyecto ELQ
 Disponible en Google Play  como  [ELQ](https://play.google.com/store/apps/details?id=mobile.ELQ.MOBILE)
 
 ## Descrición
